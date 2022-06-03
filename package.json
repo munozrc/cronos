@@ -8,7 +8,7 @@
     "packages/**"
   ],
   "scripts": {
-    "dev:renderer": "npm run dev -w=renderer"
+    "dev": "npm run build -w=renderer && npm run dev -w=main"
   },
   "devDependencies": {
     "typescript": "4.6.3",
