@@ -8,7 +8,7 @@
     "packages/**"
   ],
   "scripts": {
-    "dev:renderer": "echo \"Error: no test specified\" && exit 1"
+    "dev:renderer": "npm run dev -w=renderer"
   },
   "devDependencies": {
     "typescript": "4.6.3",
