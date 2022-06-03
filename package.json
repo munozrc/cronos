@@ -11,6 +11,14 @@
     "dev": "npm run build -w=renderer && npm run dev -w=main"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.27.0",
+    "@typescript-eslint/parser": "5.27.0",
+    "eslint": "8.17.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.1",
+    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-react": "7.30.0",
     "typescript": "4.6.3",
     "vite": "2.9.9"
   }
