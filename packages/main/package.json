@@ -1,0 +1,16 @@
+{
+  "name": "main",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npm run build && electron dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "4.6.3",
+    "vite": "2.9.9"
+  },
+  "dependencies": {
+    "electron": "19.0.3"
+  }
+}
