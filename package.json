@@ -1,0 +1,17 @@
+{
+  "name": "cronos",
+  "private": true,
+  "version": "0.0.1",
+  "author": "munozrc",
+  "license": "MIT",
+  "workspaces": [
+    "packages/**"
+  ],
+  "scripts": {
+    "dev:renderer": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "4.6.3",
+    "vite": "2.9.9"
+  }
+}
