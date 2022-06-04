@@ -11,16 +11,18 @@ export const SearchView = () => {
   return (
     <section className={styles.wrapper}>
       <ul className={styles.list}>
-        <li className={styles.item}>
-          <img className={styles.albumCover} src={songData.albumCover} />
-          <div className={styles.info}>
-            <h4 className={styles.titleSong}>{songData.title}</h4>
-            <div className={styles.subInfo}>
-              <p className={styles.artistSong}>{songData.artist}</p>
-              <p className={styles.albumSong}>{songData.album}</p>
+        {[0, 1, 2].map((value) => (
+          <li key={value} className={styles.item}>
+            <img className={styles.albumCover} src={songData.albumCover} />
+            <div className={styles.info}>
+              <h4 className={styles.titleSong}>{songData.title}</h4>
+              <div className={styles.subInfo}>
+                <p className={styles.artistSong}>{songData.artist}</p>
+                <p className={styles.albumSong}>{songData.album}</p>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        ))}
       </ul>
     </section>
   )
