@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  border-bottom: 2px solid #1c1d1f;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .brand {
@@ -15,7 +15,7 @@
 }
 
 .title {
-  color: #fafafa;
+  color: var(--text-color);
   font-size: 1em;
   font-weight: 600;
   letter-spacing: 2.2px;
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fafafa;
+  color: var(--text-color);
   padding: 6px;
   border-radius: 4px;
   font-size: 18px;
@@ -41,5 +41,5 @@
 }
 
 .item:hover {
-  background-color: #1c1d1f;
+  background-color: var(--border-color);
 }
