@@ -1,11 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 
-import { App } from './components/App'
+import { Toolbar } from './layouts'
+import { SearchView } from './views'
 import './main.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const root = ReactDOM.createRoot(
+  document.getElementById('root')!
+)
+
+root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <Toolbar />
+      <Routes>
+        <Route path="/" element={<SearchView />} />
+      </Routes>
+    </HashRouter>
   </React.StrictMode>
 )
