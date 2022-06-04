@@ -1,0 +1,22 @@
+.header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 2px solid #1c1d1f;
+}
+
+.brand {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  color: #fafafa;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+}
