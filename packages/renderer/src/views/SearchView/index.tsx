@@ -21,6 +21,10 @@ export const SearchView = () => {
                 <p className={styles.albumSong}>{songData.album}</p>
               </div>
             </div>
+            <div className={styles.options}>
+              <button className={styles.button}>Reproducir</button>
+              <button className={styles.button}>Descargar</button>
+            </div>
           </li>
         ))}
       </ul>

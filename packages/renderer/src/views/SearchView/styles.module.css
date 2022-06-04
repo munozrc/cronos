@@ -16,9 +16,14 @@
   align-items: center;
   width: 100%;
   height: 72px;
-  padding: 0 10px;
+  padding: 0 20px 0 10px;
   border-bottom: 1px solid var(--border-dark-color);
+  transition: background-color 0.15s ease;
   gap: 12px;
+}
+
+.item:hover {
+  background-color: var(--border-dark-color);
 }
 
 .item:last-child {
@@ -68,4 +73,31 @@
   background-color: var(--text-color);
   border-radius: 50%;
   order: 2;
+}
+
+.options {
+  display: flex;
+  margin-left: auto;
+  gap: 8px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  border-radius: 4px;
+  padding: 4px 8px 6px 8px;
+  transition: opacity 0.3s ease, color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+  color: var(--text-color);
+  font-size: 12px;
+  opacity: 0.2;
+}
+
+.button:hover {
+  background-color: var(--brand-light-color);
+  border: 1px solid var(--bg-color);
+  color: var(--bg-color);
+  opacity: 1;
 }
