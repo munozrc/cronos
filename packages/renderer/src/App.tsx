@@ -1,7 +1,7 @@
 const App = () => {
   return (
     <div>
-      <h1>CronosApp</h1>
+      <h1>Cronos - Music Downloader</h1>
     </div>
   )
 }
