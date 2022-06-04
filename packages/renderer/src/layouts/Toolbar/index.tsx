@@ -1,3 +1,5 @@
+import { DownloadIcon, SearchIcon } from '../../components/Icons'
+
 import styles from './styles.module.css'
 
 export const Toolbar = () => {
@@ -6,9 +8,9 @@ export const Toolbar = () => {
       <div className={styles.brand}>
         <h1 className={styles.title}>CRONOS</h1>
       </div>
-      <ul>
-        <li>Buscar</li>
-        <li>Descargas</li>
+      <ul className={styles.listItems}>
+        <li className={styles.item}><SearchIcon /></li>
+        <li className={styles.item}><DownloadIcon /></li>
       </ul>
     </header>
   )

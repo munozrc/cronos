@@ -20,3 +20,26 @@
   font-weight: 600;
   letter-spacing: 2.2px;
 }
+
+.listItems {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  list-style: none;
+  gap: 4px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fafafa;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 18px;
+  transition: background-color 0.3s ease-out 0s;
+}
+
+.item:hover {
+  background-color: #1c1d1f;
+}
