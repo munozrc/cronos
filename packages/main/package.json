@@ -10,6 +10,7 @@
     "typescript": "4.6.3"
   },
   "dependencies": {
-    "electron": "19.0.3"
+    "electron": "19.0.3",
+    "node-youtube-music": "0.7.0"
   }
 }
