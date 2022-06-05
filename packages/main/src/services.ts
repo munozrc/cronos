@@ -1,8 +1,7 @@
 import { searchMusics } from 'node-youtube-music'
 
-export async function searchSong (query: string) {
-  if (query.trim() === '') return []
-  return await searchMusics(query)
+export function searchSong (query: string) {
+  return searchMusics(query)
     .then(response => response.map(song => ({
       id: song.youtubeId,
       title: song.title,
