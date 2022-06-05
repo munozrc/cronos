@@ -20,3 +20,8 @@ body,
   height: 100vh;
   background-color: var(--bg-color);
 }
+
+.drop {
+  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
+}
