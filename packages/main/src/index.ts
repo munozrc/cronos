@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -15,14 +15,25 @@ async function createMainWindow () {
     title: 'Cronos - Music Downloader',
     width: 900,
     height: 600,
+    show: false,
     frame: true, // application frame and app icon will be hidden.
-    autoHideMenuBar: false // hides menu bar on top and will dissable finder bar on mac.
+    autoHideMenuBar: false, // hides menu bar on top and will dissable finder bar on mac.
+    webPreferences: {
+      preload: join(__dirname, './preload.js')
+    }
   })
 
   // Load the react app inside a chromium window.
   app.isPackaged
     ? window.loadFile(join(__dirname, '../../renderer/dist/index.html'))
     : window.loadURL('http://localhost:3000/')
+
+  // Show window when everything is ready.
+  window.on('ready-to-show', window.show)
+
+  // Basic handlers to ipcMain
+  ipcMain.on('closeWindow', app.quit)
+  ipcMain.on('minimizeWindow', window.minimize)
 }
 
 // run when electron is ready!
