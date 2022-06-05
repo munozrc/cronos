@@ -13,6 +13,8 @@ export const SearchView = () => {
       query: {value: string}
     }
 
+    if (formElements.query.value.trim() === '') return
+
     const songs = await window.cronos.searchSong(formElements.query.value)
     setResults(songs as any)
   }
