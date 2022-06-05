@@ -14,7 +14,9 @@ async function createMainWindow () {
   window = new BrowserWindow({
     title: 'Cronos - Music Downloader',
     width: 900,
-    height: 600
+    height: 600,
+    frame: true, // application frame and app icon will be hidden.
+    autoHideMenuBar: false // hides menu bar on top and will dissable finder bar on mac.
   })
 
   // Load the react app inside a chromium window.
