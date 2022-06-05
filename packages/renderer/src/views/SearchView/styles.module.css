@@ -26,8 +26,13 @@
   background-color: var(--border-dark-color);
 }
 
+.item:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
 .item:last-child {
   border-bottom: none;
+  border-radius: 0 0 6px 6px;
 }
 
 .albumCover {
