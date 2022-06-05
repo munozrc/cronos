@@ -1,24 +1,36 @@
+import { SyntheticEvent, useState } from 'react'
+
 import styles from './styles.module.css'
 
-const songData = {
-  title: 'Out of Time',
-  artist: 'The Weeknd',
-  album: 'Dawn FM',
-  albumCover: 'https://lh3.googleusercontent.com/5teqUPmWiFmagN0RggBKRXSW1zUj5_fVCEhbVhN6qt519EyHj6njy1x8dnJcRWNhQ5cl4dZgGaxbyqgv=w280-h280-l90-rj'
-}
-
 export const SearchView = () => {
+  const [results, setResults] = useState([])
+
+  const handleSearchSong = async (event: SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const formElements = form.elements as typeof form.elements & {
+      query: {value: string}
+    }
+
+    const songs = await window.cronos.searchSong(formElements.query.value)
+    setResults(songs as any)
+  }
   return (
     <section className={styles.wrapper}>
+      <form onSubmit={handleSearchSong}>
+        <input type="text" name="query" placeholder="Escribe el nombre de la cancion..." />
+        <button>Buscar</button>
+      </form>
       <ul className={styles.list}>
-        {[0, 1, 2].map((value) => (
-          <li key={value} className={styles.item}>
-            <img className={styles.albumCover} src={songData.albumCover} />
+        {results.map(({ id, title, artists, album, albumCover }) => (
+          <li key={id} className={styles.item}>
+            <img className={styles.albumCover} src={albumCover} />
             <div className={styles.info}>
-              <h4 className={styles.titleSong}>{songData.title}</h4>
+              <h4 className={styles.titleSong}>{title}</h4>
               <div className={styles.subInfo}>
-                <p className={styles.artistSong}>{songData.artist}</p>
-                <p className={styles.albumSong}>{songData.album}</p>
+                <p className={styles.artistSong}>{artists}</p>
+                <p className={styles.albumSong}>{album}</p>
               </div>
             </div>
             <div className={styles.options}>
