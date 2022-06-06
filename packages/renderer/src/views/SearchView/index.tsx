@@ -22,6 +22,13 @@ export const SearchView = () => {
     searchSong(query)
       .then(setResults)
   }
+
+  const handleDownloadSong = (song: Song) => {
+    const { downloadSong } = window.cronos
+    const { duration, ...metadata } = song
+    downloadSong(metadata)
+  }
+
   return (
     <section className={styles.wrapper}>
       <form onSubmit={handleSearchSong}>
@@ -29,19 +36,19 @@ export const SearchView = () => {
         <button>Buscar</button>
       </form>
       <ul className={styles.list}>
-        {results.map(({ id, title, artists, album, albumCover }) => (
-          <li key={id} className={styles.item}>
-            <img className={styles.albumCover} src={typeof albumCover === 'string' ? albumCover : undefined} />
+        {results.map((song) => (
+          <li key={song.id} className={styles.item}>
+            <img className={styles.albumCover} src={typeof song.albumCover === 'string' ? song.albumCover : undefined} />
             <div className={styles.info}>
-              <h4 className={styles.titleSong}>{title}</h4>
+              <h4 className={styles.titleSong}>{song.title}</h4>
               <div className={styles.subInfo}>
-                <p className={styles.artistSong}>{artists}</p>
-                <p className={styles.albumSong}>{album}</p>
+                <p className={styles.artistSong}>{song.artists}</p>
+                <p className={styles.albumSong}>{song.album}</p>
               </div>
             </div>
             <div className={styles.options}>
               <button className={styles.button}>Reproducir</button>
-              <button className={styles.button}>Descargar</button>
+              <button className={styles.button} onClick={() => handleDownloadSong(song)}>Descargar</button>
             </div>
           </li>
         ))}
