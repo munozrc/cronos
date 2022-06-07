@@ -1,6 +1,6 @@
-import { DownloadIcon, SearchIcon } from '../../components/Icons'
+import { DownloadIcon, SearchIcon } from '../components/Icons'
 
-import styles from './styles.module.css'
+import styles from './Toolbar.module.css'
 
 export const Toolbar = () => {
   return (
