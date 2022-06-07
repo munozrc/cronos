@@ -35,7 +35,7 @@ async function createMainWindow () {
 
   // Basic handlers to ipcMain
   ipcMain.on('closeWindow', app.quit)
-  ipcMain.on('minimizeWindow', window.minimize)
+  ipcMain.on('minimizeWindow', () => window?.minimize())
 }
 
 // run when electron is ready!
