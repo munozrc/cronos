@@ -8,9 +8,10 @@
 :root {
   --brand-light-color: #828fff;
   --text-color: #e9ebed;
-  --bg-color: #060606;
+  --bg-color: #1c1d1f;
   --border-dark-color: rgba(255, 255, 255, 0.04);
-  --hover-light-color: rgba(255, 255, 255, 0.3);
+  --border-brand-color: rgba(255, 255, 255, 0.08);
+  --hover-brand-color: rgba(255, 255, 255, 0.1);
 }
 
 html,
@@ -21,7 +22,12 @@ body,
   background-color: var(--bg-color);
 }
 
-.drop {
+button {
+  outline: none;
+  border: none;
+}
+
+.drag {
   -webkit-app-region: drag;
   -webkit-app-region: no-drag;
 }
