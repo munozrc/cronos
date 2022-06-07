@@ -18,7 +18,7 @@ async function createMainWindow () {
     width: 900,
     height: 600,
     show: false,
-    frame: true, // application frame and app icon will be hidden.
+    frame: false, // application frame and app icon will be hidden.
     autoHideMenuBar: true, // hides menu bar on top and will dissable finder bar on mac.
     webPreferences: {
       preload: join(__dirname, './preload.js')
