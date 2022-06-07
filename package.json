@@ -4,22 +4,35 @@
   "version": "0.0.1",
   "author": "munozrc",
   "license": "MIT",
-  "workspaces": [
-    "packages/**"
-  ],
   "scripts": {
-    "dev:renderer": "npm run dev -w=renderer",
-    "dev:main": "npm run dev -w=main"
+    "build:gui": "tsc && vite build",
+    "build:app": "tsc -p tsconfig.app.json",
+    "dev:gui": "vite",
+    "dev:app": "npm run build:app && electron dist/index.js"
   },
   "devDependencies": {
+    "@types/fluent-ffmpeg": "2.1.20",
+    "@types/react-dom": "18.0.0",
+    "@types/react": "18.0.0",
     "@typescript-eslint/eslint-plugin": "5.27.0",
     "@typescript-eslint/parser": "5.27.0",
-    "eslint": "8.17.0",
+    "@vitejs/plugin-react": "1.3.0",
+    "axios": "0.27.2",
+    "electron": "19.0.3",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.1",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react": "7.30.0",
-    "typescript": "4.6.3"
+    "eslint": "8.17.0",
+    "fluent-ffmpeg": "2.1.2",
+    "node-id3": "0.2.3",
+    "node-youtube-music": "0.7.0",
+    "react-dom": "18.0.0",
+    "react-router-dom": "6.3.0",
+    "react": "18.0.0",
+    "typescript": "4.6.3",
+    "vite": "2.9.9",
+    "ytdl-core": "4.11.0"
   }
 }
