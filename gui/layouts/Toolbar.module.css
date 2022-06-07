@@ -3,22 +3,34 @@
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 20px;
-  background-color: var(--brand-light-color);
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-brand-color);
 }
 
 .brand {
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
+  gap: 20px;
+  -webkit-app-region: drag;
+}
+
+.brand::before {
+  content: '';
+  width: 2px;
+  height: 28px;
+  background-color: var(--border-brand-color);
 }
 
 .title {
-  color: var(--bg-color);
-  font-size: 1em;
-  font-weight: 600;
+  color: var(--brand-light-color);
+  font-size: 1.05em;
+  font-weight: 700;
   letter-spacing: 2.2px;
+  line-height: 1;
+  user-select: none;
 }
 
 .listItems {
@@ -27,13 +39,14 @@
   align-items: center;
   list-style: none;
   gap: 4px;
+  margin-left: auto;
 }
 
 .item {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--bg-color);
+  color: var(--text-color);
   padding: 6px;
   border-radius: 4px;
   font-size: 18px;
@@ -41,5 +54,42 @@
 }
 
 .item:hover {
-  background-color: var(--hover-light-color);
+  background-color: var(--hover-brand-color);
+}
+
+.buttonGruop {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding-right: 20px;
+  gap: 6px;
+}
+
+.buttonClose,
+.buttonMinimize,
+.buttonMaximize {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  transition: opacity 0.2s ease;
+}
+
+.buttonClose:hover,
+.buttonMinimize:hover,
+.buttonMaximize:hover {
+  opacity: 0.7;
+}
+
+.buttonMaximize {
+  background-color: #00ca4e;
+}
+
+.buttonClose {
+  background-color: #ff605c;
+}
+
+.buttonMinimize {
+  background-color: #ffbd44;
 }
