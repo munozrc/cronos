@@ -1,8 +1,8 @@
 import { SyntheticEvent, useState } from 'react'
 
-import { Song } from '../../../app/types'
+import { Song } from '../../app/types'
 
-import styles from './styles.module.css'
+import styles from './SearchView.module.css'
 
 export const SearchView = () => {
   const [results, setResults] = useState<Array<Song>>([])
