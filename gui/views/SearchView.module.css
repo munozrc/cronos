@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
   max-height: calc(100% - 50px);
-  padding: 20px;
+  padding: 16px;
 }
 
 .list {
@@ -14,7 +14,7 @@
   list-style: none;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-right: 8px;
+  padding-right: 16px;
 }
 
 .list::-webkit-scrollbar {
