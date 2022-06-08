@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
   max-height: calc(100% - 50px);
-  padding: 24px 50px;
+  padding: 20px;
 }
 
 .list {
