@@ -8,6 +8,7 @@
 :root {
   --brand-light-color: #828fff;
   --text-color: #e9ebed;
+  --text-dark-color: #121212;
   --bg-color: #1c1d1f;
   --border-dark-color: rgba(255, 255, 255, 0.04);
   --border-brand-color: rgba(255, 255, 255, 0.08);
