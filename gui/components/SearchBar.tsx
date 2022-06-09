@@ -10,9 +10,10 @@ interface SearchBarProps {
 
 export const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault()
     const element = event.currentTarget[0] as HTMLInputElement
     const query = element.value.trim()
-    if (query === '') onSubmit(query)
+    if (query !== '') onSubmit(query)
   }
 
   return (
