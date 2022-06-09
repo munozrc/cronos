@@ -11,6 +11,7 @@ export const SearchView = () => {
 
   useEffect(() => {
     const query = searchParams.get('query') ?? ''
+    if (query === '') return
     window.cronos.searchSong(query)
       .then(setResults)
       .catch(setResults)
