@@ -16,7 +16,7 @@ export const Toolbar = () => {
         <h1 className={styles.title}>CRONOS</h1>
       </div>
       <ul className={styles.listItems}>
-        <SearchBar />
+        <SearchBar onSubmit={(query) => console.log(query)}/>
         <Button variant="flat">
           <FolderIcon />
         </Button>
