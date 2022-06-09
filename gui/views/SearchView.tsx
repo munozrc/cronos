@@ -1,4 +1,5 @@
-import { SyntheticEvent, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { Song } from '../../app/types'
 
@@ -6,22 +7,14 @@ import styles from './SearchView.module.css'
 
 export const SearchView = () => {
   const [results, setResults] = useState<Array<Song>>([])
+  const [searchParams] = useSearchParams()
 
-  const handleSearchSong = async (event: SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    const { searchSong } = window.cronos
-    const form = event.currentTarget
-    const formElements = form.elements as typeof form.elements & {
-      query: {value: string}
-    }
-
-    const query = formElements.query.value
-    if (query.trim() === '') return
-
-    searchSong(query)
+  useEffect(() => {
+    const query = searchParams.get('query') ?? ''
+    window.cronos.searchSong(query)
       .then(setResults)
-  }
+      .catch(setResults)
+  }, [searchParams])
 
   const handleDownloadSong = (song: Song) => {
     const { downloadSong } = window.cronos
@@ -31,10 +24,6 @@ export const SearchView = () => {
 
   return (
     <section className={styles.wrapper}>
-      <form onSubmit={handleSearchSong}>
-        <input type="text" name="query" placeholder="Escribe el nombre de la cancion..." />
-        <button>Buscar</button>
-      </form>
       <ul className={styles.list}>
         {results.map((song) => (
           <li key={song.id} className={styles.item}>
