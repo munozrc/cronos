@@ -3,7 +3,7 @@
   height: 50px;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 16px 0 20px;
   background-color: var(--text-dark-color);
 }
 
@@ -35,25 +35,25 @@
 .listItems {
   display: flex;
   height: 100%;
+  flex-direction: row-reverse;
   align-items: center;
   list-style: none;
-  gap: 4px;
   margin-left: auto;
+  gap: 4px;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-color);
-  padding: 6px;
-  border-radius: 4px;
-  font-size: 18px;
-  transition: background-color 0.3s ease-out 0s;
+.listItems::after {
+  content: "";
+  width: 3px;
+  height: 20px;
+  background-color: var(--border-brand-color);
+  margin: 0px 8px 0px 6px;
+  order: 1;
 }
 
-.item:hover {
-  background-color: var(--hover-brand-color);
+.listItems>form {
+  margin-right: 12px;
+  order: 2;
 }
 
 .buttonGruop {

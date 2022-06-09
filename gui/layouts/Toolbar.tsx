@@ -1,5 +1,6 @@
 import { Button } from '../components/Button'
-import { DownloadIcon, SearchIcon } from '../components/Icons'
+import { DownloadIcon, FolderIcon, SettingsIcon } from '../components/Icons'
+import { SearchBar } from '../components/SearchBar'
 
 import styles from './Toolbar.module.css'
 
@@ -15,11 +16,15 @@ export const Toolbar = () => {
         <h1 className={styles.title}>CRONOS</h1>
       </div>
       <ul className={styles.listItems}>
+        <SearchBar />
         <Button variant="flat">
-          <SearchIcon />
+          <FolderIcon />
         </Button>
         <Button variant="flat">
           <DownloadIcon />
+        </Button>
+        <Button variant="flat">
+          <SettingsIcon />
         </Button>
       </ul>
     </header>
