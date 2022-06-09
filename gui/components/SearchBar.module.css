@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  height: 30px;
+  background-color: var(--hover-brand-color);
+  border-radius: 4px;
+}
+
+.input {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0px 4px 0px 6px;
+  caret-color: var(--brand-light-color);
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.input::selection {
+  background-color: var(--brand-light-color);
+  color: var(--bg-color)
+}
+
+.wrapper:focus-within {
+  outline: solid 1px var(--brand-light-color);
+}
