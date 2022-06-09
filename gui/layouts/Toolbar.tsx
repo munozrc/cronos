@@ -1,3 +1,4 @@
+import { createSearchParams, useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { DownloadIcon, FolderIcon, SettingsIcon } from '../components/Icons'
 import { SearchBar } from '../components/SearchBar'
@@ -5,6 +6,8 @@ import { SearchBar } from '../components/SearchBar'
 import styles from './Toolbar.module.css'
 
 export const Toolbar = () => {
+  const navigate = useNavigate()
+  const handleSubmit = (query: string) => navigate({ pathname: '/', search: `?${createSearchParams({ query })}` })
   return (
     <header className={styles.header}>
       <div className={styles.buttonGruop}>
@@ -16,7 +19,7 @@ export const Toolbar = () => {
         <h1 className={styles.title}>CRONOS</h1>
       </div>
       <ul className={styles.listItems}>
-        <SearchBar onSubmit={(query) => console.log(query)}/>
+        <SearchBar onSubmit={handleSubmit}/>
         <Button variant="flat">
           <FolderIcon />
         </Button>
