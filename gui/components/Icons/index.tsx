@@ -1,3 +1,4 @@
 export { DownloadIcon } from './DownloadIcon'
+export { FolderIcon } from './FolderIcon'
 export { SearchIcon } from './SearchIcon'
 export { SettingsIcon } from './SettingsIcon'
