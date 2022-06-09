@@ -1,11 +1,12 @@
 .wrapper {
   display: flex;
   height: 30px;
-  background-color: var(--hover-brand-color);
+  background-color: var(--border-brand-color);
   border-radius: 4px;
 }
 
 .input {
+  width: 180px;
   background: none;
   border: none;
   outline: none;
