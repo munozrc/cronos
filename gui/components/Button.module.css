@@ -8,10 +8,11 @@
 }
 
 .flat {
+  width: 30px;
   aspect-ratio: 1;
-  padding: 6px;
+  padding: 0px;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 19px;
   color: var(--text-color);
   transition: background-color 0.3s ease-out 0s;
 }
