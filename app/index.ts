@@ -2,7 +2,7 @@ import { join } from 'node:path'
 
 import { app, BrowserWindow, ipcMain } from 'electron'
 
-import { downloadTrack } from './lib/download'
+import { downloadTrack, openDownloadsFolder } from './lib/download'
 import { searchTrack } from './lib/search'
 
 if (!app.requestSingleInstanceLock()) {
@@ -63,3 +63,4 @@ app.on('activate', () => {
 
 ipcMain.handle('searchTrack', (_, query) => searchTrack(query))
 ipcMain.handle('downloadTrack', (_, track) => downloadTrack(track))
+ipcMain.handle('openDownloadsFolder', openDownloadsFolder)
