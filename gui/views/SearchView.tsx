@@ -40,7 +40,7 @@ export const SearchView = () => {
       <ul className={styles.list}>
         {results.map((song) => (
           <li key={song.id} className={styles.item}>
-            <img className={styles.albumCover} src={song.albumCover} />
+            <img className={styles.albumCover} src={song.albumCover} loading="lazy" />
             <div className={styles.info}>
               <h4 className={styles.titleSong}>{song.title}</h4>
               <div className={styles.subInfo}>
