@@ -4,11 +4,14 @@
   "version": "0.0.1",
   "author": "munozrc",
   "license": "MIT",
+  "description": "Music downloader in mp3 format using ElectronJS and ReactJS",
+  "main": "dist/index.js",
   "scripts": {
     "build:gui": "tsc && vite build",
     "build:app": "tsc -p tsconfig.app.json",
     "dev:gui": "vite",
-    "dev:app": "npm run build:app && electron dist/index.js"
+    "dev:app": "npm run build:app && electron .",
+    "release": "npm run build:gui && npm run build:app && electron-builder build --win --publish never"
   },
   "dependencies": {
     "axios": "0.27.2",
@@ -25,6 +28,7 @@
     "@typescript-eslint/parser": "5.27.0",
     "@vitejs/plugin-react": "1.3.0",
     "electron": "19.0.3",
+    "electron-builder": "23.0.3",
     "eslint": "8.17.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
