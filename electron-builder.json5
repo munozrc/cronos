@@ -1,0 +1,24 @@
+{
+  appId: "com.munozrc.cronos",
+  productName: "Cronos",
+  asar: true,
+  directories: {
+    output: "release/${version}"
+  },
+  files: ["dist"],
+  win: {
+    target: [
+      {
+        target: "nsis",
+        arch: ["ia32"],
+      },
+    ],
+    artifactName: "cronos-windows-${version}-setup.${ext}",
+  },
+  nsis: {
+    oneClick: false,
+    perMachine: false,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: false,
+  }
+}
