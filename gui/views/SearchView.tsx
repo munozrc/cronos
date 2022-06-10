@@ -12,15 +12,16 @@ interface State {
 
 export const SearchView = () => {
   const { searchTrack, downloadTrack } = window.cronos
-  const { results, setResults } = useStore()
+  const { results, setResults, prevQuery, setPrevQuery } = useStore()
   const [state, setState] = useState<State>({ isLoading: false, isError: false })
   const [searchParams] = useSearchParams()
 
   const query = searchParams.get('query')
 
   useEffect(() => {
-    if (query === null) return
+    if (query === null || query === prevQuery) return
     setState({ isLoading: true, isError: false })
+    setPrevQuery(query)
     searchTrack(query)
       .then((response) => {
         setState({ isLoading: false, isError: false })
@@ -30,6 +31,8 @@ export const SearchView = () => {
         setState({ isLoading: false, isError: true })
         setResults(response)
       })
+
+    console.log('render')
   }, [query])
 
   if (state.isLoading) return <Spinner />
