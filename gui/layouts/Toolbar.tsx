@@ -20,13 +20,17 @@ export const Toolbar = () => {
       </div>
       <ul className={styles.listItems}>
         <SearchBar onSubmit={handleSubmit}/>
-        <Button variant="flat" onClick={window.cronos.openDownloadsFolder}>
+        <Button
+          variant="flat"
+          title="Abrir carpeta de descargas"
+          onClick={window.cronos.openDownloadsFolder}
+        >
           <FolderIcon />
         </Button>
-        <Button variant="flat">
+        <Button variant="flat" title="Historial de descargas">
           <DownloadIcon />
         </Button>
-        <Button variant="flat">
+        <Button variant="flat" title="Configuraciones">
           <SettingsIcon />
         </Button>
       </ul>
