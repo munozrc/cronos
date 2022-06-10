@@ -1,34 +1,28 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-
-import { Song } from '../../app/types'
+import { Track } from '../../app/types'
 
 import styles from './SearchView.module.css'
 
 export const SearchView = () => {
-  const [results, setResults] = useState<Array<Song>>([])
+  const [results, setResults] = useState<Track[]>([])
   const [searchParams] = useSearchParams()
 
+  const query = searchParams.get('query')
+  const { searchTrack, downloadTrack } = window.cronos
+
   useEffect(() => {
-    const query = searchParams.get('query') ?? ''
-    if (query === '') return
-    window.cronos.searchSong(query)
+    query && searchTrack(query)
       .then(setResults)
       .catch(setResults)
-  }, [searchParams])
-
-  const handleDownloadSong = (song: Song) => {
-    const { downloadSong } = window.cronos
-    const { duration, ...metadata } = song
-    downloadSong(metadata)
-  }
+  }, [query])
 
   return (
     <section className={styles.wrapper}>
       <ul className={styles.list}>
         {results.map((song) => (
           <li key={song.id} className={styles.item}>
-            <img className={styles.albumCover} src={typeof song.albumCover === 'string' ? song.albumCover : undefined} />
+            <img className={styles.albumCover} src={song.albumCover} />
             <div className={styles.info}>
               <h4 className={styles.titleSong}>{song.title}</h4>
               <div className={styles.subInfo}>
@@ -38,7 +32,9 @@ export const SearchView = () => {
             </div>
             <div className={styles.options}>
               <button className={styles.button}>Reproducir</button>
-              <button className={styles.button} onClick={() => handleDownloadSong(song)}>Descargar</button>
+              <button className={styles.button} onClick={() => downloadTrack(song)}>
+                Descargar
+              </button>
             </div>
           </li>
         ))}

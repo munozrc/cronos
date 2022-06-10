@@ -1,11 +1,8 @@
-export interface Metadata {
+export type Track = {
   id: string
   title: string
   artists: Array<string>
   album: string
-  albumCover: Buffer | string
-}
-
-export interface Song extends Metadata {
-  duration?: string
+  albumCover: string
+  duration: string
 }
