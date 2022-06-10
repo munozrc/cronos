@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import { renameSync } from 'node:fs'
-import { app } from 'electron'
+import { app, shell } from 'electron'
 import axios from 'axios'
 import ffmpeg from 'fluent-ffmpeg'
 import ytdl from 'ytdl-core'
@@ -8,10 +8,11 @@ import id3 from 'node-id3'
 
 import { Track } from '../types'
 
+const userDownloadsFolder = app.getPath('music')
+
 export async function downloadTrack (track: Track): Promise<void> {
   try {
     const { id, title, artists } = track
-    const userDownloadsFolder = app.getPath('music')
     const filePaths = getFilePaths(userDownloadsFolder, artists, title)
 
     await downloadAndSave(id, filePaths.temporary)
@@ -21,6 +22,10 @@ export async function downloadTrack (track: Track): Promise<void> {
   } catch (err) {
     console.error('DOWNLOAD_TRACK:ERROR: ', err)
   }
+}
+
+export async function openDownloadsFolder (): Promise<string> {
+  return await shell.openPath(userDownloadsFolder)
 }
 
 async function downloadAndSave (id: string, path: string): Promise<void> {
