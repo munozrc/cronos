@@ -2,7 +2,8 @@ import { join } from 'node:path'
 
 import { app, BrowserWindow, ipcMain } from 'electron'
 
-import { downloadSong, searchSong } from './services'
+import { downloadTrack } from './lib/download'
+import { searchTrack } from './lib/search'
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -60,5 +61,5 @@ app.on('activate', () => {
     : createMainWindow()
 })
 
-ipcMain.handle('searchSong', (_, query) => searchSong(query))
-ipcMain.handle('downloadSong', (_, metadata) => downloadSong(metadata))
+ipcMain.handle('searchTrack', (_, query) => searchTrack(query))
+ipcMain.handle('downloadTrack', (_, track) => downloadTrack(track))
