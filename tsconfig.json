@@ -23,6 +23,12 @@
   "include": [
     "gui"
   ],
+  "exclude": [
+    "node_modules",
+    "app",
+    "dist",
+    "release"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
