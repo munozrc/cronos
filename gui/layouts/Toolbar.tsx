@@ -20,7 +20,7 @@ export const Toolbar = () => {
       </div>
       <ul className={styles.listItems}>
         <SearchBar onSubmit={handleSubmit}/>
-        <Button variant="flat">
+        <Button variant="flat" onClick={window.cronos.openDownloadsFolder}>
           <FolderIcon />
         </Button>
         <Button variant="flat">
