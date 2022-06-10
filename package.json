@@ -11,7 +11,7 @@
     "build:app": "tsc -p tsconfig.app.json",
     "dev:gui": "vite",
     "dev:app": "npm run build:app && electron .",
-    "release": "npm run build:gui && npm run build:app && electron-builder build --win --publish never"
+    "release": "npm run build:gui && npm run build:app && electron-builder"
   },
   "dependencies": {
     "axios": "0.27.2",
