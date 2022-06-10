@@ -1,12 +1,11 @@
 import { contextBridge, ipcRenderer } from 'electron'
-
-import { Metadata, Song } from './types'
+import { Track } from './types'
 
 export const cronos = {
   closeWindow: () => ipcRenderer.send('closeWindow'),
   minimizeWindow: () => ipcRenderer.send('minimizeWindow'),
-  downloadSong: (metadata: Metadata): Promise<void> => ipcRenderer.invoke('downloadSong', metadata),
-  searchSong: (query: string): Promise<Array<Song>> => ipcRenderer.invoke('searchSong', query)
+  searchTrack: (query: string): Promise<Track[]> => ipcRenderer.invoke('searchTrack', query),
+  downloadTrack: (track: Track): Promise<void> => ipcRenderer.invoke('downloadTrack', track)
 }
 
 contextBridge.exposeInMainWorld('cronos', cronos)
