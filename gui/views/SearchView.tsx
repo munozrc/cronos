@@ -1,21 +1,38 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Spinner } from '../components/Spinner'
 import { useStore } from '../store'
 
 import styles from './SearchView.module.css'
 
+interface State {
+  isLoading: boolean,
+  isError: boolean
+}
+
 export const SearchView = () => {
   const { searchTrack, downloadTrack } = window.cronos
   const { results, setResults } = useStore()
+  const [state, setState] = useState<State>({ isLoading: false, isError: false })
   const [searchParams] = useSearchParams()
 
   const query = searchParams.get('query')
 
   useEffect(() => {
-    query && searchTrack(query)
-      .then(setResults)
-      .catch(setResults)
+    if (query === null) return
+    setState({ isLoading: true, isError: false })
+    searchTrack(query)
+      .then((response) => {
+        setState({ isLoading: false, isError: false })
+        setResults(response)
+      })
+      .catch((response) => {
+        setState({ isLoading: false, isError: true })
+        setResults(response)
+      })
   }, [query])
+
+  if (state.isLoading) return <Spinner />
 
   return (
     <section className={styles.wrapper}>
