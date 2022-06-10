@@ -30,7 +30,7 @@ async function createMainWindow () {
 
   // Load the react app inside a chromium window.
   app.isPackaged
-    ? window.loadFile(join(__dirname, '../../renderer/dist/index.html'))
+    ? window.loadFile(join(__dirname, './index.html'))
     : window.loadURL('http://localhost:3000/')
 
   // Show window when everything is ready.
