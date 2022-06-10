@@ -8,6 +8,7 @@ import styles from './Toolbar.module.css'
 export const Toolbar = () => {
   const navigate = useNavigate()
   const handleSubmit = (query: string) => navigate({ pathname: '/', search: `?${createSearchParams({ query })}` })
+  const goToDownloadsView = () => navigate({ pathname: '/downloads' })
   return (
     <header className={styles.header}>
       <div className={styles.buttonGruop}>
@@ -27,7 +28,11 @@ export const Toolbar = () => {
         >
           <FolderIcon />
         </Button>
-        <Button variant="flat" title="Historial de descargas">
+        <Button
+          variant="flat"
+          title="Historial de descargas"
+          onClick={goToDownloadsView}
+        >
           <DownloadIcon />
         </Button>
         <Button variant="flat" title="Configuraciones">
