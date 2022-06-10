@@ -68,6 +68,7 @@
 .info {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .titleSong {
@@ -88,10 +89,12 @@
 
 .artistSong {
   order: 1;
+  line-height: 0.8;
 }
 
 .albumSong {
   order: 3;
+  line-height: 0.8;
 }
 
 .subInfo::before {
