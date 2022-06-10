@@ -31,8 +31,6 @@ export const SearchView = () => {
         setState({ isLoading: false, isError: true })
         setResults(response)
       })
-
-    console.log('render')
   }, [query])
 
   if (state.isLoading) return <Spinner />
