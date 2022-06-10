@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import { Toolbar } from './layouts'
-import { SearchView } from './views'
+import { DownloadsView, SearchView } from './views'
 
 import './main.css'
 
@@ -17,6 +17,7 @@ root.render(
       <Toolbar />
       <Routes>
         <Route path="/" element={<SearchView />} />
+        <Route path="/downloads" element={<DownloadsView />} />
       </Routes>
     </HashRouter>
   </React.StrictMode>
