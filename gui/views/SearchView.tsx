@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Track } from '../../app/types'
+import { useStore } from '../store'
 
 import styles from './SearchView.module.css'
 
 export const SearchView = () => {
-  const [results, setResults] = useState<Track[]>([])
+  const { searchTrack, downloadTrack } = window.cronos
+  const { results, setResults } = useStore()
   const [searchParams] = useSearchParams()
 
   const query = searchParams.get('query')
-  const { searchTrack, downloadTrack } = window.cronos
 
   useEffect(() => {
     query && searchTrack(query)
