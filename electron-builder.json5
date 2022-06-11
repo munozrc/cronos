@@ -3,7 +3,8 @@
   productName: "Cronos",
   asar: true,
   directories: {
-    output: "release/${version}"
+    output: "release/${version}",
+    buildResources: "app/resources"
   },
   files: ["dist"],
   win: {
