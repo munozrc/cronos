@@ -26,7 +26,7 @@ export const useStore = create<State>((set) => ({
 
       if (isSimilarTrackDownloading) {
         console.log('descarga iniciada...')
-        return { ...state, downloads: [...state.downloads, trackFile] }
+        return { downloads: [...state.downloads, trackFile] }
       }
 
       console.log('existe una descarga en curso...')
@@ -39,7 +39,7 @@ export const useStore = create<State>((set) => ({
     set((state) => {
       const newArrayDownloads = state.downloads.filter(t => t.id === track.id)
       console.log('descarga completada...')
-      return { ...state, downloads: [...newArrayDownloads, { ...trackFile, state: 'completed' }] }
+      return { downloads: [...newArrayDownloads, { ...trackFile, state: 'completed' }] }
     })
   },
   setPrevQuery: (value: string) => { set(() => ({ prevQuery: value })) },
