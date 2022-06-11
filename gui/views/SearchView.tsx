@@ -11,8 +11,8 @@ interface State {
 }
 
 export const SearchView = () => {
-  const { searchTrack, downloadTrack } = window.cronos
-  const { results, setResults, prevQuery, setPrevQuery } = useStore()
+  const { searchTrack } = window.cronos
+  const { results, setResults, prevQuery, setPrevQuery, addNewDownload } = useStore()
   const [state, setState] = useState<State>({ isLoading: false, isError: false })
   const [searchParams] = useSearchParams()
 
@@ -50,7 +50,7 @@ export const SearchView = () => {
             </div>
             <div className={styles.options}>
               <button className={styles.button}>Reproducir</button>
-              <button className={styles.button} onClick={() => downloadTrack(song)}>
+              <button className={styles.button} onClick={() => addNewDownload(song)}>
                 Descargar
               </button>
             </div>
