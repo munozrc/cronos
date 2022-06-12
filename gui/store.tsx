@@ -18,13 +18,13 @@ export const useStore = create<State>((set) => ({
     const { downloadTrack } = window.cronos
     const trackFile: TrackFile = { ...track, state: 'downloading' }
 
-    let isSimilarTrackDownloading = false
+    let existSimilarDownload = false
 
     set((state) => {
       const findTrackInDownloads = state.downloads.find(t => t.id === track.id && t.state === 'downloading')
-      isSimilarTrackDownloading = typeof findTrackInDownloads === 'undefined'
+      existSimilarDownload = typeof findTrackInDownloads !== 'undefined'
 
-      if (isSimilarTrackDownloading) {
+      if (!existSimilarDownload) {
         console.log('descarga iniciada...')
         return { downloads: [...state.downloads, trackFile] }
       }
@@ -33,7 +33,7 @@ export const useStore = create<State>((set) => ({
       return state
     })
 
-    if (isSimilarTrackDownloading) return
+    if (existSimilarDownload) return
     await downloadTrack(track)
 
     set((state) => {
