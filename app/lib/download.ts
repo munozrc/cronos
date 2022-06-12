@@ -15,13 +15,12 @@ export async function downloadTrack (track: Track): Promise<void> {
     const { id, title, artists } = track
     const { temporary, persistent } = getFilePaths(userDownloadsFolder, artists, title)
 
-    const downloadProcess = await downloadAndSave(id, temporary)
-    const metadata = await getAdditionalMetadata(track)
-    const id3Process = id3.write(metadata, temporary)
+    const [, metadata] = await Promise.all([
+      downloadAndSave(id, temporary),
+      getAdditionalMetadata(track)
+    ])
 
-    if (typeof downloadProcess !== 'boolean') throw downloadProcess
-    if (typeof id3Process !== 'boolean') throw id3Process
-
+    id3.write(metadata, temporary)
     renameSync(temporary, persistent)
   } catch (err) {
     console.error('DOWNLOAD_TRACK_ERROR: ', err)
@@ -54,8 +53,10 @@ async function getAdditionalMetadata (track: Track): Promise<Tags> {
   const { title, artists, album, albumCover } = track
   const artist = artists.join(' & ')
 
-  const metadata = await getMetadataFromiTunes(artist, album)
-  const image = await getBufferAlbumCover(albumCover)
+  const [metadata, image] = await Promise.all([
+    getMetadataFromiTunes(artist, album),
+    getBufferAlbumCover(albumCover)
+  ])
 
   if (!metadata) return { title, artist, album, image }
 
@@ -86,7 +87,8 @@ async function getMetadataFromiTunes (artist: string, album: string): Promise<iT
 }
 
 async function getBufferAlbumCover (url: string): Promise<TagImage | undefined> {
-  return await axios.get(url, { responseType: 'arraybuffer' })
+  const imageURL = url.replace('w120-h120-l90-rj', 'w500-h500-l90-rj')
+  return await axios.get(imageURL, { responseType: 'arraybuffer' })
     .then(response => {
       if (response.status !== 200) return undefined
       return {
