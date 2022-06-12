@@ -45,7 +45,7 @@ async function downloadAndSave (id: string, path: string): Promise<true | Error>
 }
 
 function getFilePaths (path: string, artists: string[], title: string): {temporary: string, persistent: string} {
-  const temporary = join(path, 'track_' + Math.random().toString(36).slice(-5))
+  const temporary = join(path, Math.random().toString(36).slice(-5) + '_temp')
   const persistent = join(path, `${artists.join(' & ')} - ${title}.mp3`)
   return { temporary, persistent }
 }
