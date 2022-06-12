@@ -4,23 +4,27 @@ import { app, shell } from 'electron'
 import axios from 'axios'
 import ffmpeg from 'fluent-ffmpeg'
 import ytdl from 'ytdl-core'
-import id3 from 'node-id3'
+import id3, { Tags } from 'node-id3'
 
-import { Track } from '../types'
+import { iTunesMetadata, iTunesResponse, TagImage, Track } from '../types'
 
-const userDownloadsFolder = app.getPath('music')
+const userDownloadsFolder: string = app.getPath('music')
 
 export async function downloadTrack (track: Track): Promise<void> {
   try {
     const { id, title, artists } = track
-    const filePaths = getFilePaths(userDownloadsFolder, artists, title)
+    const { temporary, persistent } = getFilePaths(userDownloadsFolder, artists, title)
 
-    await downloadAndSave(id, filePaths.temporary)
-    await setMetada(track, filePaths.temporary)
+    const downloadProcess = await downloadAndSave(id, temporary)
+    const metadata = await getAdditionalMetadata(track)
+    const id3Process = id3.write(metadata, temporary)
 
-    renameSync(filePaths.temporary, filePaths.persistent)
+    if (typeof downloadProcess !== 'boolean') throw downloadProcess
+    if (typeof id3Process !== 'boolean') throw id3Process
+
+    renameSync(temporary, persistent)
   } catch (err) {
-    console.error('DOWNLOAD_TRACK:ERROR: ', err)
+    console.error('DOWNLOAD_TRACK_ERROR: ', err)
   }
 }
 
@@ -28,35 +32,69 @@ export async function openDownloadsFolder (): Promise<string> {
   return await shell.openPath(userDownloadsFolder)
 }
 
-async function downloadAndSave (id: string, path: string): Promise<void> {
+async function downloadAndSave (id: string, path: string): Promise<true | Error> {
   const stream = ytdl(id, { filter: 'audioonly' })
   return await new Promise((resolve, reject) => {
-    ffmpeg(stream)
-      .audioBitrate(128)
-      .format('mp3')
-      .save(path)
-      .on('end', resolve)
-      .on('error', (err) => reject(new Error(err)))
+    const ffmpegProcess = ffmpeg(stream)
+    ffmpegProcess.audioBitrate(128)
+    ffmpegProcess.format('mp3')
+    ffmpegProcess.save(path)
+    ffmpegProcess.on('end', () => resolve(true))
+    ffmpegProcess.on('error', (err) => reject(err))
   })
 }
 
-async function setMetada (track: Track, path: string): Promise<void> {
-  const { title, artists, album, albumCover } = track
-  const imageResponse = await axios.get(albumCover, { responseType: 'arraybuffer' })
-  const artist = artists.join('; ')
-
-  const image = {
-    mime: 'image/png',
-    type: { id: 3, name: 'front cover' },
-    description: 'Album Art',
-    imageBuffer: imageResponse.data
-  }
-
-  id3.write({ title, artist, image, album }, path)
+function getFilePaths (path: string, artists: string[], title: string): {temporary: string, persistent: string} {
+  const temporary = join(path, 'track_' + Math.random().toString(36).slice(-5))
+  const persistent = join(path, `${artists.join(' & ')} - ${title}.mp3`)
+  return { temporary, persistent }
 }
 
-function getFilePaths (path: string, artists: string[], title: string): {temporary: string, persistent: string} {
-  const temporary = join(path, 'temp-' + Math.random().toString(36).slice(-5))
-  const persistent = join(path, `${artists.join('& ')} - ${title}.mp3`)
-  return { temporary, persistent }
+async function getAdditionalMetadata (track: Track): Promise<Tags> {
+  const { title, artists, album, albumCover } = track
+  const artist = artists.join(' & ')
+
+  const metadata = await getMetadataFromiTunes(artist, album)
+  const image = await getBufferAlbumCover(albumCover)
+
+  if (!metadata) return { title, artist, album, image }
+
+  const { releaseDate, primaryGenreName, trackNumber } = metadata
+
+  return {
+    title,
+    artist,
+    album,
+    image,
+    date: releaseDate,
+    genre: primaryGenreName,
+    trackNumber: trackNumber.toString(),
+    year: new Date(releaseDate).getFullYear().toString()
+  }
+}
+
+async function getMetadataFromiTunes (artist: string, album: string): Promise<iTunesMetadata | null> {
+  const iTunesURL = new URL('https://itunes.apple.com/search?country=US&media=music')
+  iTunesURL.searchParams.set('term', `$${artist} ${album}`)
+  return await axios.get(iTunesURL.href)
+    .then(response => {
+      if (response.status !== 200 || response.data.resultCount === 0) return null
+      const data = response.data as iTunesResponse
+      return data.results[0]
+    })
+    .catch(() => null)
+}
+
+async function getBufferAlbumCover (url: string): Promise<TagImage | undefined> {
+  return await axios.get(url, { responseType: 'arraybuffer' })
+    .then(response => {
+      if (response.status !== 200) return undefined
+      return {
+        mime: 'image/png',
+        type: { id: 3, name: 'front cover' },
+        description: 'Album Art',
+        imageBuffer: response.data
+      }
+    })
+    .catch(() => undefined)
 }
