@@ -35,12 +35,12 @@ export async function openDownloadsFolder (): Promise<string> {
 async function downloadAndSave (id: string, path: string): Promise<true | Error> {
   const stream = ytdl(id, { filter: 'audioonly' })
   return await new Promise((resolve, reject) => {
-    const ffmpegProcess = ffmpeg(stream)
-    ffmpegProcess.audioBitrate(128)
-    ffmpegProcess.format('mp3')
-    ffmpegProcess.save(path)
-    ffmpegProcess.on('end', () => resolve(true))
-    ffmpegProcess.on('error', (err) => reject(err))
+    ffmpeg(stream)
+      .audioBitrate(128)
+      .format('mp3')
+      .save(path)
+      .on('end', () => resolve(true))
+      .on('error', (err) => reject(err))
   })
 }
 
