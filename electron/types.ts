@@ -7,10 +7,10 @@ export type Track = {
   duration: string
 }
 
-export type TrackFile = Track & {
-  path?: string
+export type DownloadFile = Track & {
   state: 'completed' | 'downloading' | 'error'
-  date?: { start: Date, end: Date }
+  path: string
+  date: Date
 }
 
 export type iTunesMetadata = {
