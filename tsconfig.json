@@ -21,13 +21,7 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "gui"
-  ],
-  "exclude": [
-    "node_modules",
-    "app",
-    "dist",
-    "release"
+    "src"
   ],
   "references": [
     {
