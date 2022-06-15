@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import { app, BrowserWindow, ipcMain } from 'electron'
 
 import { downloadTrack, openDownloadsFolder } from './lib/download'
+import { loadReactDevTools } from './helpers/loadReactDevTools'
 import { searchTrack } from './lib/search'
 
 if (!app.requestSingleInstanceLock()) {
@@ -42,7 +43,10 @@ async function createMainWindow () {
 }
 
 // run when electron is ready!
-app.whenReady().then(createMainWindow)
+app.whenReady().then(async () => {
+  await loadReactDevTools()
+  createMainWindow()
+})
 
 app.on('window-all-closed', () => {
   window = null
