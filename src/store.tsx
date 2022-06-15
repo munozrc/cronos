@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { Track, TrackFile } from '../app/types'
+import { Track, TrackFile } from '../electron/types'
 
 interface State {
   downloads: TrackFile[]

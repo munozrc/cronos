@@ -1,4 +1,4 @@
-import { cronos } from '../app/preload'
+import { cronos } from '../electron/preload'
 
 declare global {
   // eslint-disable-next-line no-unused-vars
