@@ -1,44 +1,20 @@
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import { Spinner } from '../components/Spinner'
-import { useStore } from '../store'
+import { useSearchSong } from '../hooks/useSearchSong'
+import { useDownloadStore } from '../stores/useDownloadStore'
 
 import styles from './SearchView.module.css'
 
-interface State {
-  isLoading: boolean,
-  isError: boolean
-}
-
 export const SearchView = () => {
-  const { searchTrack } = window.cronos
-  const { results, setResults, prevQuery, setPrevQuery, addNewDownload } = useStore()
-  const [state, setState] = useState<State>({ isLoading: false, isError: false })
-  const [searchParams] = useSearchParams()
+  const { queryResults, queryStatus } = useSearchSong()
+  const { addNewDownload } = useDownloadStore()
 
-  const query = searchParams.get('query')
-
-  useEffect(() => {
-    if (query === null || query === prevQuery) return
-    setState({ isLoading: true, isError: false })
-    setPrevQuery(query)
-    searchTrack(query)
-      .then((response) => {
-        setState({ isLoading: false, isError: false })
-        setResults(response)
-      })
-      .catch((response) => {
-        setState({ isLoading: false, isError: true })
-        setResults(response)
-      })
-  }, [query])
-
-  if (state.isLoading) return <Spinner />
+  if (queryStatus === 'loading') return <Spinner />
+  if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
 
   return (
     <section className={styles.wrapper}>
       <ul className={styles.list}>
-        {results.map((song) => (
+        {queryResults.map((song) => (
           <li key={song.id} className={styles.item}>
             <img className={styles.albumCover} src={song.albumCover} loading="lazy" />
             <div className={styles.info}>
