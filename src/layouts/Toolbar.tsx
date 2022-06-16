@@ -1,14 +1,22 @@
+import { useEffect } from 'react'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { DownloadIcon, FolderIcon, SettingsIcon } from '../components/Icons'
 import { SearchBar } from '../components/SearchBar'
+import { useDownloadStore } from '../stores/useDownloadStore'
 
 import styles from './Toolbar.module.css'
 
 export const Toolbar = () => {
+  const { updateItemList } = useDownloadStore()
   const navigate = useNavigate()
   const handleSubmit = (query: string) => navigate({ pathname: '/', search: `?${createSearchParams({ query })}` })
   const goToDownloadsView = () => navigate({ pathname: '/downloads' })
+
+  useEffect(() => {
+    window.cronos.onDownloadCompleted(updateItemList)
+  }, [])
+
   return (
     <header className={styles.header}>
       <div className={styles.buttonGruop}>
