@@ -15,7 +15,6 @@ export const useDownloadStore = create<DownloadState>((set) => ({
     set((state) => {
       const date = new Date()
       const newItem: DownloadFile = { ...data, date, state: 'downloading', path: '' }
-
       const findTrackInDownloads = state.itemList.find(i => i.id === data.id && i.state === 'downloading')
       const existSimilarDownload = typeof findTrackInDownloads !== 'undefined'
 
