@@ -4,6 +4,7 @@ import { Track } from '../types'
 export async function searchTrack (query: string): Promise<Track[]> {
   try {
     const response = await searchMusics(query)
+    console.log({ response })
     const results = response.map(normalizeResponse)
     return results.filter((item) => item !== undefined) as Track[]
   } catch (err) {
@@ -23,15 +24,19 @@ function normalizeResponse (track: MusicVideo): Track | undefined {
     id: youtubeId as string,
     title: title as string,
     album: album as string,
-    artists: listOfArtists,
+    artists: [listOfArtists],
     duration: duration?.label ?? '',
     albumCover: albumCover as string
   }
 }
 
-function normalizeArtistsInfo (array: Array<{name: string, id?: string}> | string): Array<string> {
-  if (typeof array === 'string') return [array]
-  return array.map(i => i.name)
+function normalizeArtistsInfo (data: Array<{name: string, id?: string}> | {name: string, id?: string}): string {
+  if (Array.isArray(data)) {
+    const isEmpty = data.length !== 0
+    const matchNames = data.map(i => i.name).join(' & ')
+    return isEmpty ? matchNames : 'sin-artista'
+  }
+  return data.name
 }
 
 function isTrack (obj: MusicVideo): boolean {
