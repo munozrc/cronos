@@ -6,7 +6,7 @@ import styles from './SearchView.module.css'
 
 export const SearchView = () => {
   const { queryResults, queryStatus } = useSearchSong()
-  const { addNewDownload } = useDownloadStore()
+  const { createNewDownload } = useDownloadStore()
 
   if (queryStatus === 'loading') return <Spinner />
   if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
@@ -26,7 +26,7 @@ export const SearchView = () => {
             </div>
             <div className={styles.options}>
               <button className={styles.button}>Reproducir</button>
-              <button className={styles.button} onClick={() => addNewDownload(song)}>
+              <button className={styles.button} onClick={() => createNewDownload(song)}>
                 Descargar
               </button>
             </div>
