@@ -22,8 +22,8 @@ export const DownloadsView = () => {
           <th>Estado</th>
           <th>Fecha</th>
         </tr>
-        {itemList.map(({ title, artists, state, date, id }) => (
-          <tr key={date.getMilliseconds()}>
+        {itemList.map(({ title, artists, state, date, uuid }) => (
+          <tr key={uuid}>
             <td>{`${artists.join(' & ')} - ${title}`}</td>
             <td className={`${styles.status} ${styles['status-' + state]}`}>{stateTransform[state]}</td>
             <td>{dateFormat(date)}</td>
