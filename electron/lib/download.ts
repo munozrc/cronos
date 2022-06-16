@@ -90,7 +90,7 @@ function getMetadataFromiTunes (artist: string, album: string): Promise<iTunesMe
 }
 
 function getBufferAlbumCover (url: string): Promise<TagImage | undefined> {
-  const imageURL = url.replace('w120-h120-l90-rj', 'w500-h500-l90-rj')
+  const imageURL = url.replace('w60-h60-l90-rj', 'w500-h500-l90-rj')
   return axios.get(imageURL, { responseType: 'arraybuffer' })
     .then(response => {
       if (response.status !== 200) return undefined

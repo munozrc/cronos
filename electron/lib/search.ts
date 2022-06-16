@@ -4,27 +4,39 @@ import { Track } from '../types'
 export async function searchTrack (query: string): Promise<Track[]> {
   try {
     const response = await searchMusics(query)
-    return response.map(normalizeResponse)
+    const results = response.map(normalizeResponse)
+    return results.filter((item) => item !== undefined) as Track[]
   } catch (err) {
     console.error('Error fetch data search: ', err)
     return []
   }
 }
 
-function normalizeResponse (track: MusicVideo): Track {
+function normalizeResponse (track: MusicVideo): Track | undefined {
+  if (isTrack(track)) return undefined
+
   const { youtubeId, title, artists, duration, album, thumbnailUrl } = track
-  const listOfArtists: Array<string> = artists?.map(normalizeArtistsInfo) ?? []
+  const listOfArtists = normalizeArtistsInfo(artists ?? [])
+  const albumCover = thumbnailUrl?.replace('w120-h120-l90-rj', 'w60-h60-l90-rj')
 
   return {
-    id: youtubeId ?? '',
-    title: title ?? '',
+    id: youtubeId as string,
+    title: title as string,
+    album: album as string,
     artists: listOfArtists,
     duration: duration?.label ?? '',
-    album: album ?? '',
-    albumCover: thumbnailUrl ?? ''
+    albumCover: albumCover as string
   }
 }
 
-function normalizeArtistsInfo (artist: {name: string, id?: string}) {
-  return artist.name
+function normalizeArtistsInfo (array: Array<{name: string, id?: string}> | string): Array<string> {
+  if (typeof array === 'string') return [array]
+  return array.map(i => i.name)
+}
+
+function isTrack (obj: MusicVideo): boolean {
+  for (const property in Object.values(obj)) {
+    if (typeof property === 'undefined') return true
+  }
+  return false
 }
