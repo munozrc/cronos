@@ -1,28 +1,31 @@
 import { join } from 'node:path'
 import { renameSync } from 'node:fs'
-import { app, shell } from 'electron'
+import { app, BrowserWindow, shell } from 'electron'
 import axios from 'axios'
 import ffmpeg from 'fluent-ffmpeg'
 import ytdl from 'ytdl-core'
 import id3, { Tags } from 'node-id3'
-
-import { iTunesMetadata, iTunesResponse, TagImage, Track } from '../types'
+import { DownloadFile, iTunesMetadata, iTunesResponse, TagImage, Track } from '../types'
 
 const userDownloadsFolder: string = app.getPath('music')
 
-export async function downloadTrack (track: Track): Promise<void> {
-  try {
-    const { id, title, artists } = track
-    const { temporary, persistent } = getFilePaths(userDownloadsFolder, artists, title)
+export async function downloadTrack (data: DownloadFile, window: BrowserWindow | null): Promise<void> {
+  const { id, title, artists } = data
+  const { temporary, persistent } = getFilePaths(userDownloadsFolder, artists, title)
+  const { webContents } = window as BrowserWindow
+  const item = { ...data, state: 'completed', path: persistent } as DownloadFile
 
+  try {
     const [, metadata] = await Promise.all([
       downloadAndSave(id, temporary),
-      getAdditionalMetadata(track)
+      getAdditionalMetadata(data)
     ])
 
     id3.write(metadata, temporary)
     renameSync(temporary, persistent)
+    webContents.send('downloadCompleted', item)
   } catch (err) {
+    webContents.send('downloadCompleted', { ...item, state: 'error' })
     console.error('DOWNLOAD_TRACK_ERROR: ', err)
   }
 }
@@ -31,9 +34,9 @@ export async function openDownloadsFolder (): Promise<string> {
   return await shell.openPath(userDownloadsFolder)
 }
 
-async function downloadAndSave (id: string, path: string): Promise<true | Error> {
+function downloadAndSave (id: string, path: string): Promise<true | Error> {
   const stream = ytdl(id, { filter: 'audioonly' })
-  return await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     ffmpeg(stream)
       .audioBitrate(128)
       .format('mp3')
@@ -74,10 +77,10 @@ async function getAdditionalMetadata (track: Track): Promise<Tags> {
   }
 }
 
-async function getMetadataFromiTunes (artist: string, album: string): Promise<iTunesMetadata | null> {
+function getMetadataFromiTunes (artist: string, album: string): Promise<iTunesMetadata | null> {
   const iTunesURL = new URL('https://itunes.apple.com/search?country=US&media=music')
   iTunesURL.searchParams.set('term', `$${artist} ${album}`)
-  return await axios.get(iTunesURL.href)
+  return axios.get(iTunesURL.href)
     .then(response => {
       if (response.status !== 200 || response.data.resultCount === 0) return null
       const data = response.data as iTunesResponse
@@ -86,9 +89,9 @@ async function getMetadataFromiTunes (artist: string, album: string): Promise<iT
     .catch(() => null)
 }
 
-async function getBufferAlbumCover (url: string): Promise<TagImage | undefined> {
+function getBufferAlbumCover (url: string): Promise<TagImage | undefined> {
   const imageURL = url.replace('w120-h120-l90-rj', 'w500-h500-l90-rj')
-  return await axios.get(imageURL, { responseType: 'arraybuffer' })
+  return axios.get(imageURL, { responseType: 'arraybuffer' })
     .then(response => {
       if (response.status !== 200) return undefined
       return {
