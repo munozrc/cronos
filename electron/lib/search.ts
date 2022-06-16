@@ -24,7 +24,7 @@ function normalizeResponse (track: MusicVideo): Track | undefined {
     id: youtubeId as string,
     title: title as string,
     album: album as string,
-    artists: [listOfArtists],
+    artist: listOfArtists,
     duration: duration?.label ?? '',
     albumCover: albumCover as string
   }

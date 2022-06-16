@@ -22,9 +22,9 @@ export const DownloadsView = () => {
           <th>Estado</th>
           <th>Fecha</th>
         </tr>
-        {itemList.map(({ title, artists, state, date, uuid }) => (
+        {itemList.map(({ title, artist, state, date, uuid }) => (
           <tr key={uuid}>
-            <td>{`${artists.join(' & ')} - ${title}`}</td>
+            <td>{`${artist} - ${title}`}</td>
             <td className={`${styles.status} ${styles['status-' + state]}`}>{stateTransform[state]}</td>
             <td>{dateFormat(date)}</td>
           </tr>

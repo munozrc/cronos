@@ -10,8 +10,8 @@ import { DownloadFile, iTunesMetadata, iTunesResponse, TagImage, Track } from '.
 const userDownloadsFolder: string = app.getPath('music')
 
 export async function downloadTrack (data: DownloadFile, window: BrowserWindow | null): Promise<void> {
-  const { id, title, artists } = data
-  const { temporary, persistent } = getFilePaths(userDownloadsFolder, artists, title)
+  const { id, title, artist } = data
+  const { temporary, persistent } = getFilePaths(userDownloadsFolder, artist, title)
   const { webContents } = window as BrowserWindow
   const item = { ...data, state: 'completed', path: persistent } as DownloadFile
 
@@ -46,16 +46,14 @@ function downloadAndSave (id: string, path: string): Promise<true | Error> {
   })
 }
 
-function getFilePaths (path: string, artists: string[], title: string): {temporary: string, persistent: string} {
+function getFilePaths (path: string, artist: string, title: string): {temporary: string, persistent: string} {
   const temporary = join(path, Math.random().toString(36).slice(-5) + '_temp')
-  const persistent = join(path, `${artists.join(' & ')} - ${title}.mp3`)
+  const persistent = join(path, `${artist} - ${title}.mp3`)
   return { temporary, persistent }
 }
 
 async function getAdditionalMetadata (track: Track): Promise<Tags> {
-  const { title, artists, album, albumCover } = track
-  const artist = artists.join(' & ')
-
+  const { title, artist, album, albumCover } = track
   const [metadata, image] = await Promise.all([
     getMetadataFromiTunes(artist, album),
     getBufferAlbumCover(albumCover)

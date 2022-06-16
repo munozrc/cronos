@@ -20,7 +20,7 @@ export const SearchView = () => {
             <div className={styles.info}>
               <h4 className={styles.titleSong}>{song.title}</h4>
               <div className={styles.subInfo}>
-                <p className={styles.artistSong}>{song.artists.join(' & ')}</p>
+                <p className={styles.artistSong}>{song.artist}</p>
                 <p className={styles.albumSong}>{song.album}</p>
               </div>
             </div>

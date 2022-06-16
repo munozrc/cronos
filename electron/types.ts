@@ -1,7 +1,7 @@
 export type Track = {
   id: string
   title: string
-  artists: Array<string>
+  artist: string
   album: string
   albumCover: string
   duration: string
