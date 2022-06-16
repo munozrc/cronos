@@ -4,20 +4,13 @@ import { DownloadFile, Track } from '../../electron/types'
 interface DownloadState {
   itemList: Array<DownloadFile>
   setItemList: (list: Array<DownloadFile>) => void
-  updateItemList: (item: DownloadFile) => void
   createNewDownload: (data: Track) => void
+  updateItemList: (item: DownloadFile) => void
 }
 
 export const useDownloadStore = create<DownloadState>((set) => ({
   itemList: [],
   setItemList: (items: DownloadFile[]) => { set(() => ({ itemList: items })) },
-  updateItemList: (item: DownloadFile) => {
-    set((state) => {
-      const newItemList = state.itemList.filter(({ id }) => id !== item.id)
-      console.log(`[${item.state}-download]::: --> ${item.id}`)
-      return { itemList: [...newItemList, item] }
-    })
-  },
   createNewDownload: (data: Track) => {
     set((state) => {
       const date = new Date()
@@ -34,6 +27,13 @@ export const useDownloadStore = create<DownloadState>((set) => ({
 
       console.log(`[exist-download-progress]::: --> ${newItem.id}`)
       return state
+    })
+  },
+  updateItemList: (item: DownloadFile) => {
+    set((state) => {
+      const newItemList = state.itemList.filter(({ id }) => id !== item.id)
+      console.log(`[${item.state}-download]::: --> ${item.id}`)
+      return { itemList: [...newItemList, item] }
     })
   }
 }))
