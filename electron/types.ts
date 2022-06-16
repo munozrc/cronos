@@ -8,6 +8,7 @@ export type Track = {
 }
 
 export type DownloadFile = Track & {
+  uuid: string
   state: 'completed' | 'downloading' | 'error'
   path: string
   date: Date
