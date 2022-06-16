@@ -12,13 +12,11 @@ const root = ReactDOM.createRoot(
 )
 
 root.render(
-  <React.StrictMode>
-    <HashRouter>
-      <Toolbar />
-      <Routes>
-        <Route path="/" element={<SearchView />} />
-        <Route path="/downloads" element={<DownloadsView />} />
-      </Routes>
-    </HashRouter>
-  </React.StrictMode>
+  <HashRouter>
+    <Toolbar />
+    <Routes>
+      <Route path="/" element={<SearchView />} />
+      <Route path="/downloads" element={<DownloadsView />} />
+    </Routes>
+  </HashRouter>
 )
