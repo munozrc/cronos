@@ -1,39 +1,39 @@
 import create from 'zustand'
-import { Track, TrackFile } from '../../electron/types'
+import { DownloadFile, Track } from '../../electron/types'
 
-interface State {
-  downloads: TrackFile[]
-  addNewDownload: (track: Track) => Promise<void>
+interface DownloadState {
+  itemList: Array<DownloadFile>
+  setItemList: (list: Array<DownloadFile>) => void
+  updateItemList: (item: DownloadFile) => void
+  createNewDownload: (data: Track) => void
 }
 
-export const useDownloadStore = create<State>((set) => ({
-  downloads: [],
-  addNewDownload: async (track: Track) => {
-    const { downloadTrack } = window.cronos
-    const trackFile: TrackFile = { ...track, state: 'downloading' }
-
-    let existSimilarDownload = false
-
+export const useDownloadStore = create<DownloadState>((set) => ({
+  itemList: [],
+  setItemList: (items: DownloadFile[]) => { set(() => ({ itemList: items })) },
+  updateItemList: (item: DownloadFile) => {
     set((state) => {
-      const findTrackInDownloads = state.downloads.find(t => t.id === track.id && t.state === 'downloading')
-      existSimilarDownload = typeof findTrackInDownloads !== 'undefined'
+      const newItemList = state.itemList.filter(({ id }) => id !== item.id)
+      console.log(`[${item.state}-download]::: --> ${item.id}`)
+      return { itemList: [...newItemList, item] }
+    })
+  },
+  createNewDownload: (data: Track) => {
+    set((state) => {
+      const date = new Date()
+      const newItem: DownloadFile = { ...data, date, state: 'downloading', path: '' }
+
+      const findTrackInDownloads = state.itemList.find(i => i.id === data.id && i.state === 'downloading')
+      const existSimilarDownload = typeof findTrackInDownloads !== 'undefined'
 
       if (!existSimilarDownload) {
-        console.log('descarga iniciada...')
-        return { downloads: [...state.downloads, trackFile] }
+        console.log(`[start-download]::: --> ${newItem.id}`)
+        window.cronos.downloadTrack(newItem)
+        return { itemList: [...state.itemList, newItem] }
       }
 
-      console.log('existe una descarga en curso...')
+      console.log(`[exist-download-progress]::: --> ${newItem.id}`)
       return state
-    })
-
-    if (existSimilarDownload) return
-    await downloadTrack(track)
-
-    set((state) => {
-      const newArrayDownloads = state.downloads.filter(t => t.id === track.id)
-      console.log('descarga completada...')
-      return { downloads: [...newArrayDownloads, { ...trackFile, state: 'completed' }] }
     })
   }
 }))
