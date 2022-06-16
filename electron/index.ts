@@ -68,5 +68,5 @@ app.on('activate', () => {
 })
 
 ipcMain.handle('searchTrack', (_, query) => searchTrack(query))
-ipcMain.handle('downloadTrack', (_, track) => downloadTrack(track))
+ipcMain.handle('downloadTrack', (_, track) => downloadTrack(track, window))
 ipcMain.handle('openDownloadsFolder', openDownloadsFolder)
