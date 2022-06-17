@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useAppStore } from '../stores/useAppStore'
 
 export function useSearchSong () {
-  const { queryResults, queryStatus, lastQuery, setNewQuery, setQueryResults, setStatusQuery } = useAppStore()
+  const { queryResults, queryStatus, lastQuery, suggestionResults, setNewQuery, setQueryResults, setStatusQuery, searchTrackSuggestions } = useAppStore()
   const { searchTrack } = window.cronos
   const [searchParams] = useSearchParams()
 
@@ -17,12 +17,14 @@ export function useSearchSong () {
       .then((results) => {
         setStatusQuery('complete')
         setQueryResults(results)
+        searchTrackSuggestions()
       })
       .catch(() => setStatusQuery('error'))
   }, [searchParams])
 
   return {
     queryResults,
-    queryStatus
+    queryStatus,
+    suggestionResults
   }
 }
