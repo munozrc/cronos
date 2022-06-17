@@ -32,20 +32,20 @@ export const Toolbar = () => {
         <Button
           variant="flat"
           title="Abrir carpeta de descargas"
+          icon={<FolderIcon />}
           onClick={window.cronos.openDownloadsFolder}
-        >
-          <FolderIcon />
-        </Button>
+        />
         <Button
           variant="flat"
           title="Historial de descargas"
+          icon={<DownloadIcon />}
           onClick={goToDownloadsView}
-        >
-          <DownloadIcon />
-        </Button>
-        <Button variant="flat" title="Configuraciones">
-          <SettingsIcon />
-        </Button>
+        />
+        <Button
+          variant="flat"
+          title="Configuraciones"
+          icon={<SettingsIcon />}
+        />
       </ul>
     </header>
   )
