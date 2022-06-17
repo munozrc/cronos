@@ -1,3 +1,5 @@
+import { DownloadIcon } from '../components/Icons'
+import { Hero } from '../layouts'
 import { useDownloadStore } from '../stores/useDownloadStore'
 import styles from './DownloadsView.module.css'
 
@@ -13,9 +15,10 @@ export const DownloadsView = () => {
   const { itemList } = useDownloadStore()
   return (
     <section className={styles.wrapper}>
-      <header className={styles.header}>
-        <h3 className={styles.title}>Mis Descargas</h3>
-      </header>
+      <Hero
+        icon={<DownloadIcon />}
+        subtitle={`${itemList.length} ${itemList.length === 1 ? 'Elemento' : 'Elementos'}`}
+      />
       <table className={styles.downloadsTable}>
         <tr>
           <th>Canción</th>
