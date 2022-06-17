@@ -3,8 +3,8 @@ import { join } from 'node:path'
 import { app, BrowserWindow, ipcMain } from 'electron'
 
 import { downloadTrack, openDownloadsFolder } from './lib/download'
+import { getTrackSuggestions, searchTrack } from './lib/search'
 import { loadReactDevTools } from './helpers/loadReactDevTools'
-import { searchTrack } from './lib/search'
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -68,5 +68,6 @@ app.on('activate', () => {
 })
 
 ipcMain.handle('searchTrack', (_, query) => searchTrack(query))
+ipcMain.handle('getTrackSuggestions', (_, id) => getTrackSuggestions(id))
 ipcMain.handle('downloadTrack', (_, track) => downloadTrack(track, window))
 ipcMain.handle('openDownloadsFolder', openDownloadsFolder)
