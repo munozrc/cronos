@@ -1,6 +1,7 @@
-import { Spinner } from '../components/Spinner'
 import { useSearchSong } from '../hooks/useSearchSong'
 import { useDownloadStore } from '../stores/useDownloadStore'
+import { ViewContainer } from '../layouts'
+import { Spinner } from '../components/Spinner'
 
 import styles from './SearchView.module.css'
 
@@ -12,7 +13,7 @@ export const SearchView = () => {
   if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
 
   return (
-    <section className={styles.wrapper}>
+    <ViewContainer>
       <ul className={styles.list}>
         {queryResults.map((song) => (
           <li key={song.id} className={styles.item}>
@@ -33,6 +34,6 @@ export const SearchView = () => {
           </li>
         ))}
       </ul>
-    </section>
+    </ViewContainer>
   )
 }
