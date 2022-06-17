@@ -17,7 +17,9 @@ export const SearchView = () => {
       <ul className={styles.list}>
         {queryResults.map((song) => (
           <li key={song.id} className={styles.item}>
-            <img className={styles.albumCover} src={song.albumCover} loading="lazy" />
+            <picture className={styles.albumCover}>
+              <img src={song.albumCover} loading="lazy" />
+            </picture>
             <div className={styles.info}>
               <h4 className={styles.titleSong}>{song.title}</h4>
               <div className={styles.subInfo}>
