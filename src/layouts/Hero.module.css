@@ -1,0 +1,35 @@
+.header {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #1363DF;
+}
+
+.circle>svg {
+  font-size: 42px;
+  color: var(--text-color);
+}
+
+.title {
+  font-size: 28px;
+  color: var(--text-color);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.subtitle {
+  color: var(--text-light-color);
+  font-size: 14px;
+}
