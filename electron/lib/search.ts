@@ -4,7 +4,6 @@ import { Track } from '../types'
 export async function searchTrack (query: string): Promise<Track[]> {
   try {
     const response = await searchMusics(query)
-    console.log({ response })
     const results = response.map(normalizeResponse)
     return results.filter((item) => item !== undefined) as Track[]
   } catch (err) {
