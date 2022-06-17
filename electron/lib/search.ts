@@ -1,4 +1,4 @@
-import { MusicVideo, searchMusics } from 'node-youtube-music'
+import { MusicVideo, searchMusics, getSuggestions } from 'node-youtube-music'
 import { Track } from '../types'
 
 export async function searchTrack (query: string): Promise<Track[]> {
@@ -12,8 +12,20 @@ export async function searchTrack (query: string): Promise<Track[]> {
   }
 }
 
+export async function getTrackSuggestions (id: string): Promise<Track[]> {
+  try {
+    const response = await getSuggestions(id)
+    const results = response.map(normalizeResponse)
+    return results.filter((item) => item !== undefined) as Track[]
+  } catch (err) {
+    console.error('Error fetch suggestions for track: ', err)
+    return []
+  }
+}
+
 function normalizeResponse (track: MusicVideo): Track | undefined {
   if (isTrack(track)) return undefined
+  if (track.thumbnailUrl?.includes('https://i.ytimg.com/')) return undefined
 
   const { youtubeId, title, artists, duration, album, thumbnailUrl } = track
   const listOfArtists = normalizeArtistsInfo(artists ?? [])
