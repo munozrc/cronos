@@ -1,0 +1,119 @@
+.wrapperList,
+.wrapperResultItem,
+.wrapperInfo,
+.wrapperSubtitle,
+.wrapperOptions {
+  display: flex;
+}
+
+.wrapperList {
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+  padding-right: 16px;
+  list-style: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapperList::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.wrapperList::-webkit-scrollbar-thumb {
+  background: var(--hover-brand-color);
+  border-radius: 2px;
+  border: none;
+}
+
+.wrapperList::-webkit-scrollbar-track {
+  border: none;
+  border-radius: 2px;
+  background: var(--border-dark-color);
+}
+
+.wrapperResultItem {
+  align-items: center;
+  width: 100%;
+  min-height: 72px;
+  padding: 0 20px 0 10px;
+  border-bottom: 1px solid var(--border-dark-color);
+  transition: background-color 0.15s ease;
+  gap: 12px;
+}
+
+.wrapperResultItem:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+.wrapperResultItem:last-child {
+  border-radius: 0 0 6px 6px;
+  border-bottom: none;
+}
+
+.wrapperResultItem:hover {
+  background-color: var(--border-dark-color);
+}
+
+.wrapperInfo {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wrapperSubtitle {
+  align-items: center;
+  color: var(--text-color);
+  opacity: 0.5;
+  font-size: 12px;
+  font-weight: 300;
+  gap: 6px;
+}
+
+.wrapperSubtitle::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  order: 2;
+}
+
+.wrapperOptions {
+  margin-left: auto;
+  gap: 8px;
+}
+
+.albumCover {
+  width: 52px;
+  aspect-ratio: 1;
+  background-color: var(--hover-brand-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.albumCover>img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.titleSong {
+  color: var(--text-color);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.artistSong,
+.albumSong {
+  line-height: 0.8;
+}
+
+.artistSong {
+  order: 1;
+}
+
+.albumSong {
+  order: 3;
+}
