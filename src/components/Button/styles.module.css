@@ -1,0 +1,36 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flat {
+  width: 30px;
+  padding: 0px;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  font-size: 19px;
+  color: var(--text-color);
+  transition: background-color 0.3s ease-out 0s;
+}
+
+.flat:hover {
+  background-color: var(--hover-brand-color);
+}
+
+.outline {
+  padding: 4px 8px 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--text-color);
+  font-size: 12px;
+  color: var(--text-color);
+  transition: opacity 0.3s ease, color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+  opacity: 0.2;
+}
+
+.outline:hover {
+  background-color: var(--brand-light-color);
+  border: 1px solid var(--bg-color);
+  color: var(--bg-color);
+  opacity: 1;
+}
