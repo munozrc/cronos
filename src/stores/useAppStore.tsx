@@ -9,9 +9,7 @@ interface AppState {
   suggestionResults: Array<Track>
   queryStatus: ResponseStatus
   suggestionStatus: ResponseStatus
-  setNewQuery: (query: string) => void
-  setQueryResults: (results: Array<Track>) => void
-  setStatusQuery: (status: ResponseStatus) => void
+  searchSong: (query: string | null) => void
   searchTrackSuggestions: () => void
 }
 
@@ -21,9 +19,23 @@ export const useAppStore = create<AppState>((set, get) => ({
   suggestionResults: [],
   queryStatus: 'complete',
   suggestionStatus: 'complete',
-  setNewQuery: (query: string) => { set(() => ({ lastQuery: query })) },
-  setQueryResults: (results: Array<Track>) => { set(() => ({ queryResults: results })) },
-  setStatusQuery: (status: ResponseStatus) => { set(() => ({ queryStatus: status })) },
+  searchSong: (query: string | null) => {
+    const { searchTrack } = window.cronos
+    const { lastQuery } = get()
+
+    if (query === null || query === lastQuery) return
+
+    set(() => ({ lastQuery: query, queryStatus: 'loading' }))
+
+    searchTrack(query)
+      .then(results => set(() => ({
+        queryStatus: 'complete',
+        queryResults: results
+      })))
+      .catch(() => set(() => ({
+        queryStatus: 'error'
+      })))
+  },
   searchTrackSuggestions: () => {
     const { getTrackSuggestions } = window.cronos
     const { queryResults, queryStatus } = get()
