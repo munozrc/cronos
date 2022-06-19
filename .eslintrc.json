@@ -6,6 +6,8 @@
   },
   "extends": [
     "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
     "standard"
   ],
   "parser": "@typescript-eslint/parser",
@@ -18,11 +20,17 @@
   },
   "plugins": [
     "react",
+    "jsx-a11y",
+    "react-hooks",
     "@typescript-eslint"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "indent": [
+      "error",
+      2
+    ]
   },
   "settings": {
     "react": {
