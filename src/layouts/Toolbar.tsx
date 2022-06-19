@@ -1,27 +1,21 @@
-import { useEffect } from 'react'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import { Button } from '../components/Button'
 import { DownloadIcon, FolderIcon, SettingsIcon } from '../components/Icons'
 import { SearchBar } from '../components/SearchBar'
-import { useDownloadStore } from '../stores/useDownloadStore'
+import { Button } from '../components/Button'
 
 import styles from './Toolbar.module.css'
 
 export const Toolbar = () => {
-  const { updateItemList } = useDownloadStore()
   const navigate = useNavigate()
+  const { closeWindow, minimizeWindow, openDownloadsFolder } = window.cronos
   const handleSubmit = (query: string) => navigate({ pathname: '/', search: `?${createSearchParams({ query })}` })
   const goToDownloadsView = () => navigate({ pathname: '/downloads' })
-
-  useEffect(() => {
-    window.cronos.onDownloadCompleted(updateItemList)
-  }, [])
 
   return (
     <header className={styles.header}>
       <div className={styles.buttonGruop}>
-        <button className={styles.buttonClose} onClick={window.cronos.closeWindow}/>
-        <button className={styles.buttonMinimize} onClick={window.cronos.minimizeWindow}/>
+        <button className={styles.buttonClose} onClick={closeWindow}/>
+        <button className={styles.buttonMinimize} onClick={minimizeWindow}/>
         <button className={styles.buttonMaximize} />
       </div>
       <div className={styles.brand}>
@@ -33,7 +27,7 @@ export const Toolbar = () => {
           variant="flat"
           title="Abrir carpeta de descargas"
           icon={<FolderIcon />}
-          onClick={window.cronos.openDownloadsFolder}
+          onClick={openDownloadsFolder}
         />
         <Button
           variant="flat"

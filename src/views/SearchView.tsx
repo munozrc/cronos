@@ -1,15 +1,15 @@
-import { useSearchSong } from '../hooks/useSearchSong'
 import { useDownloadStore } from '../stores/useDownloadStore'
 import { ViewContainer } from '../layouts'
 import { Spinner } from '../components/Spinner'
 
 import styles from './SearchView.module.css'
 import { useState } from 'react'
+import { useAppStore } from '../stores/useAppStore'
 
 export const SearchView = () => {
-  const { queryResults, queryStatus, suggestionResults } = useSearchSong()
-  const { createNewDownload } = useDownloadStore()
   const [showSuggestions, toggleSuggestions] = useState<boolean>(false)
+  const { queryResults, queryStatus, suggestionResults } = useAppStore()
+  const { createNewDownload } = useDownloadStore()
 
   if (queryStatus === 'loading') return <Spinner />
   if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
@@ -25,7 +25,7 @@ export const SearchView = () => {
           {queryResults.map((song) => (
             <li key={song.id} className={styles.item}>
               <picture className={styles.albumCover}>
-                <img src={song.albumCover} loading="lazy" />
+                <img src={song.albumCover} loading="lazy" alt={song.artist}/>
               </picture>
               <div className={styles.info}>
                 <h4 className={styles.titleSong}>{song.title}</h4>
@@ -48,7 +48,7 @@ export const SearchView = () => {
         {suggestionResults.map((song) => (
           <li key={song.id} className={styles.item}>
             <picture className={styles.albumCover}>
-              <img src={song.albumCover} loading="lazy" />
+              <img src={song.albumCover} loading="lazy" alt={song.artist} />
             </picture>
             <div className={styles.info}>
               <h4 className={styles.titleSong}>{song.title}</h4>
