@@ -1,6 +1,6 @@
 import { FormEvent } from 'react'
-import { Button } from './Button'
-import { SearchIcon } from './Icons'
+import { Button } from '../Button'
+import { SearchIcon } from '../Icons'
 
 import styles from './SearchBar.module.css'
 
@@ -20,9 +20,7 @@ export const SearchBar = ({ onSubmit }: SearchBarProps) => {
   return (
     <form className={styles.wrapper} onSubmit={handleSubmit}>
       <input className={styles.input} name="search" placeholder="Buscar..."/>
-      <Button variant='flat'>
-        <SearchIcon />
-      </Button>
+      <Button variant='flat' icon={<SearchIcon />}/>
     </form>
   )
 }
