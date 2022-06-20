@@ -1,2 +1,2 @@
-export { DownloadsView } from './DownloadsView'
+export { DownloadView } from './DownloadView'
 export { SearchView } from './SearchView'
