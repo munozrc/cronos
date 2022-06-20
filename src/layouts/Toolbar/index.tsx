@@ -25,6 +25,13 @@ export const Toolbar = () => {
       </div>
       <ul className={styles.buttonList}>
         <SearchBar onSubmit={handleSubmit}/>
+
+        <Button
+          variant="flat"
+          title="Configuraciones"
+          icon={<SettingsIcon />}
+          onClick={goToSettingsView}
+        />
         <Button
           variant="flat"
           title="Abrir carpeta de descargas"
@@ -36,12 +43,6 @@ export const Toolbar = () => {
           title="Historial de descargas"
           icon={<DownloadIcon />}
           onClick={goToDownloadsView}
-        />
-        <Button
-          variant="flat"
-          title="Configuraciones"
-          icon={<SettingsIcon />}
-          onClick={goToSettingsView}
         />
       </ul>
     </header>
