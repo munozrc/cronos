@@ -2,7 +2,7 @@ import { FormEvent } from 'react'
 import { Button } from '../Button'
 import { SearchIcon } from '../Icons'
 
-import styles from './SearchBar.module.css'
+import styles from './styles.module.css'
 
 interface SearchBarProps {
   onSubmit: (query: string) => void
