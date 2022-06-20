@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
-import styles from './ViewContainer.module.css'
+
+import styles from './styles.module.css'
 
 interface ViewContainerProps {
   children: ReactNode
