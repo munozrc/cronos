@@ -5,7 +5,6 @@ import styles from './styles.module.css'
 
 interface ListOfItemsProps {
   list: Array<Track>
-  isVisible: boolean
   createNewDownload: (value: Track) => void
 }
 interface ResultItemProps extends Track {
@@ -13,9 +12,9 @@ interface ResultItemProps extends Track {
   handlePlaySong: () => void
 }
 
-const ListOfItems = ({ list, isVisible, createNewDownload }: ListOfItemsProps) => (
+const ListOfItems = ({ list, createNewDownload }: ListOfItemsProps) => (
   <ul className={styles.wrapperList}>
-    {isVisible && list.map((item) => (
+    {list.map((item) => (
       <ResultItem
         key={item.id}
         {...item}
