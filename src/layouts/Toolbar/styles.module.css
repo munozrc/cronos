@@ -1,29 +1,36 @@
-.header {
+.wrapper,
+.branding,
+.buttonList {
   width: 100%;
-  height: 50px;
   display: flex;
   align-items: center;
+}
+
+.branding,
+.buttonList,
+.actionsButtons {
+  height: 100%;
+}
+
+.wrapper {
+  height: 50px;
   padding: 0 16px 0 20px;
   background-color: var(--text-dark-color);
 }
 
-.brand {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
+.branding {
   gap: 20px;
   -webkit-app-region: drag;
 }
 
-.brand::before {
+.branding::before {
   content: '';
   width: 2px;
   height: 28px;
   background-color: var(--border-brand-color);
 }
 
-.title {
+.brandingText {
   color: var(--brand-light-color);
   font-size: 1.05em;
   font-weight: 500;
@@ -32,17 +39,14 @@
   user-select: none;
 }
 
-.listItems {
-  display: flex;
-  height: 100%;
+.buttonList {
   flex-direction: row-reverse;
-  align-items: center;
   list-style: none;
   margin-left: auto;
   gap: 4px;
 }
 
-.listItems::after {
+.buttonList::after {
   content: "";
   width: 3px;
   height: 20px;
@@ -51,14 +55,13 @@
   order: 1;
 }
 
-.listItems>form {
+.buttonList>form {
   margin-right: 12px;
   order: 2;
 }
 
-.buttonGruop {
+.actionsButtons {
   display: flex;
-  height: 100%;
   align-items: center;
   padding-right: 20px;
   gap: 6px;
