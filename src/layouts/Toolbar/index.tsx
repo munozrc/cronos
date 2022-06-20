@@ -25,7 +25,6 @@ export const Toolbar = () => {
       </div>
       <ul className={styles.buttonList}>
         <SearchBar onSubmit={handleSubmit}/>
-
         <Button
           variant="flat"
           title="Configuraciones"
