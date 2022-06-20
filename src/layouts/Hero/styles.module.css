@@ -29,6 +29,7 @@
   color: var(--text-color);
   font-weight: 700;
   line-height: 1.2;
+  padding-bottom: 4px;
 }
 
 .subtitle {
