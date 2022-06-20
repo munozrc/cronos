@@ -1,25 +1,33 @@
-import { ReactNode } from 'react'
 import { Track } from '../../../electron/types'
 import { Button } from '../Button'
 
 import styles from './styles.module.css'
 
 interface ListOfItemsProps {
-  children: ReactNode
+  list: Array<Track>
+  isVisible: boolean
+  createNewDownload: (value: Track) => void
 }
 interface ResultItemProps extends Track {
   handleDownload: () => void
   handlePlaySong: () => void
 }
 
-const ListOfItems = ({ children }: ListOfItemsProps) => (
+const ListOfItems = ({ list, isVisible, createNewDownload }: ListOfItemsProps) => (
   <ul className={styles.wrapperList}>
-    {children}
+    {isVisible && list.map((item) => (
+      <ResultItem
+        key={item.id}
+        {...item}
+        handleDownload={() => createNewDownload(item)}
+        handlePlaySong={() => {}}
+      />
+    ))}
   </ul>
 )
 
 const ResultItem = ({ albumCover, artist, title, album, ...props }: ResultItemProps) => (
-  <li className={styles.wrapperItem}>
+  <li className={styles.wrapperResultItem}>
     <picture className={styles.albumCover}>
       <img src={albumCover} loading="lazy" alt={artist}/>
     </picture>
@@ -37,5 +45,4 @@ const ResultItem = ({ albumCover, artist, title, album, ...props }: ResultItemPr
   </li>
 )
 
-export { ResultItem }
-export default ListOfItems
+export { ListOfItems }
