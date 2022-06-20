@@ -1,23 +1,25 @@
-.header {
-  height: 120px;
+.wrapperHeader,
+.wrapperIcon {
   display: flex;
   align-items: center;
+}
+
+.wrapperHeader {
+  height: 120px;
   gap: 20px;
   padding-left: 20px;
   margin-bottom: 10px;
 }
 
-.circle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.wrapperIcon {
   width: 80px;
   aspect-ratio: 1;
+  justify-content: center;
   border-radius: 50%;
   background-color: #1363DF;
 }
 
-.circle>svg {
+.wrapperIcon>svg {
   font-size: 42px;
   color: var(--text-color);
 }

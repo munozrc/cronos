@@ -1,17 +1,16 @@
 import { ReactNode } from 'react'
-import styles from './Hero.module.css'
+
+import styles from './styles.module.css'
 
 interface HeroProps {
   icon: ReactNode
-  subtitle: string
+  subtitle?: string
 }
 
 export const Hero = ({ icon, subtitle }: HeroProps) => {
   return (
-    <header className={styles.header}>
-      <span className={styles.circle}>
-        {icon}
-      </span>
+    <header className={styles.wrapperHeader}>
+      <span className={styles.wrapperIcon}>{icon}</span>
       <section>
         <h3 className={styles.title}>Descargas</h3>
         <p className={styles.subtitle}>{subtitle}</p>
