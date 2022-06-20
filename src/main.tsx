@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { HashRouter, Routes, Route, useSearchParams } from 'react-router-dom'
 
 import { Toolbar } from './layouts'
-import { DownloadView, SearchView } from './views'
+import { DownloadView, SearchView, SettingsView } from './views'
 
 import { useAppStore } from './stores/useAppStore'
 import { useDownloadStore } from './stores/useDownloadStore'
@@ -28,6 +28,7 @@ const RootComponent = () => {
       <Toolbar />
       <Routes>
         <Route path="/" element={<SearchView />} />
+        <Route path="/settings" element={<SettingsView />} />
         <Route path="/downloads" element={<DownloadView />} />
       </Routes>
     </>
