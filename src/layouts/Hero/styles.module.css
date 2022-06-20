@@ -16,7 +16,7 @@
   aspect-ratio: 1;
   justify-content: center;
   border-radius: 50%;
-  background-color: #1363DF;
+  background-color: transparent;
 }
 
 .wrapperIcon>svg {

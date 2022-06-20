@@ -19,6 +19,7 @@ export const DownloadView = () => {
       <Hero
         icon={<DownloadIcon />}
         title="Descargas"
+        color="#E04D01"
         subtitle={`${itemList.length} ${itemList.length === 1 ? 'Elemento' : 'Elementos'}`}
       />
       <table className={styles.downloadsTable}>

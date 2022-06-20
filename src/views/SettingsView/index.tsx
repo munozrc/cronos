@@ -8,6 +8,7 @@ export const SettingsView = () => {
       <Hero
         icon={<SettingsIcon />}
         title="Configuraciones"
+        color="#1363DF"
         subtitle={`Acerca de Cronos ${version}`}
       />
     </ViewContainer>
