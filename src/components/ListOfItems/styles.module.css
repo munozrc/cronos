@@ -43,10 +43,6 @@
   gap: 12px;
 }
 
-.wrapperResultItem:first-child {
-  border-radius: 6px 6px 0 0;
-}
-
 .wrapperResultItem:last-child {
   border-radius: 0 0 6px 6px;
   border-bottom: none;
