@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  height: calc(100% - 50px);
+}
+
+.wrapperTabs {
+  display: flex;
+  justify-content: center;
+  margin-right: 22px;
+}
+
+.wrapperTabs::after {
+  content: '';
+  width: 100%;
+  border-bottom: 2px solid var(--border-dark-color);
+}
+
+.wrapperTabs>button {
+  padding: 10px 30px;
+  border-radius: 6px 6px 0px 0px;
+  color: var(--text-light-color);
+  line-height: 0.8;
+  font-size: 15px;
+  font-weight: 400;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.wrapperTabs>button:hover {
+  background-color: var(--border-dark-color);
+}
+
+.wrapperTabs>button.active {
+  opacity: 1;
+  border-bottom: 2px solid var(--text-light-color);
+  background-color: var(--hover-brand-color);
+}
+
+.wrapperTabs>button.disable {
+  color: rgb(107, 107, 107);
+  border-bottom: 2px solid var(--border-dark-color);
+}
