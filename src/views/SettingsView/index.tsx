@@ -9,7 +9,7 @@ export const SettingsView = () => {
         icon={<SettingsIcon />}
         title="Configuraciones"
         color="#1363DF"
-        subtitle={`Acerca de Cronos ${version}`}
+        subtitle={`Acerca de Cronos v${version}`}
       />
     </ViewContainer>
   )
