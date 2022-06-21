@@ -41,9 +41,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     const { getTrackSuggestions } = window.cronos
     const { queryResults, queryStatus, suggestionStatus } = get()
 
-    if (queryResults.length === 0 ||
-        suggestionStatus === 'complete' ||
-        queryStatus === 'error') return
+    if (queryResults.length === 0 || suggestionStatus === 'complete' || queryStatus === 'error') return
 
     set(() => ({ suggestionStatus: 'loading' }))
     getTrackSuggestions(queryResults[0].id)
