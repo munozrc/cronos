@@ -50,7 +50,7 @@
     "asar": true,
     "directories": {
       "output": "release/${version}",
-      "buildResources": "app/resources"
+      "buildResources": "electron/resources"
     },
     "files": [
       "dist"
