@@ -1,7 +1,7 @@
 {
   "name": "cronos",
   "private": true,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "munozrc",
   "license": "MIT",
   "description": "Music downloader in mp3 format using ElectronJS and ReactJS",
