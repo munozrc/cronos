@@ -1,7 +1,7 @@
 import create from 'zustand'
 import { Track } from '../../electron/types'
 
-type ResponseStatus = 'loading' | 'error' | 'complete'
+type ResponseStatus = 'loading' | 'error' | 'complete' | 'waiting'
 
 interface AppState {
   lastQuery: string
@@ -18,7 +18,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   queryResults: [],
   suggestionResults: [],
   queryStatus: 'complete',
-  suggestionStatus: 'complete',
+  suggestionStatus: 'waiting',
   searchSong: (query: string | null) => {
     const { searchTrack } = window.cronos
     const { lastQuery } = get()
@@ -30,6 +30,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     searchTrack(query)
       .then(results => set(() => ({
         queryStatus: 'complete',
+        suggestionStatus: 'waiting',
         queryResults: results
       })))
       .catch(() => set(() => ({
@@ -38,9 +39,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
   searchTrackSuggestions: () => {
     const { getTrackSuggestions } = window.cronos
-    const { queryResults, queryStatus } = get()
+    const { queryResults, queryStatus, suggestionStatus } = get()
 
-    if (queryResults.length === 0 || queryStatus === 'error') return
+    if (queryResults.length === 0 ||
+        suggestionStatus === 'complete' ||
+        queryStatus === 'error') return
 
     set(() => ({ suggestionStatus: 'loading' }))
     getTrackSuggestions(queryResults[0].id)
