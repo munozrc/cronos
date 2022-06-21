@@ -16,7 +16,7 @@ export async function getTrackSuggestions (id: string): Promise<Track[]> {
   try {
     const response = await getSuggestions(id)
     const results = response.map(normalizeResponse)
-    return results.filter((item) => item !== undefined) as Track[]
+    return results.filter((item) => IsUndefinedOrRepeatedResult(item, id)) as Track[]
   } catch (err) {
     console.error('Error fetch suggestions for track: ', err)
     return []
@@ -55,4 +55,10 @@ function isTrack (obj: MusicVideo): boolean {
     if (typeof property === 'undefined') return true
   }
   return false
+}
+
+function IsUndefinedOrRepeatedResult (item: Track | undefined, id: string): boolean {
+  const isUndefined = item !== undefined
+  const isRepeated = item?.id !== id
+  return isUndefined && isRepeated
 }
