@@ -23,18 +23,22 @@ export const DownloadView = () => {
         subtitle={`${itemList.length} ${itemList.length === 1 ? 'Elemento' : 'Elementos'}`}
       />
       <table className={styles.downloadsTable}>
-        <tr>
-          <th>Canción</th>
-          <th>Estado</th>
-          <th>Fecha</th>
-        </tr>
-        {itemList.map(({ title, artist, state, date, uuid }) => (
-          <tr key={uuid}>
-            <td>{`${artist} - ${title}`}</td>
-            <td className={`${styles.status} ${styles['status-' + state]}`}>{translateState[state]}</td>
-            <td>{dateFormat(date)}</td>
+        <thead>
+          <tr>
+            <th>Canción</th>
+            <th>Estado</th>
+            <th>Fecha</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {itemList.map(({ title, artist, state, date, uuid }) => (
+            <tr key={uuid}>
+              <td>{`${artist} - ${title}`}</td>
+              <td className={`${styles.status} ${styles['status-' + state]}`}>{translateState[state]}</td>
+              <td>{dateFormat(date)}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </ViewContainer>
   )
