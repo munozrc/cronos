@@ -2,12 +2,15 @@ import { join } from 'node:path'
 import { renameSync } from 'node:fs'
 import { app, BrowserWindow, shell } from 'electron'
 import axios from 'axios'
+import pathToFfmpeg from 'ffmpeg-static-electron'
 import ffmpeg from 'fluent-ffmpeg'
 import ytdl from 'ytdl-core'
 import id3, { Tags } from 'node-id3'
 import { DownloadFile, iTunesMetadata, iTunesResponse, TagImage, Track } from '../types'
 
 const userDownloadsFolder: string = app.getPath('music')
+
+ffmpeg.setFfmpegPath(pathToFfmpeg.path)
 
 export async function downloadTrack (data: DownloadFile, window: BrowserWindow | null): Promise<void> {
   const { id, title, artist } = data
@@ -88,7 +91,7 @@ function getMetadataFromiTunes (artist: string, album: string): Promise<iTunesMe
 }
 
 function getBufferAlbumCover (url: string): Promise<TagImage | undefined> {
-  const imageURL = url.replace('w60-h60-l90-rj', 'w500-h500-l90-rj')
+  const imageURL = url.replace('w60-h60-l90-rj', 'w800-h800-l90-rj')
   return axios.get(imageURL, { responseType: 'arraybuffer' })
     .then(response => {
       if (response.status !== 200) return undefined

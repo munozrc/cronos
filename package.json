@@ -1,7 +1,7 @@
 {
   "name": "cronos",
   "private": true,
-  "version": "0.0.11",
+  "version": "0.0.12",
   "author": "munozrc",
   "license": "MIT",
   "description": "Music downloader in mp3 format using ElectronJS and ReactJS",
@@ -15,12 +15,14 @@
   },
   "dependencies": {
     "axios": "0.27.2",
+    "ffmpeg-static-electron": "2.0.3",
     "fluent-ffmpeg": "2.1.2",
     "node-id3": "0.2.3",
     "node-youtube-music": "0.7.0",
     "ytdl-core": "4.11.0"
   },
   "devDependencies": {
+    "@types/ffmpeg-static": "3.0.1",
     "@types/fluent-ffmpeg": "2.1.20",
     "@types/react": "18.0.0",
     "@types/react-dom": "18.0.0",
@@ -47,7 +49,7 @@
   "build": {
     "appId": "com.munozrc.cronos",
     "productName": "Cronos",
-    "asar": true,
+    "asar": false,
     "directories": {
       "output": "release/${version}",
       "buildResources": "electron/resources"
