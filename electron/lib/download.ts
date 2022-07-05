@@ -2,15 +2,15 @@ import { join } from 'node:path'
 import { renameSync } from 'node:fs'
 import { app, BrowserWindow, shell } from 'electron'
 import axios from 'axios'
-import pathToFfmpeg from 'ffmpeg-static-electron'
 import ffmpeg from 'fluent-ffmpeg'
 import ytdl from 'ytdl-core'
 import id3, { Tags } from 'node-id3'
 import { DownloadFile, iTunesMetadata, iTunesResponse, TagImage, Track } from '../types'
+import pathToFfmpeg from '../helpers/loadFfmpegPath'
 
 const userDownloadsFolder: string = app.getPath('music')
 
-ffmpeg.setFfmpegPath(pathToFfmpeg.path)
+ffmpeg.setFfmpegPath(pathToFfmpeg)
 
 export async function downloadTrack (data: DownloadFile, window: BrowserWindow | null): Promise<void> {
   const { id, title, artist } = data
