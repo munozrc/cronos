@@ -1,12 +1,22 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [react()],
-  build: { emptyOutDir: true },
+  plugins: [
+    react()
+  ],
+  server: {
+    watch: {
+      ignored: [
+        'electron',
+        'release'
+      ]
+    }
+  },
   esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+    logOverride: {
+      'this-is-undefined-in-esm': 'silent'
+    }
   }
 })
