@@ -12,9 +12,8 @@ export const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const searchValue = formData.get('search') as string
-    const normalizeValue = searchValue.trim()
-    if (normalizeValue !== '') onSubmit(normalizeValue)
+    const search = formData.get('search') as string
+    search && onSubmit(search)
   }
 
   return (

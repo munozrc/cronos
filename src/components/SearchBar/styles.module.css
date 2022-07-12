@@ -1,19 +1,27 @@
 .wrapper {
+  width: 320px;
+  height: 36px;
   display: flex;
-  height: 30px;
   background-color: var(--border-brand-color);
-  border-radius: 4px;
+  border-radius: 200px;
+  padding: 0px 0px 0px 16px;
+  overflow: hidden;
+}
+
+.wrapper>button {
+  aspect-ratio: auto;
+  width: 52px;
+  padding-right: 4px;
 }
 
 .input {
-  width: 180px;
+  width: 100%;
   background: none;
   border: none;
   outline: none;
-  padding: 0px 4px 0px 10px;
   caret-color: var(--brand-light-color);
   color: var(--text-color);
-  font-size: 16px;
+  font-size: 1.05rem;
 }
 
 .input::selection {
@@ -22,5 +30,5 @@
 }
 
 .wrapper:focus-within {
-  outline: solid 1px var(--brand-light-color);
+  box-shadow: 0px 0px 0px 2px var(--brand-light-color);
 }
