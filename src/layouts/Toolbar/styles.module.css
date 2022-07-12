@@ -1,6 +1,5 @@
 .wrapper,
 .branding,
-.buttonList,
 .subtitle {
   width: 100%;
   display: flex;
@@ -8,8 +7,7 @@
 }
 
 .wrapper,
-.branding,
-.buttonList {
+.branding {
   height: 100%;
 }
 
@@ -25,45 +23,32 @@
 
 .title {
   color: var(--brand-light-color);
-  font-size: 1.05em;
-  font-weight: 500;
+  font-size: 1em;
+  font-weight: 600;
   letter-spacing: 2.2px;
-  line-height: 1;
 }
 
 .subtitle {
   color: rgba(255, 255, 255, 0.2);
-  font-size: 1.05em;
-  font-weight: 400;
+  font-size: 0.9em;
+  font-weight: 300;
+  line-height: 1;
 }
 
 .subtitle::before {
   display: inline-block;
   content: "";
   width: 3px;
-  height: 22px;
+  height: 1rem;
   background-color: var(--border-brand-color);
-  margin: 0px 16px;
+  margin: 0px 0.7rem;
 }
 
-.buttonList {
-  width: fit-content;
-  list-style: none;
-  gap: 4px;
-}
-
-.buttonList>form {
-  margin-right: 8px;
-}
 
 .actionsButtons {
   display: flex;
   align-items: center;
   gap: 6px;
-  background-color: var(--hover-brand-color);
-  padding: 8px 10px;
-  margin-left: 20px;
-  border-radius: 100px;
 }
 
 .buttonClose,
