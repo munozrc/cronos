@@ -7,13 +7,13 @@
   align-items: center;
 }
 
+.wrapper,
 .branding,
 .buttonList {
   height: 100%;
 }
 
 .wrapper {
-  height: 50px;
   padding: 0px 20px;
   background-color: var(--text-dark-color);
 }
@@ -50,6 +50,10 @@
   width: fit-content;
   list-style: none;
   gap: 4px;
+}
+
+.buttonList>form {
+  margin-right: 8px;
 }
 
 .actionsButtons {

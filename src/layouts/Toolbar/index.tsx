@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom'
-import { DownloadIcon, FolderIcon, SearchIcon, SettingsIcon } from '../../components/Icons'
+import { createSearchParams, useNavigate } from 'react-router-dom'
+import { DownloadIcon, FolderIcon, SettingsIcon } from '../../components/Icons'
 import { Button } from '../../components/Button'
+import { SearchBar } from '../../components/SearchBar'
 
 import styles from './styles.module.css'
 
@@ -15,12 +16,7 @@ export const Toolbar = () => {
         <p className={styles.subtitle}>Music Downloader</p>
       </div>
       <ul className={styles.buttonList}>
-        <Button
-          variant="flat"
-          title="Buscar"
-          icon={<SearchIcon />}
-          onClick={() => navigate({ pathname: '/' })}
-        />
+        <SearchBar onSubmit={(query) => navigate({ pathname: '/', search: `?${createSearchParams({ query })}` })}/>
         <Button
           variant="flat"
           title="Historial de descargas"
