@@ -8,12 +8,12 @@ export const SearchView = () => {
   const { queryResults, queryStatus, suggestionResults, searchTrackSuggestions } = useAppStore()
   const { createNewDownload } = useDownloadStore()
 
-  if (queryStatus === 'loading') return <Spinner />
-  if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
-
   const handleCallbackTab = (index: number) => {
     if (index === 1) searchTrackSuggestions()
   }
+
+  if (queryStatus === 'loading') return <Spinner />
+  if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
 
   return (
     <TabContainer callback={handleCallbackTab}>

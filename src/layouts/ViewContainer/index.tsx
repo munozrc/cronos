@@ -7,7 +7,7 @@ interface ViewContainerProps {
 }
 
 export const ViewContainer = ({ children }: ViewContainerProps) => (
-  <section className={styles.wrapper}>
+  <div className={styles.wrapper}>
     {children}
-  </section>
+  </div>
 )
