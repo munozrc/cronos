@@ -17,7 +17,7 @@ export const TabContainer = ({ children, callback }: TabContainerProps) => {
   }
 
   return (
-    <section className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <header className={styles.wrapperTabs}>
         <button className={isVisible(showTab, 0)} onClick={() => handleClick(0)}>
           Resultados
@@ -27,6 +27,6 @@ export const TabContainer = ({ children, callback }: TabContainerProps) => {
         </button>
       </header>
       {children.filter((_child, index) => index === showTab)}
-    </section>
+    </div>
   )
 }
