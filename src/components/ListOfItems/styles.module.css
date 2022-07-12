@@ -9,7 +9,7 @@
 .wrapperList {
   flex-direction: column;
   padding-right: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
