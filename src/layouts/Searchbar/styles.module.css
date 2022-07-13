@@ -1,0 +1,33 @@
+.wrapper {
+  width: 320px;
+  min-height: 36px;
+  display: flex;
+  background-color: var(--border-brand-color);
+  border-radius: 200px;
+  padding: 0px 0px 0px 16px;
+}
+
+.wrapper>button {
+  aspect-ratio: auto;
+  width: 52px;
+  padding-right: 4px;
+}
+
+.input {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  caret-color: var(--brand-light-color);
+  color: var(--text-color);
+  font-size: 1.05rem;
+}
+
+.input::selection {
+  background-color: var(--brand-light-color);
+  color: var(--bg-color)
+}
+
+.wrapper:focus-within {
+  box-shadow: 0px 0px 0px 2px var(--brand-light-color);
+}

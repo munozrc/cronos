@@ -1,9 +1,5 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 34px 1fr;
-  padding: 16px;
-  max-height: calc(100vh - 60px);
 }
 
 .wrapperTabs {

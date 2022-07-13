@@ -1,3 +1,7 @@
+export { Footer } from './Footer'
 export { Hero } from './Hero'
+export { RootContainer } from './RootContainer'
+export { Searchbar } from './Searchbar'
+export { TabContainer } from './TabContainer'
 export { Toolbar } from './Toolbar'
 export { ViewContainer } from './ViewContainer'

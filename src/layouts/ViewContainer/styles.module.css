@@ -1,5 +1,25 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  grid-area: view;
   padding: 16px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background: var(--hover-brand-color);
+  border-radius: 2px;
+  border: none;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  border: none;
+  border-radius: 2px;
+  background: var(--border-dark-color);
 }
