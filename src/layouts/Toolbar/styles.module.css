@@ -1,19 +1,22 @@
 .wrapper,
 .branding,
-.subtitle {
+.subtitle,
+.actionsLinks {
   width: 100%;
   display: flex;
   align-items: center;
 }
 
 .wrapper,
-.branding {
+.branding,
+.actionsLinks {
   height: 100%;
 }
 
 .wrapper {
   padding: 0px 20px;
-  background-color: var(--text-dark-color);
+  background-color: var(--bg-second-color);
+  grid-area: toolbar;
 }
 
 .branding {
@@ -21,11 +24,33 @@
   user-select: none;
 }
 
+.actionsLinks {
+  width: fit-content;
+  margin-right: 20px;
+  gap: 8px;
+}
+
+.link {
+  width: 30px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: #fafafa;
+  font-size: 1.1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
 .title {
   color: var(--brand-light-color);
-  font-size: 1em;
+  font-size: 0.905em;
   font-weight: 600;
   letter-spacing: 2.2px;
+  line-height: 1;
 }
 
 .subtitle {
@@ -39,7 +64,7 @@
   display: inline-block;
   content: "";
   width: 3px;
-  height: 1rem;
+  height: 1.3rem;
   background-color: var(--border-brand-color);
   margin: 0px 0.7rem;
 }
