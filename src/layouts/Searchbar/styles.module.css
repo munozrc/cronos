@@ -1,10 +1,11 @@
 .wrapper {
-  width: 320px;
+  width: 440px;
   min-height: 36px;
   display: flex;
   background-color: var(--border-brand-color);
   border-radius: 200px;
   padding: 0px 0px 0px 16px;
+  margin: 30px auto 16px auto;
 }
 
 .wrapper>button {
