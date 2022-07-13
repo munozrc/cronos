@@ -7,10 +7,11 @@
 
 :root {
   --brand-light-color: #828fff;
-  --text-color: #e9ebed;
+  --text-color: #131313;
   --text-light-color: rgb(180, 180, 180);
   --text-dark-color: #121212;
-  --bg-color: #1c1d1f;
+  --bg-color: #e4e4e4;
+  --bg-second-color: #121212;
   --border-dark-color: rgba(255, 255, 255, 0.04);
   --border-brand-color: rgba(255, 255, 255, 0.08);
   --hover-brand-color: rgba(255, 255, 255, 0.1);
@@ -29,7 +30,7 @@
 
 body {
   background-color: var(--bg-color);
-  color: #101010;
+  color: var(--text-color);
   font-size: 16px;
   margin: 0;
   padding: 0;
@@ -45,8 +46,9 @@ body {
   width: 100%;
   height: 100%;
   display: grid;
+  grid-template-areas: "toolbar""view""footer";
   grid-template-columns: 1fr;
-  grid-template-rows: 40px 1fr;
+  grid-template-rows: 50px 1fr 20px;
 }
 
 button {

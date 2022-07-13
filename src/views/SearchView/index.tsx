@@ -2,7 +2,7 @@ import { useDownloadStore } from '../../stores/useDownloadStore'
 import { useAppStore } from '../../stores/useAppStore'
 import { ListOfItems } from '../../components/ListOfItems'
 import { Spinner } from '../../components/Spinner'
-import { TabContainer } from '../../layouts/TabContainer'
+import { Searchbar, TabContainer, ViewContainer } from '../../layouts'
 
 export const SearchView = () => {
   const { queryResults, queryStatus, suggestionResults, searchTrackSuggestions } = useAppStore()
@@ -12,19 +12,23 @@ export const SearchView = () => {
     if (index === 1) searchTrackSuggestions()
   }
 
-  if (queryStatus === 'loading') return <Spinner />
-  if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
-
   return (
-    <TabContainer callback={handleCallbackTab}>
-      <ListOfItems
-        list={queryResults}
-        createNewDownload={createNewDownload}
-      />
-      <ListOfItems
-        list={suggestionResults}
-        createNewDownload={createNewDownload}
-      />
-    </TabContainer>
+    <ViewContainer>
+      <Searchbar />
+      {queryStatus === 'complete' && (
+        <TabContainer callback={handleCallbackTab}>
+          <ListOfItems
+            list={queryResults}
+            createNewDownload={createNewDownload}
+          />
+          <ListOfItems
+            list={suggestionResults}
+            createNewDownload={createNewDownload}
+          />
+        </TabContainer>
+      )}
+      {queryStatus === 'loading' && <Spinner />}
+      {queryStatus === 'error' && <h3>Algo salio mal!</h3>}
+    </ViewContainer>
   )
 }
