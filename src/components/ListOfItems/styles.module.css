@@ -8,26 +8,7 @@
 
 .wrapperList {
   flex-direction: column;
-  padding-right: 1rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.wrapperList::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-.wrapperList::-webkit-scrollbar-thumb {
-  background: var(--hover-brand-color);
-  border-radius: 2px;
-  border: none;
-}
-
-.wrapperList::-webkit-scrollbar-track {
-  border: none;
-  border-radius: 2px;
-  background: var(--border-dark-color);
+  padding-right: 16px;
 }
 
 .wrapperResultItem {
