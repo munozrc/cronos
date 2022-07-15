@@ -16,21 +16,20 @@
 }
 
 .flat:hover {
-  background-color: var(--hover-brand-color);
+  background-color: var(--fill-color);
 }
 
 .outline {
-  padding: 4px 8px 6px 8px;
+  padding: 6px 8px;
   border-radius: 4px;
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--fill-color);
   font-size: 12px;
-  color: var(--text-color);
+  color: var(--fill-color);
   transition: opacity 0.3s ease, color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
-  opacity: 0.2;
 }
 
 .outline:hover {
-  background-color: var(--brand-light-color);
+  background-color: var(--brand-color);
   border: 1px solid var(--bg-color);
   color: var(--bg-color);
   opacity: 1;
