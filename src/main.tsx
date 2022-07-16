@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
-import { Footer, Toolbar, RootContainer } from './layouts'
+import { Footer, Toolbar, RootContainer, Sidebar } from './layouts'
 import { DownloadView, SearchView, SettingsView } from './views'
 
 import './main.css'
@@ -12,6 +12,7 @@ root.render(
   <RootContainer>
     <HashRouter>
       <Toolbar />
+      <Sidebar />
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/settings" element={<SettingsView />} />
