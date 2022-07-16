@@ -16,7 +16,7 @@
   height: 76px;
   min-height: 76px;
   padding: 0 20px 0 10px;
-  border-bottom: 1px solid var(--border-dark-color);
+  border-bottom: 1px solid var(--line-color);
   transition: background-color 0.15s ease;
   gap: 12px;
 }
@@ -27,7 +27,7 @@
 }
 
 .wrapperResultItem:hover {
-  background-color: var(--border-dark-color);
+  background-color: var(--line-color);
 }
 
 .wrapperInfo {
@@ -38,8 +38,7 @@
 
 .wrapperSubtitle {
   align-items: center;
-  color: var(--text-color);
-  opacity: 0.5;
+  color: var(--text-second-color);
   font-size: 12px;
   font-weight: 300;
   gap: 6px;
@@ -63,7 +62,7 @@
 .albumCover {
   width: 52px;
   aspect-ratio: 1;
-  background-color: var(--hover-brand-color);
+  background-color: var(--fill-color);
   border-radius: 4px;
   overflow: hidden;
 }

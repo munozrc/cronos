@@ -16,7 +16,7 @@
 }
 
 .flat:hover {
-  background-color: var(--fill-color);
+  background-color: var(--text-second-color);
 }
 
 .outline {
