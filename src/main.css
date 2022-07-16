@@ -63,7 +63,11 @@ button {
   border: none;
 }
 
-.drag {
-  -webkit-app-region: drag;
-  -webkit-app-region: no-drag;
+a {
+  text-decoration: none;
+}
+
+input {
+  border: none;
+  outline: none;
 }
