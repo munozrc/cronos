@@ -1,8 +1,1 @@
-import { ViewContainer } from '../../layouts'
-
-export const SettingsView = () => {
-  return (
-    <ViewContainer>
-    </ViewContainer>
-  )
-}
+export { SettingsView } from './SettingsView'
