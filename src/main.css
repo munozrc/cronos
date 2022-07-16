@@ -6,12 +6,16 @@
 }
 
 :root {
-  --brand-light-color: #828fff;
-  --text-color: #e4e4e4;
+  --brand-light-color: #4E9F3D;
   --text-light-color: rgb(180, 180, 180);
   --text-dark-color: #121212;
-  --bg-color: #1c1d1f;
-  --bg-second-color: #121212;
+  --brand-color: #2ed770;
+  --bg-color: #131313;
+  --bg-second-color: #0e0f0e;
+  --text-color: #ffffff;
+  --text-second-color: #868485;
+  --fill-color: #343434;
+  --line-color: #242424;
   --border-dark-color: rgba(255, 255, 255, 0.04);
   --border-brand-color: rgba(255, 255, 255, 0.08);
   --hover-brand-color: rgba(255, 255, 255, 0.1);
@@ -29,7 +33,7 @@
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: #1F2021;
   color: var(--text-color);
   font-size: 16px;
   margin: 0;
@@ -46,9 +50,9 @@ body {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-areas: "toolbar""view""footer";
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 1fr 20px;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows: 40px 1fr 20px;
+  grid-template-areas: "toolbar toolbar""sidebar view""sidebar footer";
 }
 
 button {
