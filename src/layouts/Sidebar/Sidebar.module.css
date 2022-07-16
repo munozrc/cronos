@@ -1,0 +1,28 @@
+.container {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: 1px solid #333538;
+  padding: 12px 0;
+  gap: 6px;
+}
+
+.itemLink {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  aspect-ratio: 1;
+  /* color: #fff; */
+  color: #656565;
+  border-radius: 4px;
+}
+
+.itemLink:not(:first-child) {
+  margin-bottom: 8px;
+}
+
+.itemLink:hover {
+  background-color: #333538;
+}
