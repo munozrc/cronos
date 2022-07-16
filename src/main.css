@@ -33,14 +33,13 @@
 }
 
 body {
-  background-color: #1F2021;
-  color: var(--text-color);
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
   height: 100vh;
   width: 100vw;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  color: var(--text-color);
+  font-size: 16px;
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -53,6 +52,9 @@ body {
   grid-template-columns: 50px 1fr;
   grid-template-rows: 40px 1fr 20px;
   grid-template-areas: "toolbar toolbar""sidebar view""sidebar footer";
+  overflow: hidden;
+  background-color: #1F2021;
+  border-radius: 6px;
 }
 
 button {
