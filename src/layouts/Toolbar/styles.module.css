@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 16px;
   background: #121416;
   border-bottom: 1px solid #333538;
   -webkit-app-region: drag;
