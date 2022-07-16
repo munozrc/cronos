@@ -1,6 +1,5 @@
 import { useDownloadStore } from '../../stores/useDownloadStore'
-import { DownloadIcon } from '../../components/Icons'
-import { Hero, ViewContainer } from '../../layouts'
+import { ViewContainer } from '../../layouts'
 
 import styles from './styles.module.css'
 
@@ -16,12 +15,6 @@ export const DownloadView = () => {
   const { itemList } = useDownloadStore()
   return (
     <ViewContainer>
-      <Hero
-        icon={<DownloadIcon />}
-        title="Descargas"
-        color="#E04D01"
-        subtitle={`${itemList.length} ${itemList.length === 1 ? 'Elemento' : 'Elementos'}`}
-      />
       <table className={styles.downloadsTable}>
         <thead>
           <tr>

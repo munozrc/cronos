@@ -1,6 +1,5 @@
 export { Footer } from './Footer'
-export { Hero } from './Hero'
 export { RootContainer } from './RootContainer'
+export { Sidebar } from './Sidebar'
 export { Toolbar } from './Toolbar'
 export { ViewContainer } from './ViewContainer'
-export { Sidebar } from './Sidebar'
