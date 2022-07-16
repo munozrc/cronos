@@ -12,10 +12,10 @@ export const Sidebar = () => (
       <DownloadIcon height="24px" width="24px" />
     </Link>
     <Link to="/" className={styles.itemLink}>
-      <FolderIcon height="24px" width="24px" />
+      <FolderIcon height="22px" width="22px" />
     </Link>
     <Link to="/settings" className={styles.itemLink}>
-      <SettingsIcon height="24px" width="24px" />
+      <SettingsIcon height="22px" width="22px" />
     </Link>
   </nav>
 )
