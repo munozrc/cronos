@@ -1,5 +1,6 @@
-export { Footer } from './Footer'
-export { RootContainer } from './RootContainer'
-export { Sidebar } from './Sidebar'
 export { Toolbar } from './Toolbar'
-export { ViewContainer } from './ViewContainer'
+
+export { Container } from './container'
+export { Navbar } from './navbar'
+export { Statusbar } from './statusbar'
+export { Wrapper } from './wrapper'

@@ -1,5 +1,5 @@
+import { Container } from '../../layouts'
 import { useDownloadStore } from '../../stores/useDownloadStore'
-import { ViewContainer } from '../../layouts'
 
 import styles from './styles.module.css'
 
@@ -14,7 +14,7 @@ const dateFormat = (date: Date) => new window.Intl.DateTimeFormat('es-CO', { dat
 export const DownloadView = () => {
   const { itemList } = useDownloadStore()
   return (
-    <ViewContainer>
+    <Container>
       <table className={styles.downloadsTable}>
         <thead>
           <tr>
@@ -33,6 +33,6 @@ export const DownloadView = () => {
           ))}
         </tbody>
       </table>
-    </ViewContainer>
+    </Container>
   )
 }

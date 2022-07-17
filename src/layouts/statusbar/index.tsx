@@ -1,11 +1,9 @@
 import styles from './styles.module.css'
 
-export function Footer () {
+export function Statusbar () {
   return (
     <footer className={styles.container}>
-      <div>
-        <p>by <strong>@munozrc</strong></p>
-      </div>
+      <p>by @munozrc</p>
     </footer>
   )
 }

@@ -1,4 +1,4 @@
-.wrapper {
+.container {
   display: flex;
   flex-direction: column;
   grid-area: view;
@@ -7,18 +7,18 @@
   overflow-y: auto;
 }
 
-.wrapper::-webkit-scrollbar {
+.container::-webkit-scrollbar {
   width: 8px;
   height: 6px;
 }
 
-.wrapper::-webkit-scrollbar-thumb {
+.container::-webkit-scrollbar-thumb {
   background: var(--hover-brand-color);
   border-radius: 2px;
   border: none;
 }
 
-.wrapper::-webkit-scrollbar-track {
+.container::-webkit-scrollbar-track {
   border: none;
   border-radius: 2px;
   background: var(--border-dark-color);

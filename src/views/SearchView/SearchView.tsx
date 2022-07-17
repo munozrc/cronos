@@ -1,6 +1,6 @@
 import { Container } from '../../layouts'
 
-export const SettingsView = () => {
+export const SearchView = () => {
   return (
     <Container>
     </Container>

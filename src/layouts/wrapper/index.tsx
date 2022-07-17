@@ -1,11 +1,11 @@
 import { ReactNode, useEffect } from 'react'
 import { useDownloadStore } from '../../stores/useDownloadStore'
 
-interface RootContainerProps {
+interface WrapperProps {
   children: ReactNode | Array<ReactNode>
 }
 
-export const RootContainer = ({ children }: RootContainerProps) => {
+export const Wrapper = ({ children }: WrapperProps) => {
   const { onDownloadCompleted } = window.cronos
   const { updateItemList } = useDownloadStore()
 
