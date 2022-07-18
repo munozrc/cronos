@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 const isActive = ({ isActive }: any) => isActive ? styles.linkActive : styles.link
 
 export function Navbar () {
+  const { closeWindow, minimizeWindow } = window.cronos
   return (
     <header className={styles.container}>
       <h1 className={styles.title}>CRONOS</h1>
@@ -14,8 +15,8 @@ export function Navbar () {
       </nav>
       <div className={styles.windowButtons}>
         <button className={styles.btnMaximize}/>
-        <button className={styles.btnMinimize}/>
-        <button className={styles.btnClose}/>
+        <button className={styles.btnMinimize} onClick={minimizeWindow} />
+        <button className={styles.btnClose} onClick={closeWindow} />
       </div>
     </header>
   )
