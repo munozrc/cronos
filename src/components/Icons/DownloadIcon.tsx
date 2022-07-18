@@ -2,17 +2,18 @@ import { SVGProps } from 'react'
 
 export const DownloadIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    stroke="currentColor"
+    width={18}
+    height={19}
     fill="none"
-    strokeWidth={2}
-    viewBox="0 0 24 24"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    height="1em"
-    width="1em"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+    <path
+      d="M9 11.75v-9m0 9-3-3m3 3 3-3m-10.5 4.5.466 1.864A1.5 1.5 0 0 0 3.42 16.25h11.158a1.5 1.5 0 0 0 1.455-1.136l.466-1.864"
+      stroke="#4B4B4B"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 )
