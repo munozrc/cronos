@@ -51,13 +51,12 @@
   font-size: 23px;
   color: #BEBEBE;
   opacity: 0;
-  transition: opacity 0.2s ease-in;
 }
 
 .albumCover>img {
-  width: 100%;
+  width: 45px;
+  aspect-ratio: 1;
   object-fit: cover;
-  transition: opacity 0.2s ease-in;
 }
 
 .titleAndArtist {
@@ -102,7 +101,6 @@
 .album,
 .time,
 .index {
-  transition: color 0.15s ease-in-out;
   cursor: default;
 }
 
@@ -113,7 +111,15 @@
   color: #BEBEBE;
 }
 
+.item:hover .albumCover {
+  background-color: #111111;
+}
+
 .item:hover .albumCover>img {
+  opacity: 0.2;
+}
+
+.item:hover .albumCover:hover>img {
   opacity: 0;
 }
 

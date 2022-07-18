@@ -8,19 +8,20 @@ import styles from './styles.module.css'
 interface ListItemsProps {
   items: Array<Track>
   createNewDownload: (value: Track) => void
+  playAndPause: () => void
 }
 
-export const ListItems = ({ items, createNewDownload } : ListItemsProps) => {
+export const ListItems = ({ items, createNewDownload, playAndPause } : ListItemsProps) => {
   return (
     <ul className={styles.list}>
       {items.map((track, index) => (
         <li key={track.id} className={styles.item}>
           <div className={styles.info}>
             <span className={styles.index}>{`${index + 1}`.padStart(2, '0')}</span>
-            <div className={styles.albumCover}>
+            <button className={styles.albumCover} onClick={playAndPause}>
               <Image src={track.albumCover} fallback={ImageFallback} alt={track.id}/>
               <PlayIcon />
-            </div>
+            </button>
             <div className={styles.titleAndArtist}>
               <h4>{track.title}</h4>
               <p>{track.artist}</p>
