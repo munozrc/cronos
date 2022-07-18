@@ -1,4 +1,5 @@
 export { Container } from './container'
+export { Content } from './content'
 export { Navbar } from './navbar'
 export { Statusbar } from './statusbar'
 export { Wrapper } from './wrapper'
