@@ -5,6 +5,7 @@
   gap: 30px;
   padding-bottom: 14px;
   background-color: #161819;
+  z-index: 1;
 }
 
 .search>form {
