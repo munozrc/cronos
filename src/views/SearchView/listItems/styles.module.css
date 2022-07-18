@@ -120,6 +120,7 @@
 }
 
 .item:hover .albumCover:hover>img {
+  transition: opacity 0.15s linear;
   opacity: 0;
 }
 
