@@ -20,6 +20,7 @@ export const SearchField = ({ onSubmit }: SearchFieldProps) => {
       <input
         type="text"
         className={styles.input}
+        name="search"
         placeholder="Busca por canción o artista"
       />
       <button type="submit" className={styles.btnSearch}>
