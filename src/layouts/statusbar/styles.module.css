@@ -1,6 +1,6 @@
 .container {
   grid-area: statusbar;
-  background-color: #242627;
+  background-color: #0F1010;
   display: flex;
   align-items: center;
   padding: 0px 4px 2px 4px;
@@ -8,5 +8,6 @@
 
 .container>p {
   font-size: 10px;
-  font-weight: 200;
+  font-weight: 300;
+  color: #7C7E7E;
 }
