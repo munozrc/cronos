@@ -1,6 +1,10 @@
 .search {
+  top: 0;
+  position: sticky;
   display: flex;
   gap: 30px;
+  padding-bottom: 14px;
+  background-color: #161819;
 }
 
 .search>form {
