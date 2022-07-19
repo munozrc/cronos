@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.wrapperSpinner {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.spinner {
+  width: 70px;
+  height: 70px;
+  border: 6px solid #242627;
+  border-radius: 50%;
+  border-left-color: #8CB0FC;
+  animation: spin 1s linear infinite;
+}
+
+.wrapperSpinner,
+.hidden,
+.active {
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.hidden {
+  position: absolute;
+  height: 0px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrapperSpinner,
+.active {
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+  opacity: 1;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

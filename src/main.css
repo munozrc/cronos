@@ -1,9 +1,20 @@
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/inter-vf.ttf") format("truetype-variations");
+  font-weight: 100 900;
+}
+
 :root {
-  --brand-light-color: #828fff;
-  --text-color: #e9ebed;
+  --brand-light-color: #4E9F3D;
   --text-light-color: rgb(180, 180, 180);
   --text-dark-color: #121212;
-  --bg-color: #1c1d1f;
+  --brand-color: #2ed770;
+  --bg-color: #131313;
+  --bg-second-color: #0e0f0e;
+  --text-color: #ffffff;
+  --text-second-color: #868485;
+  --fill-color: #343434;
+  --line-color: #242424;
   --border-dark-color: rgba(255, 255, 255, 0.04);
   --border-brand-color: rgba(255, 255, 255, 0.08);
   --hover-brand-color: rgba(255, 255, 255, 0.1);
@@ -21,18 +32,14 @@
 }
 
 body {
-  background-color: var(--bg-color);
-  color: #101010;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
   height: 100vh;
   width: 100vw;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #E4E4E4;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
 }
 
 #root {
@@ -40,7 +47,11 @@ body {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 65px 1fr 20px;
+  grid-template-areas: "navbar""view""statusbar";
+  overflow: hidden;
+  background-color: #161819;
+  border-radius: 6px;
 }
 
 button {
@@ -49,7 +60,12 @@ button {
   border: none;
 }
 
-.drag {
-  -webkit-app-region: drag;
-  -webkit-app-region: no-drag;
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+input {
+  border: none;
+  outline: none;
 }

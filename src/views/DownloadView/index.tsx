@@ -1,6 +1,5 @@
+import { Container } from '../../layouts'
 import { useDownloadStore } from '../../stores/useDownloadStore'
-import { DownloadIcon } from '../../components/Icons'
-import { Hero, ViewContainer } from '../../layouts'
 
 import styles from './styles.module.css'
 
@@ -15,13 +14,7 @@ const dateFormat = (date: Date) => new window.Intl.DateTimeFormat('es-CO', { dat
 export const DownloadView = () => {
   const { itemList } = useDownloadStore()
   return (
-    <ViewContainer>
-      <Hero
-        icon={<DownloadIcon />}
-        title="Descargas"
-        color="#E04D01"
-        subtitle={`${itemList.length} ${itemList.length === 1 ? 'Elemento' : 'Elementos'}`}
-      />
+    <Container>
       <table className={styles.downloadsTable}>
         <thead>
           <tr>
@@ -40,6 +33,6 @@ export const DownloadView = () => {
           ))}
         </tbody>
       </table>
-    </ViewContainer>
+    </Container>
   )
 }

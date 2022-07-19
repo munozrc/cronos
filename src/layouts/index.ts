@@ -1,3 +1,5 @@
-export { Hero } from './Hero'
-export { Toolbar } from './Toolbar'
-export { ViewContainer } from './ViewContainer'
+export { Container } from './container'
+export { Content } from './content'
+export { Navbar } from './navbar'
+export { Statusbar } from './statusbar'
+export { Wrapper } from './wrapper'

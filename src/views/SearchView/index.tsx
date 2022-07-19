@@ -1,30 +1,36 @@
-import { useDownloadStore } from '../../stores/useDownloadStore'
+import { useState } from 'react'
+import { Container, Content } from '../../layouts'
 import { useAppStore } from '../../stores/useAppStore'
-import { ListOfItems } from '../../components/ListOfItems'
-import { Spinner } from '../../components/Spinner'
-import { TabContainer } from '../../layouts/TabContainer'
+import { SearchField } from './searchField'
+import { ToogleField } from './toggleField'
+import { ListItems } from './listItems'
+import MusicPlayer from './music-player'
+
+import styles from './styles.module.css'
 
 export const SearchView = () => {
-  const { queryResults, queryStatus, suggestionResults, searchTrackSuggestions } = useAppStore()
-  const { createNewDownload } = useDownloadStore()
+  const { queryResults, queryStatus, searchSong } = useAppStore()
+  const [filter, setFilter] = useState(true)
 
-  const handleCallbackTab = (index: number) => {
-    if (index === 1) searchTrackSuggestions()
+  const handleChange = (value:boolean) => {
+    console.log({ value })
+    setFilter(value)
   }
 
-  if (queryStatus === 'loading') return <Spinner />
-  if (queryStatus === 'error') return <h3>Algo salio mal!</h3>
-
   return (
-    <TabContainer callback={handleCallbackTab}>
-      <ListOfItems
-        list={queryResults}
-        createNewDownload={createNewDownload}
-      />
-      <ListOfItems
-        list={suggestionResults}
-        createNewDownload={createNewDownload}
-      />
-    </TabContainer>
+    <Container>
+      <div className={styles.search}>
+        <SearchField onSubmit={searchSong}/>
+        <ToogleField checked={filter} onChange={handleChange} />
+      </div>
+      <Content isLoading={queryStatus === 'loading'} isError={queryStatus === 'error'}>
+        <ListItems
+          items={queryResults}
+          createNewDownload={() => {}}
+          playAndPause={() => console.log('Play')}
+        />
+        <MusicPlayer />
+      </Content>
+    </Container>
   )
 }

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  grid-area: view;
+  padding: 0px 14px 0px 24px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 0 12px 20px 0;
+}
+
+.container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #242627;
+  border-radius: 2px;
+  border: none;
+}
+
+.container::-webkit-scrollbar-track {
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+}
