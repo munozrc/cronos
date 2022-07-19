@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { Container } from '../../layouts'
+import { Container, Content } from '../../layouts'
 import { useAppStore } from '../../stores/useAppStore'
 import { SearchField } from './searchField'
 import { ToogleField } from './toggleField'
+import { ListItems } from './listItems'
+import MusicPlayer from './music-player'
 
 import styles from './styles.module.css'
-import { Spinner } from '../../components/Spinner'
-import { ListItems } from './listItems'
 
 export const SearchView = () => {
   const { queryResults, queryStatus, searchSong } = useAppStore()
@@ -23,13 +23,14 @@ export const SearchView = () => {
         <SearchField onSubmit={searchSong}/>
         <ToogleField checked={filter} onChange={handleChange} />
       </div>
-      { queryStatus === 'loading' && <Spinner /> }
-      { queryStatus === 'complete' && (
+      <Content isLoading={queryStatus === 'loading'} isError={queryStatus === 'error'}>
         <ListItems
           items={queryResults}
           createNewDownload={() => {}}
+          playAndPause={() => console.log('Play')}
         />
-      )}
+        <MusicPlayer />
+      </Content>
     </Container>
   )
 }

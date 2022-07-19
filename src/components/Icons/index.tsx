@@ -1,6 +1,8 @@
 export { CloseIcon } from './CloseIcon'
 export { DownloadIcon } from './DownloadIcon'
 export { FolderIcon } from './FolderIcon'
+export { PauseIcon } from './pause-icon'
 export { PlayIcon } from './playIcon'
 export { SearchIcon } from './SearchIcon'
 export { SettingsIcon } from './SettingsIcon'
+export { VolumeIcon } from './volume-icon'
