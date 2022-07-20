@@ -14,7 +14,7 @@ interface AudioPlayerProps {
   title: string
 }
 
-const MusicPlayer = ({ id, ...props }: AudioPlayerProps) => {
+const AudioPlayer = ({ id, ...props }: AudioPlayerProps) => {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setPlaying] = useState(false)
   const [audioSrc, setAudioSrc] = useState('')
@@ -60,4 +60,4 @@ const MusicPlayer = ({ id, ...props }: AudioPlayerProps) => {
   )
 }
 
-export default MusicPlayer
+export default AudioPlayer

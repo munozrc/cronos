@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { Track } from '../../electron/types'
+import { Track } from '../types'
 
 type ResponseStatus = 'loading' | 'error' | 'complete' | 'waiting'
 

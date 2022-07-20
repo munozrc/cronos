@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { Container, Content } from '../../layouts'
 import { useAppStore } from '../../stores/useAppStore'
+import { Track } from '../../types'
+
 import SearchField from './search-field'
 import ToogleField from './toggle-field'
 import ListItems from './list-items'
-import MusicPlayer from './music-player'
+import AudioPlayer from './audio-player'
 
 import styles from './styles.module.css'
-import { Track } from '../../../electron/types'
 
 export const SearchView = () => {
   const { queryResults, queryStatus, searchSong } = useAppStore()
@@ -31,7 +32,7 @@ export const SearchView = () => {
           createNewDownload={() => {}}
           playAndPause={setActiveSong}
         />
-        { activeSong && <MusicPlayer {...activeSong} />}
+        { activeSong && <AudioPlayer {...activeSong} />}
       </Content>
     </Container>
   )

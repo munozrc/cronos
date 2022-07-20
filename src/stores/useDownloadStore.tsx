@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { DownloadFile, Track } from '../../electron/types'
+import { DownloadFile, Track } from '../types'
 
 interface DownloadState {
   itemList: Array<DownloadFile>
