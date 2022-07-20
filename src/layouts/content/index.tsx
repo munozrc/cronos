@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import Spinner from '../../components/spinner'
 
 import styles from './styles.module.css'
 
@@ -12,7 +13,7 @@ export const Content = ({ isLoading, isError, children }: ContentProps) => {
   return (
     <div className={styles.container}>
       <div className={`${isLoading ? styles.wrapperSpinner : styles.hidden}`}>
-        <div className={styles.spinner} />
+        <Spinner width='70px' height='70px' borderWidth='6px' />
       </div>
       <div className={`${!isLoading && !isError ? styles.active : styles.hidden}`}>{children}</div>
     </div>

@@ -11,15 +11,6 @@
   place-items: center;
 }
 
-.spinner {
-  width: 70px;
-  height: 70px;
-  border: 6px solid #242627;
-  border-radius: 50%;
-  border-left-color: #8CB0FC;
-  animation: spin 1s linear infinite;
-}
-
 .wrapperSpinner,
 .hidden,
 .active {
@@ -39,14 +30,4 @@
   height: 100%;
   visibility: visible;
   opacity: 1;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }

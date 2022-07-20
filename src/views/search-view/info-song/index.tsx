@@ -10,7 +10,7 @@ interface InfoSongProps {
 
 const InfoSong = ({ title, artist, albumCover }: InfoSongProps) => (
   <div className={styles.container}>
-    <figure className={styles.albumCover}>
+    <figure className={styles.albumCover} key={albumCover}>
       <Image src={albumCover} fallback={ImageFallback} alt={albumCover}/>
     </figure>
     <div className={styles.titleAndArtist}>
