@@ -1,0 +1,81 @@
+.container {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  min-height: 70px;
+  background-color: #080808;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 12px;
+}
+
+.groupButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 235px;
+  gap: 10px;
+  margin-right: 10px;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  background-color: rgba(36, 38, 39, 0.2);
+  border-radius: 30px;
+  color: #FFFFFF;
+  transition: background-color 0.15s linear;
+  padding: 10px;
+}
+
+.btn:hover {
+  background-color: rgba(36, 38, 39, 0.4);
+}
+
+.containerSeek {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  max-width: 420px;
+  gap: 8px;
+  margin: 0 auto;
+}
+
+.seek {
+  width: 100%;
+  height: 6px;
+  background-color: #242627;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.track {
+  width: 0%;
+  height: 100%;
+  max-height: 6px;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+}
+
+.time {
+  display: inline-block;
+  width: 45px;
+  min-width: 45px;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 13px;
+  color: #BEBEBE;
+}
+
+.time:first-child {
+  text-align: end;
+}
+
+.time:last-child {
+  text-align: start;
+}

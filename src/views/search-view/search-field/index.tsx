@@ -7,7 +7,7 @@ interface SearchFieldProps {
   onSubmit: (query: string) => void
 }
 
-export const SearchField = ({ onSubmit }: SearchFieldProps) => {
+const SearchField = ({ onSubmit }: SearchFieldProps) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
@@ -29,3 +29,5 @@ export const SearchField = ({ onSubmit }: SearchFieldProps) => {
     </form>
   )
 }
+
+export default SearchField

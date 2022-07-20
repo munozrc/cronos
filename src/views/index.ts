@@ -1,3 +1,3 @@
-export { DownloadView } from './DownloadView'
-export { SettingsView } from './SettingsView'
-export { SearchView } from './SearchView'
+export * from './download-view'
+export * from './settings-view'
+export * from './search-view'

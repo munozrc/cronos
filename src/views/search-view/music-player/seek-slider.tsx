@@ -1,5 +1,5 @@
 import { MouseEvent, useRef } from 'react'
-import styles from './seek-slider.module.css'
+import styles from './styles.module.css'
 
 function parseTime (value: number): string {
   return String(value).padStart(2, '0')
@@ -37,7 +37,7 @@ const SeekSlider = ({ currentTime, duration, onChange }: SeekSliderProps) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.containerSeek}>
       <span className={styles.time}>{secondsToTime(currentTime)}</span>
       <div
         ref={seekRef}

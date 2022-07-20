@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Container, Content } from '../../layouts'
 import { useAppStore } from '../../stores/useAppStore'
-import { SearchField } from './searchField'
-import { ToogleField } from './toggleField'
-import { ListItems } from './listItems'
+import SearchField from './search-field'
+import ToogleField from './toggle-field'
+import ListItems from './list-items'
 import MusicPlayer from './music-player'
 
 import styles from './styles.module.css'

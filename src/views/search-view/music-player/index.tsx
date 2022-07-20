@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import { PauseIcon, PlayIcon, VolumeIcon } from '../../../components/Icons'
+import InfoSong from '../info-song'
 import SeekSlider from './seek-slider'
 
-import styles from './music-player.module.css'
-import InfoSong from '../info-song'
-import { PauseIcon, PlayIcon, VolumeIcon } from '../../../components/Icons'
+import styles from './styles.module.css'
 
 const MusicPlayer = () => {
   const [state, setState] = useState({ currentTime: 1, duration: 67, isPlaying: true })
@@ -24,7 +24,7 @@ const MusicPlayer = () => {
           {state.isPlaying ? <PauseIcon width="26px" height="26px"/> : <PlayIcon width="26px" height="26px"/>}
         </button>
         <button className={styles.btn}>
-          <VolumeIcon width="20px" height="20px"/>
+          <VolumeIcon width="18px" height="18px"/>
         </button>
       </div>
     </div>

@@ -5,7 +5,7 @@ interface ToogleFieldProps {
   onChange: (value: boolean) => void
 }
 
-export const ToogleField = ({ checked, onChange }: ToogleFieldProps) => {
+const ToogleField = ({ checked, onChange }: ToogleFieldProps) => {
   return (
     <label className={styles.container}>
       RESULTADOS
@@ -22,3 +22,5 @@ export const ToogleField = ({ checked, onChange }: ToogleFieldProps) => {
     </label>
   )
 }
+
+export default ToogleField

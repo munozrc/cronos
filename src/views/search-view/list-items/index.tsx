@@ -11,7 +11,7 @@ interface ListItemsProps {
   playAndPause: () => void
 }
 
-export const ListItems = ({ items, createNewDownload, playAndPause } : ListItemsProps) => {
+const ListItems = ({ items, createNewDownload, playAndPause } : ListItemsProps) => {
   return (
     <ul className={styles.list}>
       {items.map((track, index) => (
@@ -37,3 +37,5 @@ export const ListItems = ({ items, createNewDownload, playAndPause } : ListItems
     </ul>
   )
 }
+
+export default ListItems
