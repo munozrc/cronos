@@ -1,5 +1,5 @@
 import { FormEvent } from 'react'
-import { SearchIcon } from '../../../components/Icons'
+import { SearchIcon } from '../../../Icons'
 
 import styles from './styles.module.css'
 

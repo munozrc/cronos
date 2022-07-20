@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PauseIcon, PlayIcon, VolumeIcon } from '../../../components/Icons'
+import { PauseIcon, PlayIcon, VolumeIcon } from '../../../Icons'
 import InfoSong from '../info-song'
 import SeekSlider from './seek-slider'
 

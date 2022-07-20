@@ -1,7 +1,7 @@
 import { Track } from '../../../../electron/types'
 import Image from '../../../components/image'
 import ImageFallback from '../../../assets/albumcover-fallback.jpg'
-import { DownloadIcon, PlayIcon } from '../../../components/Icons'
+import { DownloadIcon, PlayIcon } from '../../../Icons'
 
 import styles from './styles.module.css'
 
