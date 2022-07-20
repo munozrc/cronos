@@ -18,7 +18,8 @@ export async function getTrackSuggestions (id: string): Promise<Track[]> {
     const results = response.map(normalizeResponse)
     return results.filter((item) => IsUndefinedOrRepeatedResult(item, id)) as Track[]
   } catch (err) {
-    console.error('Error fetch suggestions for track: ', err)
+    // console.error('Error fetch suggestions for track: ', err)
+    console.log({ id })
     return []
   }
 }

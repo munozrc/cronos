@@ -6,12 +6,13 @@ import styles from './styles.module.css'
 interface ContentProps {
   isLoading: boolean
   isError: boolean
+  isHidden: boolean
   children: ReactNode | Array<ReactNode>
 }
 
-export const Content = ({ isLoading, isError, children }: ContentProps) => {
+export const Content = ({ isLoading, isError, isHidden, children }: ContentProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ display: isHidden ? 'none' : undefined }}>
       <div className={`${isLoading ? styles.wrapperSpinner : styles.hidden}`}>
         <Spinner width='70px' height='70px' borderWidth='6px' />
       </div>

@@ -10,24 +10,54 @@ import AudioPlayer, { AudioPlayerProps } from './audio-player'
 import styles from './styles.module.css'
 
 export const SearchView = () => {
-  const { queryResults, queryStatus, searchSong } = useAppStore()
+  const {
+    queryResults,
+    queryStatus,
+    suggestionResults,
+    suggestionStatus,
+    searchSong,
+    searchTrackSuggestions
+  } = useAppStore()
+
   const [activeTab, setActiveTab] = useState(true)
   const [activeSong, setActiveSong] = useState<AudioPlayerProps | null>(null)
 
   function handleSubmit (query: string): void {
-    searchSong(query)
     setActiveSong(null)
+    setActiveTab(true)
+    searchSong(query)
+  }
+
+  function handleChangeTab (value: boolean): void {
+    !value && searchTrackSuggestions()
+    setActiveTab(value)
   }
 
   return (
     <Container>
       <div className={styles.search}>
         <SearchField onSubmit={handleSubmit}/>
-        <ToogleField checked={activeTab} onChange={setActiveTab} />
+        <ToogleField checked={activeTab} onChange={handleChangeTab} />
       </div>
-      <Content isLoading={queryStatus === 'loading'} isError={queryStatus === 'error'}>
+      <Content
+        isLoading={queryStatus === 'loading'}
+        isError={queryStatus === 'error'}
+        isHidden={!activeTab}
+      >
         <ListItems
           items={queryResults}
+          createNewDownload={() => {}}
+          playAndPause={setActiveSong}
+        />
+        { activeSong && <AudioPlayer {...activeSong} />}
+      </Content>
+      <Content
+        isLoading={suggestionStatus === 'loading'}
+        isError={suggestionStatus === 'error'}
+        isHidden={activeTab}
+      >
+        <ListItems
+          items={suggestionResults}
           createNewDownload={() => {}}
           playAndPause={setActiveSong}
         />
