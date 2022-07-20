@@ -4,7 +4,7 @@ import { Track } from '../types'
 type ResponseStatus = 'loading' | 'error' | 'complete' | 'waiting'
 
 interface AppState {
-  lastQuery: string
+  query: string
   queryResults: Array<Track>
   suggestionResults: Array<Track>
   queryStatus: ResponseStatus
@@ -14,17 +14,17 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
-  lastQuery: '',
+  query: '',
   queryResults: [],
   suggestionResults: [],
   queryStatus: 'complete',
   suggestionStatus: 'waiting',
-  searchSong: (query: string) => {
-    if (query === get().lastQuery) return
+  searchSong: (value: string) => {
+    if (value === get().query) return
 
-    set(() => ({ lastQuery: query, queryStatus: 'loading' }))
+    set(() => ({ query: value, queryStatus: 'loading' }))
 
-    window.cronos.searchTrack(query)
+    window.cronos.searchTrack(value)
       .then(results => set(() => ({
         queryStatus: 'complete',
         suggestionStatus: 'waiting',
@@ -42,7 +42,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
     set(() => ({ suggestionStatus: 'loading' }))
     getTrackSuggestions(queryResults[0].id)
-      .then(suggestions => set(() => ({ suggestionResults: suggestions, suggestionStatus: 'complete' })))
+      .then(data => set(() => ({ suggestionResults: data, suggestionStatus: 'complete' })))
       .catch(() => set(() => ({ suggestionResults: [], suggestionStatus: 'error' })))
   }
 }))
