@@ -22,6 +22,9 @@ export const SearchView = () => {
   const [activeTab, setActiveTab] = useState(true)
   const [activeSong, setActiveSong] = useState<AudioPlayerProps | null>(null)
 
+  const loading = queryStatus === 'loading' || suggestionStatus === 'loading'
+  const error = queryStatus === 'error' || suggestionStatus === 'error'
+
   function handleSubmit (query: string): void {
     setActiveSong(null)
     setActiveTab(true)
@@ -39,25 +42,16 @@ export const SearchView = () => {
         <SearchField onSubmit={handleSubmit}/>
         <ToogleField checked={activeTab} onChange={handleChangeTab} />
       </div>
-      <Content
-        isLoading={queryStatus === 'loading'}
-        isError={queryStatus === 'error'}
-        isHidden={!activeTab}
-      >
+      <Content isLoading={loading} isError={error}>
         <ListItems
           items={queryResults}
+          hidden={!activeTab}
           createNewDownload={() => {}}
           playAndPause={setActiveSong}
         />
-        { activeSong && <AudioPlayer {...activeSong} />}
-      </Content>
-      <Content
-        isLoading={suggestionStatus === 'loading'}
-        isError={suggestionStatus === 'error'}
-        isHidden={activeTab}
-      >
         <ListItems
           items={suggestionResults}
+          hidden={activeTab}
           createNewDownload={() => {}}
           playAndPause={setActiveSong}
         />

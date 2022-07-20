@@ -7,13 +7,14 @@ import styles from './styles.module.css'
 
 interface ListItemsProps {
   items: Array<Track>
+  hidden: boolean
   createNewDownload: (value: Track) => void
   playAndPause: (value: Track) => void
 }
 
-const ListItems = ({ items, createNewDownload, playAndPause } : ListItemsProps) => {
+const ListItems = ({ items, hidden, createNewDownload, playAndPause } : ListItemsProps) => {
   return (
-    <ul className={styles.list}>
+    <ul className={styles.list} style={{ display: hidden ? 'none' : undefined }}>
       {items.map((track, index) => (
         <li key={track.id} className={styles.item}>
           <div className={styles.info}>
