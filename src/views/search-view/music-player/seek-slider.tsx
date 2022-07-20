@@ -8,7 +8,7 @@ function parseTime (value: number): string {
 function secondsToTime (time: number): string {
   const hours = Math.floor(time / 3600)
   const minutes = Math.floor((time - (hours * 3600)) / 60)
-  const seconds = time - (hours * 3600) - (minutes * 60)
+  const seconds = Math.floor(time) - (hours * 3600) - (minutes * 60)
 
   if (hours === 0) return `${minutes}:${parseTime(seconds % 60)}`
   return `${parseTime(hours)}:${parseTime(minutes)}:${parseTime(seconds % 60)}`

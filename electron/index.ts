@@ -4,6 +4,7 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 
 import { downloadTrack, openDownloadsFolder } from './lib/download'
 import { getTrackSuggestions, searchTrack } from './lib/search'
+import { getSongURL } from './lib/song'
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -66,5 +67,6 @@ app.on('activate', () => {
 
 ipcMain.handle('searchTrack', (_, query) => searchTrack(query))
 ipcMain.handle('getTrackSuggestions', (_, id) => getTrackSuggestions(id))
+ipcMain.handle('get-song-url', (_, id) => getSongURL(id))
 ipcMain.handle('downloadTrack', (_, track) => downloadTrack(track, window))
 ipcMain.handle('openDownloadsFolder', openDownloadsFolder)

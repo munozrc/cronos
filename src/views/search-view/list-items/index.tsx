@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 interface ListItemsProps {
   items: Array<Track>
   createNewDownload: (value: Track) => void
-  playAndPause: () => void
+  playAndPause: (value: Track) => void
 }
 
 const ListItems = ({ items, createNewDownload, playAndPause } : ListItemsProps) => {
@@ -18,7 +18,7 @@ const ListItems = ({ items, createNewDownload, playAndPause } : ListItemsProps) 
         <li key={track.id} className={styles.item}>
           <div className={styles.info}>
             <span className={styles.index}>{`${index + 1}`.padStart(2, '0')}</span>
-            <button className={styles.albumCover} onClick={playAndPause}>
+            <button className={styles.albumCover} onClick={() => playAndPause(track)}>
               <Image src={track.albumCover} fallback={ImageFallback} alt={track.id}/>
               <PlayIcon />
             </button>

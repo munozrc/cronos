@@ -7,12 +7,14 @@ import ListItems from './list-items'
 import MusicPlayer from './music-player'
 
 import styles from './styles.module.css'
+import { Track } from '../../../electron/types'
 
 export const SearchView = () => {
   const { queryResults, queryStatus, searchSong } = useAppStore()
   const [filter, setFilter] = useState(true)
+  const [activeSong, setActiveSong] = useState<Track | null>(null)
 
-  const handleChange = (value:boolean) => {
+  const handleChange = async (value:boolean) => {
     console.log({ value })
     setFilter(value)
   }
@@ -27,9 +29,9 @@ export const SearchView = () => {
         <ListItems
           items={queryResults}
           createNewDownload={() => {}}
-          playAndPause={() => console.log('Play')}
+          playAndPause={setActiveSong}
         />
-        <MusicPlayer />
+        { activeSong && <MusicPlayer {...activeSong} />}
       </Content>
     </Container>
   )
