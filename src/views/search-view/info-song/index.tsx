@@ -15,7 +15,7 @@ const InfoSong = ({ title, artist, albumCover }: InfoSongProps) => (
     </figure>
     <div className={styles.titleAndArtist}>
       <h4>{title}</h4>
-      <p>{artist}</p>
+      <p>{artist === '' ? 'sin-artista' : artist}</p>
     </div>
   </div>
 )

@@ -25,7 +25,7 @@ const ListItems = ({ items, hidden, createNewDownload, playAndPause } : ListItem
             </button>
             <div className={styles.titleAndArtist}>
               <h4>{track.title}</h4>
-              <p>{track.artist}</p>
+              <p>{track.artist === '' ? 'sin-artista' : track.artist}</p>
             </div>
           </div>
           <p className={styles.album}>{track.album}</p>

@@ -46,7 +46,7 @@ function normalizeArtistsInfo (data: Array<{name: string, id?: string}> | {name:
   if (Array.isArray(data)) {
     const isEmpty = data.length !== 0
     const matchNames = data.map(i => i.name).join(' & ')
-    return isEmpty ? matchNames : 'sin-artista'
+    return isEmpty ? matchNames : ''
   }
   return data.name
 }
