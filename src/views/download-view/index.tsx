@@ -4,10 +4,6 @@ import { useDownloadStore } from '../../stores/useDownloadStore'
 
 import styles from './styles.module.css'
 
-// downloading = #FCE38A
-// completed = #3A79FF
-// error = #EB4747
-
 enum translateState {
   preparing = 'Preparando',
   completed = 'Completada',
