@@ -27,7 +27,7 @@ export const DownloadView = () => {
     <Container>
       <header className={styles.header}>
         <span className={styles.counterElements}>{numberOfElements(itemList.length)}</span>
-        <button className={styles.btnFolder}>
+        <button className={styles.btnFolder} onClick={window.cronos.openDownloadsFolder}>
           <FolderIcon />
         </button>
       </header>

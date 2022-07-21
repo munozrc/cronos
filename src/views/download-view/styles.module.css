@@ -21,6 +21,10 @@
   font-size: 17px;
 }
 
+.btnFolder:hover {
+  color: #808080;
+}
+
 .table {
   border-collapse: collapse;
   margin-top: 12px;
