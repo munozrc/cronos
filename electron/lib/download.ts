@@ -16,17 +16,17 @@ export async function downloadTrack (data: DownloadFile, window: BrowserWindow |
   const { id, title, artist } = data
   const { temporary, persistent } = getFilePaths(userDownloadsFolder, artist, title)
   const { webContents } = window as BrowserWindow
-  const item = { ...data, state: 'completed', path: persistent } as DownloadFile
+  const item = { ...data, state: 'completed', path: persistent, size: 0 } as DownloadFile
 
   try {
-    const [, metadata] = await Promise.all([
+    const [size, metadata] = await Promise.all([
       downloadAndSave(id, temporary),
       getAdditionalMetadata(data)
     ])
 
     id3.write(metadata, temporary)
     renameSync(temporary, persistent)
-    webContents.send('downloadCompleted', item)
+    webContents.send('downloadCompleted', { ...item, size })
   } catch (err) {
     webContents.send('downloadCompleted', { ...item, state: 'error' })
     console.error('DOWNLOAD_TRACK_ERROR: ', err)
@@ -37,14 +37,18 @@ export async function openDownloadsFolder (): Promise<string> {
   return await shell.openPath(userDownloadsFolder)
 }
 
-function downloadAndSave (id: string, path: string): Promise<true | Error> {
+function downloadAndSave (id: string, path: string): Promise<number | Error> {
   const stream = ytdl(id, { filter: 'audioonly' })
+  let size = 0
   return new Promise((resolve, reject) => {
     ffmpeg(stream)
       .audioBitrate(128)
       .format('mp3')
       .save(path)
-      .on('end', () => resolve(true))
+      .on('progress', (progress) => {
+        size = progress.targetSize
+      })
+      .on('end', () => resolve(size))
       .on('error', (err) => reject(err))
   })
 }

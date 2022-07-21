@@ -13,7 +13,7 @@ export const useDownloadStore = create<DownloadState>((set) => ({
     set((state) => {
       const date = new Date()
       const uuid = window.crypto.randomUUID()
-      const newItem: DownloadFile = { ...data, uuid, date, state: 'downloading', path: '' }
+      const newItem: DownloadFile = { ...data, uuid, date, state: 'downloading', path: '', size: 0 }
       const findTrackInDownloads = state.itemList.find(i => i.id === data.id && i.state === 'downloading')
       const existSimilarDownload = typeof findTrackInDownloads !== 'undefined'
 

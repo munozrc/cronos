@@ -12,6 +12,7 @@ export type DownloadFile = Track & {
   state: 'completed' | 'downloading' | 'error'
   path: string
   date: Date
+  size: number
 }
 
 export type iTunesMetadata = {

@@ -8,6 +8,7 @@ import ListItems from './list-items'
 import AudioPlayer, { AudioPlayerProps } from './audio-player'
 
 import styles from './styles.module.css'
+import { useDownloadStore } from '../../stores/useDownloadStore'
 
 export const SearchView = () => {
   const {
@@ -18,6 +19,8 @@ export const SearchView = () => {
     searchSong,
     searchTrackSuggestions
   } = useAppStore()
+
+  const { createNewDownload } = useDownloadStore()
 
   const [activeTab, setActiveTab] = useState(true)
   const [activeSong, setActiveSong] = useState<AudioPlayerProps | null>(null)
@@ -46,13 +49,13 @@ export const SearchView = () => {
         <ListItems
           items={queryResults}
           hidden={!activeTab}
-          createNewDownload={() => {}}
+          createNewDownload={createNewDownload}
           playAndPause={setActiveSong}
         />
         <ListItems
           items={suggestionResults}
           hidden={activeTab}
-          createNewDownload={() => {}}
+          createNewDownload={createNewDownload}
           playAndPause={setActiveSong}
         />
         { activeSong && <AudioPlayer {...activeSong} />}
