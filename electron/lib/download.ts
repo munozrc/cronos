@@ -9,6 +9,7 @@ import { DownloadFile, iTunesMetadata, iTunesResponse, TagImage, Track } from '.
 import pathToFfmpeg from '../helpers/loadFfmpegPath'
 
 const userDownloadsFolder: string = app.getPath('music')
+const unsupportedChars = /[/\\?%*:|"<>]/g
 
 ffmpeg.setFfmpegPath(pathToFfmpeg)
 
@@ -55,7 +56,10 @@ function downloadAndSave (id: string, path: string): Promise<number | Error> {
 
 function getFilePaths (path: string, artist: string, title: string): {temporary: string, persistent: string} {
   const temporary = join(path, Math.random().toString(36).slice(-5) + '_temp')
-  const persistent = join(path, `${artist} - ${title}.mp3`)
+  const parseArtist = artist.replace(unsupportedChars, '')
+  const parseTitle = title.replace(unsupportedChars, '')
+  const persistent = join(path, `${parseArtist} - ${parseTitle}.mp3`)
+
   return { temporary, persistent }
 }
 
