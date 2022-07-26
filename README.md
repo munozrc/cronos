@@ -19,3 +19,4 @@ Music downloader in mp3 format using ElectronJS and ReactJS
 - [ ] Notificar si existe una descarga de la misma canción
 - [ ] Agregar badge con contador de descargas en curso
 - [ ] Implementar animación de loading en la barra de tareas cuando existen descargas en curso
+- [ ] Mostrar indicador si uno de los elementos de la lista de resultados se esta reproduciendo
