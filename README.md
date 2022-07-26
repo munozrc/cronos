@@ -21,3 +21,4 @@ Music downloader in mp3 format using ElectronJS and ReactJS
 - [ ] Implementar animación de loading en la barra de tareas cuando existen descargas en curso
 - [ ] Mostrar indicador si uno de los elementos de la lista de resultados se esta reproduciendo
 - [ ] Evitar doble actulizacion del estado cuando se descarga una canción
+- [ ] Validar si la API de iTunes de vuelve resultados validos
