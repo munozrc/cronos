@@ -1,11 +1,11 @@
 import { join } from 'node:path'
 import { renameSync } from 'node:fs'
-import { app, BrowserWindow, shell } from 'electron'
+import { app, BrowserWindow, shell, WebContents } from 'electron'
 import axios from 'axios'
 import ffmpeg from 'fluent-ffmpeg'
 import ytdl from 'ytdl-core'
 import id3, { Tags } from 'node-id3'
-import { DownloadFile, iTunesMetadata, iTunesResponse, TagImage, Track } from '../types'
+import { DownloadFile, iTunesMetadata, iTunesResponse, TagImage, Track, UpdateProgress } from '../types'
 import pathToFfmpeg from '../helpers/loadFfmpegPath'
 
 const userDownloadsFolder: string = app.getPath('music')
@@ -14,20 +14,20 @@ const unsupportedChars = /[/\\?%*:|"<>]/g
 ffmpeg.setFfmpegPath(pathToFfmpeg)
 
 export async function downloadTrack (data: DownloadFile, window: BrowserWindow | null): Promise<void> {
-  const { id, title, artist } = data
+  const { id, title, artist, uuid } = data
   const { temporary, persistent } = getFilePaths(userDownloadsFolder, artist, title)
   const { webContents } = window as BrowserWindow
-  const item = { ...data, state: 'completed', path: persistent, size: 0 } as DownloadFile
+  const item = { ...data, state: 'completed', path: persistent } as DownloadFile
 
   try {
-    const [size, metadata] = await Promise.all([
-      downloadAndSave(id, temporary),
+    const [progress, metadata] = await Promise.all([
+      downloadAndSave(id, uuid, temporary, webContents),
       getAdditionalMetadata(data)
     ])
 
     id3.write(metadata, temporary)
     renameSync(temporary, persistent)
-    webContents.send('downloadCompleted', { ...item, size })
+    webContents.send('downloadCompleted', { ...item, ...progress })
   } catch (err) {
     webContents.send('downloadCompleted', { ...item, state: 'error' })
     console.error('DOWNLOAD_TRACK_ERROR: ', err)
@@ -38,19 +38,29 @@ export async function openDownloadsFolder (): Promise<string> {
   return await shell.openPath(userDownloadsFolder)
 }
 
-function downloadAndSave (id: string, path: string): Promise<number | Error> {
+function downloadAndSave (id: string, uuid: string, path: string, webContents: WebContents): Promise<UpdateProgress | Error> {
   const stream = ytdl(id, { filter: 'audioonly' })
+
+  let totalTime = 0
   let size = 0
+  let percent = 0
+
   return new Promise((resolve, reject) => {
     ffmpeg(stream)
       .audioBitrate(128)
       .format('mp3')
       .save(path)
+      .on('codecData', data => {
+        totalTime = parseInt(data.duration.replace(/:/g, ''))
+      })
       .on('progress', (progress) => {
         size = progress.targetSize
+        percent = (parseInt(progress.timemark.replace(/:/g, '')) / totalTime) * 100
+        webContents.send(`update-progress-${uuid}`, { percent, size })
       })
-      .on('end', () => resolve(size))
+      .on('end', () => resolve({ percent, size }))
       .on('error', (err) => reject(err))
+      .run()
   })
 }
 

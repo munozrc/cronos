@@ -10,7 +10,7 @@ Music downloader in mp3 format using ElectronJS and ReactJS
 - [ ] Botón para limpiar campo de búsqueda
 - [X] Error al guardar archivos con nombres como “AC/DC”
 - [ ] Implementar barra de descarga
-- [ ] Error al actualizar el tamaño de la descarga
+- [X] Error al actualizar el tamaño de la descarga
 - [ ] Implementar iconos en los botones del marco de la ventana
 - [ ] Autoplay al seleccionar una canción por primera vez
 - [ ] Añadir funcionalidad de control de volumen
@@ -20,3 +20,4 @@ Music downloader in mp3 format using ElectronJS and ReactJS
 - [ ] Agregar badge con contador de descargas en curso
 - [ ] Implementar animación de loading en la barra de tareas cuando existen descargas en curso
 - [ ] Mostrar indicador si uno de los elementos de la lista de resultados se esta reproduciendo
+- [ ] Evitar doble actulizacion del estado cuando se descarga una canción

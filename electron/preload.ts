@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { DownloadFile, Track } from './types'
+import { DownloadFile, Track, UpdateProgress } from './types'
 
 export const cronos = {
   closeWindow: () => ipcRenderer.send('closeWindow'),
@@ -9,7 +9,8 @@ export const cronos = {
   getSongURL: (id: string) => ipcRenderer.invoke('get-song-url', id),
   downloadTrack: (track: Track): Promise<void> => ipcRenderer.invoke('downloadTrack', track),
   openDownloadsFolder: (): Promise<string> => ipcRenderer.invoke('openDownloadsFolder'),
-  onDownloadCompleted: (callback: (item: DownloadFile) => void) => ipcRenderer.on('downloadCompleted', (_, args) => callback(args))
+  onDownloadCompleted: (callback: (item: DownloadFile) => void) => ipcRenderer.on('downloadCompleted', (_, args) => callback(args)),
+  onUpdateProgress: (callback: ({ percent, size }: UpdateProgress) => void, uuid: string) => ipcRenderer.on(`update-progress-${uuid}`, (_, args) => callback(args))
 }
 
 contextBridge.exposeInMainWorld('cronos', cronos)

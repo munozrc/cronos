@@ -13,6 +13,7 @@ export type DownloadFile = Track & {
   path: string
   date: Date
   size: number
+  percent: number
 }
 
 export type iTunesMetadata = {
@@ -52,4 +53,9 @@ export type TagImage = {
   }
   description: string
   imageBuffer: Buffer
+}
+
+export type UpdateProgress = {
+  percent: number
+  size: number
 }
