@@ -60,7 +60,8 @@
 }
 
 .table .size {
-  min-width: 60px;
+  width: 75px;
+  min-width: 75px;
 }
 
 .table .progress {

@@ -30,7 +30,9 @@ const Item = ({ uuid, artist, title, state, size, percent }: DownloadFile) => {
       <td className={styles.name}>{`${artist} - ${title}`}</td>
       <td className={styles.size}>{`${parseKbToMb(progress.size)} MB`}</td>
       <td className={styles.progress}>
-        <div><span style={{ width: `${progress.percent}%`, backgroundColor: colorState[state] }}/></div>
+        <div>
+          <span style={{ width: state === 'error' ? '100%' : `${progress.percent}%`, backgroundColor: colorState[state] }}/>
+        </div>
       </td>
       <td className={styles.status}>{translateState[state]}</td>
       <td className={styles.date}>Hoy</td>
