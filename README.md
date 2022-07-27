@@ -6,8 +6,8 @@ Music downloader in mp3 format using ElectronJS and ReactJS
 
 ### Issues
 
-- [ ] Conservar el valor del campo de búsqueda
-- [ ] Botón para limpiar campo de búsqueda
+- [X] Conservar el valor del campo de búsqueda
+- [X] Botón para limpiar campo de búsqueda
 - [X] Error al guardar archivos con nombres como “AC/DC”
 - [X] Implementar barra de descarga
 - [X] Error al actualizar el tamaño de la descarga

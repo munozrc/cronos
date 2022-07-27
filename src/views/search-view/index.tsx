@@ -14,12 +14,14 @@ import styles from './styles.module.css'
 
 export const SearchView = () => {
   const {
+    query,
     queryResults,
     queryStatus,
     suggestionResults,
     suggestionStatus,
     searchSong,
-    searchTrackSuggestions
+    searchTrackSuggestions,
+    clearSearch
   } = useAppStore()
 
   const { createNewDownload } = useDownloadStore()
@@ -45,8 +47,15 @@ export const SearchView = () => {
   return (
     <Container>
       <div className={styles.search}>
-        <SearchField onSubmit={handleSubmit}/>
-        <ToogleField checked={tab} onChange={handleChangeTab} />
+        <SearchField
+          initialValue={query}
+          onSubmit={handleSubmit}
+          onClearSearch={clearSearch}
+        />
+        <ToogleField
+          checked={tab}
+          onChange={handleChangeTab}
+        />
       </div>
       <Content isLoading={loading} isError={error}>
         <ListItems

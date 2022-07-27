@@ -37,3 +37,17 @@
 .btnSearch:hover {
   background-color: #292b2c;
 }
+
+.btnClear {
+  display: grid;
+  place-items: center;
+  color: #BEBEBE;
+  background-color: #292b2c;
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 1px;
+}
+
+.btnClear:hover {
+  background-color: #47494A;
+}

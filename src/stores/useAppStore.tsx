@@ -11,6 +11,7 @@ interface AppState {
   suggestionStatus: ResponseStatus
   searchSong: (query: string) => void
   searchTrackSuggestions: () => void
+  clearSearch: () => void
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -44,5 +45,6 @@ export const useAppStore = create<AppState>((set, get) => ({
     getTrackSuggestions(queryResults[0].id)
       .then(data => set(() => ({ suggestionResults: data, suggestionStatus: 'complete' })))
       .catch(() => set(() => ({ suggestionResults: [], suggestionStatus: 'error' })))
-  }
+  },
+  clearSearch: () => set(() => ({ query: '' }))
 }))
