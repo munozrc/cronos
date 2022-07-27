@@ -1,36 +1,34 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 
-import { useEffect, useRef, useState } from 'react'
-import Spinner from '../../../components/spinner'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { PauseIcon, PlayIcon, VolumeIcon } from '../../../Icons'
+import { AudioPlayerSong } from '../../../types'
+import Spinner from '../../../components/spinner'
 import InfoSong from '../info-song'
 import SeekSlider from './seek-slider'
 
 import styles from './styles.module.css'
 
 export interface AudioPlayerProps {
-  id: string
-  albumCover: string
-  artist: string
-  title: string
+  song: AudioPlayerSong
+  playing: boolean
+  onPlaying: Dispatch<SetStateAction<boolean>>
 }
 
-const AudioPlayer = ({ id, ...props }: AudioPlayerProps) => {
+const AudioPlayer = ({ song, playing, onPlaying }: AudioPlayerProps) => {
   const audioRef = useRef<HTMLAudioElement>(null)
-  const [playing, setPlaying] = useState(false)
-  const [audioSrc, setAudioSrc] = useState('')
+  const [source, setSource] = useState<string | undefined>(undefined)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const { getSongURL } = window.cronos
-    if (id === '') return
-    getSongURL(id).then(setAudioSrc)
+    window.cronos.getSongURL(song.id).then(setSource)
     setCurrentTime(0)
     setDuration(0)
     setReady(false)
-  }, [id])
+    onPlaying(false)
+  }, [song, onPlaying])
 
   useEffect(() => {
     if (playing) audioRef.current?.play()
@@ -45,11 +43,12 @@ const AudioPlayer = ({ id, ...props }: AudioPlayerProps) => {
   function handleCanPlay (): void {
     setDuration(audioRef.current?.duration || 0)
     setReady(true)
+    onPlaying(true)
   }
 
   function togglePlay (): void {
     if (!ready) return
-    setPlaying(prev => !prev)
+    onPlaying(prev => !prev)
   }
 
   return (
@@ -57,14 +56,14 @@ const AudioPlayer = ({ id, ...props }: AudioPlayerProps) => {
       <audio
         ref={audioRef}
         className={styles.audio}
-        src={audioSrc}
+        src={source}
         autoPlay={playing || undefined}
         controls={false}
         onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
-        onEnded={() => setPlaying(false)}
+        onEnded={() => onPlaying(false)}
         onCanPlay={handleCanPlay}
       />
-      <InfoSong {...props}/>
+      <InfoSong {...song}/>
       <SeekSlider
         duration={duration}
         currentTime={currentTime}

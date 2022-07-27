@@ -5,10 +5,12 @@ import { useAppStore } from '../../stores/useAppStore'
 import SearchField from './search-field'
 import ToogleField from './toggle-field'
 import ListItems from './list-items'
-import AudioPlayer, { AudioPlayerProps } from './audio-player'
+import AudioPlayer from './audio-player'
+
+import { useDownloadStore } from '../../stores/useDownloadStore'
+import { AudioPlayerSong } from '../../types'
 
 import styles from './styles.module.css'
-import { useDownloadStore } from '../../stores/useDownloadStore'
 
 export const SearchView = () => {
   const {
@@ -22,43 +24,50 @@ export const SearchView = () => {
 
   const { createNewDownload } = useDownloadStore()
 
-  const [activeTab, setActiveTab] = useState(true)
-  const [activeSong, setActiveSong] = useState<AudioPlayerProps | null>(null)
+  const [tab, setTab] = useState<boolean>(true)
+  const [song, setSong] = useState<AudioPlayerSong | null>(null)
+  const [playing, setPlaying] = useState<boolean>(false)
 
   const loading = queryStatus === 'loading' || suggestionStatus === 'loading'
   const error = queryStatus === 'error' || suggestionStatus === 'error'
 
   function handleSubmit (query: string): void {
-    setActiveSong(null)
-    setActiveTab(true)
+    setSong(null)
+    setTab(true)
     searchSong(query)
   }
 
   function handleChangeTab (value: boolean): void {
     !value && searchTrackSuggestions()
-    setActiveTab(value)
+    setTab(value)
   }
 
   return (
     <Container>
       <div className={styles.search}>
         <SearchField onSubmit={handleSubmit}/>
-        <ToogleField checked={activeTab} onChange={handleChangeTab} />
+        <ToogleField checked={tab} onChange={handleChangeTab} />
       </div>
       <Content isLoading={loading} isError={error}>
         <ListItems
           items={queryResults}
-          hidden={!activeTab}
+          hidden={!tab}
+          idActiveSong={song?.id}
+          isPlayingSong={playing}
+          onSetSong={setSong}
+          togglePlaySong={setPlaying}
           createNewDownload={createNewDownload}
-          playAndPause={setActiveSong}
         />
         <ListItems
           items={suggestionResults}
-          hidden={activeTab}
+          hidden={tab}
+          idActiveSong={song?.id}
+          isPlayingSong={playing}
+          onSetSong={setSong}
+          togglePlaySong={setPlaying}
           createNewDownload={createNewDownload}
-          playAndPause={setActiveSong}
         />
-        { activeSong && <AudioPlayer {...activeSong} />}
+        { song && <AudioPlayer song={song} playing={playing} onPlaying={setPlaying} />}
       </Content>
     </Container>
   )
