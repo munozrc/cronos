@@ -8,15 +8,20 @@
   overflow: hidden;
 }
 
+.container:focus-within {
+  background-color: #060707;
+}
+
 .input {
   width: 100%;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15.5px;
   color: #BEBEBE;
   background: transparent;
 }
 
-.input::placeholder {
+.input::-webkit-input-placeholder {
+  font-weight: 500;
   color: #47494A;
 }
 
