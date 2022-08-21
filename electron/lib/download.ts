@@ -75,24 +75,29 @@ function getFilePaths (path: string, artist: string, title: string): {temporary:
 
 async function getAdditionalMetadata (track: Track): Promise<Tags> {
   const { title, artist, album, albumCover } = track
-  const [metadata, image] = await Promise.all([
-    getMetadataFromiTunes(artist, album),
-    getBufferAlbumCover(albumCover)
-  ])
 
-  if (!metadata) return { title, artist, album, image }
+  try {
+    const [metadata, image] = await Promise.all([
+      getMetadataFromiTunes(artist, album),
+      getBufferAlbumCover(albumCover)
+    ])
 
-  const { releaseDate, primaryGenreName, trackNumber } = metadata
+    if (!metadata) return { title, artist, album, image }
 
-  return {
-    title,
-    artist,
-    album,
-    image,
-    date: releaseDate,
-    genre: primaryGenreName,
-    trackNumber: trackNumber.toString(),
-    year: new Date(releaseDate).getFullYear().toString()
+    const { releaseDate, primaryGenreName, trackNumber } = metadata
+
+    return {
+      title,
+      artist,
+      album,
+      image,
+      date: releaseDate,
+      genre: primaryGenreName,
+      trackNumber: trackNumber.toString(),
+      year: new Date(releaseDate).getFullYear().toString()
+    }
+  } catch (error) {
+    return { title, artist, album, image: undefined }
   }
 }
 
