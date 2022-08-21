@@ -7,7 +7,6 @@ export async function getSongURL (id: string): Promise<string | undefined> {
     if (typeof format === 'undefined') return undefined
     return format.url
   } catch (error) {
-    console.log('Error is Here 🤦‍♂️')
     return undefined
   }
 }
