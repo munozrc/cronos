@@ -18,7 +18,7 @@
     "fluent-ffmpeg": "2.1.2",
     "node-id3": "0.2.3",
     "node-youtube-music": "0.7.0",
-    "ytdl-core": "4.11.0"
+    "ytdl-core": "4.10.0"
   },
   "devDependencies": {
     "@types/ffmpeg-static": "3.0.1",
