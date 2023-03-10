@@ -1,0 +1,90 @@
+.container {
+  align-items: center;
+}
+
+.header {
+  width: 782px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 40px;
+  padding-bottom: 32px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #C3CAD6;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #696E78;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.videoContainer {
+  padding-bottom: 24px;
+}
+
+.videoContainer> :first-child {
+  border-radius: 8px;
+}
+
+.songsContainer> :first-child {
+  border-radius: 8px 8px 0px 0px;
+}
+
+
+.songsContainer> :last-child {
+  border-radius: 0px 0px 8px 8px;
+}
+
+.primary,
+.secondary {
+  height: auto;
+  min-width: 103px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0px;
+  border-radius: 6px;
+  transition: background 0.2s ease-out;
+}
+
+.primary {
+  background: #3B8CC2;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #101213;
+}
+
+.primary:hover {
+  background: #47B5FF;
+}
+
+.secondary {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #9DA6B3;
+}
+
+.secondary:hover {
+  background: #22252b;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+  gap: 6px;
+}

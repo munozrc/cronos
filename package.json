@@ -1,0 +1,39 @@
+{
+  "name": "cronos",
+  "private": true,
+  "version": "0.0.1",
+  "main": "build/index.js",
+  "scripts": {
+    "dev:renderer": "vite",
+    "dev:main": "npm run build:main && electron .",
+    "build:renderer": "tsc && vite build",
+    "build:main": "tsc -p tsconfig.main.json"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2",
+    "node-id3": "^0.2.6",
+    "node-youtube-music": "^0.8.3",
+    "ytdl-core": "^4.11.2"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.21",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "electron": "^23.1.1",
+    "eslint": "^8.35.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "ffmpeg-static-electron": "^2.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.0",
+    "wouter": "^2.10.0"
+  }
+}

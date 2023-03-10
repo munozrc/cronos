@@ -1,0 +1,49 @@
+{
+  "video": {
+    "id": "KhqNTjbQ71A",
+    "title": "Wham! - Last Christmas (Lyrics)",
+    "channelTitle": "7clouds",
+    "thumbnail": "https://i.ytimg.com/vi/KhqNTjbQ71A/mqdefault.jpg"
+  },
+  "songs": [
+    {
+      "id": "GJvGf_ifiKw",
+      "title": "Last Christmas",
+      "artists": [
+        {
+          "name": "Wham!",
+          "id": "UCpVKXA1YEpLtD_keJogkCwg"
+        }
+      ],
+      "album": "LAST CHRISTMAS",
+      "thumbnailUrl": "https://lh3.googleusercontent.com/Pz95hD_2FIXOs_PVPdgpO-KqcdOmpsNCFnrS5IBgNJan--EyjjLph4cdRr_9xVeybgbDobaTDdH30Qam=w120-h120-l90-rj",
+      "duration": "4:23"
+    },
+    {
+      "id": "vBpDfOtqIh4",
+      "title": "Last Christmas (Single Version)",
+      "artists": [
+        {
+          "name": "Wham!",
+          "id": "UCpVKXA1YEpLtD_keJogkCwg"
+        }
+      ],
+      "album": "A Very Special Christmas - Essential",
+      "thumbnailUrl": "https://lh3.googleusercontent.com/9Wm3Ng5JQaqFY9MnDEcEyrSxgOY_CC12ULPDFLEo2L8NJ7OV7c3jwK0DCCS7WWLB6NHET9umutnHp00=w120-h120-l90-rj",
+      "duration": "4:44"
+    },
+    {
+      "id": "hJZyzW9Fy7c",
+      "title": "Last Christmas (Pudding Mix)",
+      "artists": [
+        {
+          "name": "Wham!",
+          "id": "UCpVKXA1YEpLtD_keJogkCwg"
+        }
+      ],
+      "album": "Music From The Edge Of Heaven",
+      "thumbnailUrl": "https://lh3.googleusercontent.com/naLAh9UFrDIa6B91G3s-z_BeYrJe6ATiGZ-LGFCwCKcBwdKsCzmWEFiWDl1K4YU4sxORpg0LRzioNYu4gw=w120-h120-l90-rj",
+      "duration": "6:45"
+    }
+  ]
+}

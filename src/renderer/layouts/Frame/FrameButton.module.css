@@ -1,0 +1,16 @@
+.button {
+  width: 18px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #70747A;
+}
+
+.secondary:hover {
+  color: #A1A1A1;
+}
+
+.primary:hover {
+  color: #Df5B61;
+}

@@ -1,0 +1,114 @@
+.container {
+  position: relative;
+  width: 782px;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  gap: 15px;
+  background: #131517;
+  border-bottom: 1px solid #1A1C1F;
+}
+
+.container:hover {
+  background: #0D0F10;
+}
+
+.input {
+  display: none;
+}
+
+.container:has(>.input:checked) {
+  box-shadow: 0px 0px 0px 3px #357CAB;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+.header {
+  width: 370px;
+  max-width: 370px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+}
+
+.titleAndArtists {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.titleAndArtists>h4 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #B0B9CC;
+}
+
+.titleAndArtists>span {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #70747A;
+}
+
+.sourceLink,
+.album,
+.duration {
+  height: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sourceLink>span,
+.album>span,
+.duration>span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #70747A;
+}
+
+.album {
+  width: 300px;
+  max-width: 300px;
+}
+
+.duration {
+  width: 50px;
+  max-width: 50px;
+}
+
+.sourceLink {
+  width: 96px;
+  min-width: 96px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease-out;
+}
+
+.editButton:hover {
+  background: #212429;
+}
+
+.editButton,
+.thumbnail {
+  width: 50px;
+  height: 50px;
+  background: #1A1C20;
+  border-radius: 4px;
+  /* border: 2px solid #292d33; */
+}
