@@ -1,7 +1,4 @@
-<img 
-  src="https://user-images.githubusercontent.com/47870821/224227590-f9ffd604-34a1-46a7-a580-e3bac57d886e.png"
-  width="100%"
-/>
+![header-github](https://user-images.githubusercontent.com/47870821/224228685-0455b8e0-eee6-4ff6-ae9a-22c9c2e9bb97.png)
 
 # Cronos
 
