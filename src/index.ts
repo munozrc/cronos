@@ -1,23 +1,27 @@
 import { join } from "node:path"
 import { app, BrowserWindow, ipcMain } from "electron"
-import { resolveHtmlPath } from "./helpers"
 import { onDownloadSong, onGetVideoID, onParseArtists, onSearchSong } from "./handlers"
+import { resolveHtmlPath } from "./helpers"
 
 async function createMainWindow (): Promise<void> {
   const window = new BrowserWindow({
     width: 900,
     height: 600,
-    backgroundColor: "#1A1C20",
-    titleBarStyle: "hidden",
     autoHideMenuBar: false,
+    titleBarStyle: "hidden",
+    backgroundColor: "#1A1C20",
+    icon: join(__dirname, "renderer/icon.png"),
     webPreferences: {
-      preload: join(__dirname, "preload.js"),
-      devTools: true
+      devTools: true,
+      preload: join(__dirname, "preload.js")
     }
   })
 
-  const indexHTML = resolveHtmlPath(5173, "renderer/index.html")
-  await window.loadURL(indexHTML)
+  resolveHtmlPath({
+    port: 5173,
+    htmlFileName: "./renderer/index.html",
+    window
+  })
 
   window.webContents.openDevTools({
     mode: "undocked"

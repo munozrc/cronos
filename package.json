@@ -3,11 +3,15 @@
   "private": true,
   "version": "0.0.1",
   "main": "build/index.js",
+  "description": "Music downloader in mp3 format using NodeJS and ReactJS",
+  "author": "munozrc",
   "scripts": {
     "dev:renderer": "vite",
     "dev:main": "npm run build:main && electron .",
     "build:renderer": "tsc && vite build",
-    "build:main": "tsc -p tsconfig.main.json"
+    "build:main": "tsc -p tsconfig.main.json",
+    "build": "npm run build:renderer && npm run build:main",
+    "release": "npm run build && electron-builder --publish never"
   },
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2",
@@ -22,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@vitejs/plugin-react": "^3.1.0",
     "electron": "^23.1.1",
+    "electron-builder": "^23.6.0",
     "eslint": "^8.35.0",
     "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -35,5 +40,34 @@
     "typescript": "^4.9.5",
     "vite": "^4.1.0",
     "wouter": "^2.10.0"
+  },
+  "build": {
+    "productName": "Cronos Music Downloader",
+    "appId": "com.${author}.${name}",
+    "files": [
+      "build"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "public/logo.ico",
+      "artifactName": "${name}-portable-v${version}.${ext}",
+      "extraResources": [
+        {
+          "from": "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg.exe",
+          "to": "ffmpeg.exe"
+        }
+      ]
+    },
+    "directories": {
+      "output": "release/${version}",
+      "buildResources": "resources"
+    }
   }
 }

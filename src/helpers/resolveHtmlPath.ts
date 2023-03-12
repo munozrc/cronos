@@ -1,8 +1,14 @@
 import { join } from "node:path"
-import { app } from "electron"
+import { app, type BrowserWindow } from "electron"
 
-export function resolveHtmlPath (port: number, htmlFileName: string): string {
-  return !app.isPackaged
-    ? `http://localhost:${port}/`
-    : `file://${join(__dirname, htmlFileName)}`
+export interface Params {
+  window: BrowserWindow
+  htmlFileName: string
+  port: number
+}
+
+export function resolveHtmlPath (params: Params): void {
+  const { window, htmlFileName, port } = params
+  if (app.isPackaged) void window.loadFile(join(__dirname, "../", htmlFileName))
+  else void window.loadURL(`http://localhost:${port}/`)
 }
