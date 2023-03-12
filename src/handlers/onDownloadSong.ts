@@ -29,17 +29,22 @@ export async function onDownloadSong (_: IpcMainInvokeEvent, data: DataDownload)
     return
   }
 
+  let metaTags = {
+    title,
+    album,
+    artist: artists.replace(" & ", "; "),
+    image: undefined
+  }
+
   const [, metadata, image] = await Promise.allSettled([
     saveStreamToFile(stream, tempPath),
     getMetadata({ album, artists, title }),
     getBufferImage(thumbnailUrl)
   ])
 
-  let tags = {}
+  if (metadata.status === "fulfilled") metaTags = { ...metaTags, ...metadata.value }
+  if (image.status === "fulfilled") metaTags = { ...metaTags, image: image.value }
 
-  if (metadata.status === "fulfilled") tags = metadata.value
-  if (image.status === "fulfilled") tags = { ...tags, image: image.value }
-
-  NodeID3.write(tags, tempPath)
+  NodeID3.write(metaTags, tempPath)
   renameSync(tempPath, filePath)
 }

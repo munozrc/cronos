@@ -7,14 +7,11 @@ interface Params {
 }
 
 const fromApiResponseToMetadata = (response: any): any => {
-  const { trackName, artistName, collectionName, primaryGenreName, releaseDate } = response
+  const { primaryGenreName, releaseDate } = response
   const date = new Date(releaseDate)
   const year = date.getFullYear()
 
   return {
-    title: trackName,
-    artist: artistName,
-    album: collectionName,
     genre: primaryGenreName,
     year
   }
@@ -28,13 +25,13 @@ async function getMetadata (params: Params): Promise<any> {
   const response = await globalThis.fetch(url)
 
   if (!response.ok) {
-    return null
+    return undefined
   }
 
   const { resultCount, results } = await response.json()
 
   if (resultCount === 0) {
-    return null
+    return undefined
   }
 
   const [track] = results
