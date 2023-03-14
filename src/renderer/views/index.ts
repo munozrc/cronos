@@ -1,2 +1,2 @@
-export * from "./ResultsView"
-export * from "./SearchView"
+export * from "./Results"
+export * from "./Search"
