@@ -43,8 +43,9 @@
     "vite": "^4.1.0"
   },
   "build": {
-    "productName": "Cronos Music Downloader",
     "appId": "com.${author}.${name}",
+    "productName": "Cronos",
+    "artifactName": "${name}-portable-v${version}.${ext}",
     "files": [
       "build"
     ],
@@ -57,18 +58,16 @@
           ]
         }
       ],
-      "icon": "public/logo.ico",
-      "artifactName": "${name}-portable-v${version}.${ext}",
-      "extraResources": [
-        {
-          "from": "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg.exe",
-          "to": "ffmpeg.exe"
-        }
-      ]
+      "icon": "build/renderer/icon.ico"
     },
     "directories": {
-      "output": "release/${version}",
-      "buildResources": "resources"
-    }
+      "output": "release"
+    },
+    "extraResources": [
+      {
+        "from": "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg.exe",
+        "to": "ffmpeg.exe"
+      }
+    ]
   }
 }
