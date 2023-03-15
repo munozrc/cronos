@@ -1,4 +1,4 @@
-import { ViewContext } from "@/contexts/viewContext"
+import { ViewContext } from "@/contexts"
 import { useCallback, useContext } from "react"
 
 type ReturnType<T> = [T, (path: string, params?: object) => void]

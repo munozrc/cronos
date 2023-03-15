@@ -11,13 +11,13 @@ interface ViewContextValues {
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-const ViewContext = createContext<ViewContextValues>({} as ViewContextValues)
+export const ViewContext = createContext<ViewContextValues>({} as ViewContextValues)
 
 interface ViewProviderProps {
   children: ReactNode
 }
 
-const ViewProvider: FC<ViewProviderProps> = ({ children }) => {
+export const ViewProvider: FC<ViewProviderProps> = ({ children }) => {
   const [currentView, setCurrentView] = useState<View>({
     path: "/",
     params: {}
@@ -29,6 +29,3 @@ const ViewProvider: FC<ViewProviderProps> = ({ children }) => {
     </ViewContext.Provider>
   )
 }
-
-export { ViewContext }
-export default ViewProvider

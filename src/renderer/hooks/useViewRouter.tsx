@@ -1,4 +1,4 @@
-import { ViewContext } from "@/contexts/viewContext"
+import { ViewContext } from "@/contexts"
 import { useContext } from "react"
 
 export function useViewRouter (): string {
