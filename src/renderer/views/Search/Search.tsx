@@ -1,31 +1,23 @@
 import { type FormEvent } from "react"
 import { Input, SearchIcon } from "@/components"
 import { ViewContainer } from "@/layouts"
-import styles from "./SearchView.module.css"
-import { useLocation } from "wouter"
 
-type VideoLink = string | null
+import styles from "./Search.module.css"
+import { useLocation } from "@/hooks"
 
 export const SearchView = (): JSX.Element => {
-  const [, setLocation] = useLocation()
-  const { getVideoID } = window.video
+  const [, changeView] = useLocation()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
-    const videoLink = formData.get("video-link") as VideoLink
-    const isEmpty = videoLink === null || videoLink.length <= 0
+    const videoLink = formData.get("video-link") as string | null
+    if (videoLink === null || videoLink.length <= 0) return
 
-    if (isEmpty) return
-
-    getVideoID(videoLink)
-      .then(id => {
-        setLocation("/results/" + id)
-      })
-      .catch((e) => {
-        console.log({ e })
-      })
+    window.video.getVideoID(videoLink)
+      .then(id => { changeView("/results", { id }) })
+      .catch((e) => { console.log({ e }) })
   }
 
   return (

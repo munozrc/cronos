@@ -1,43 +1,42 @@
 import { useEffect, useState, type FormEvent } from "react"
 import { type SearchResponse } from "@cronos/types"
-import { useLocation, useRoute } from "wouter"
 
 import { ViewContainer } from "@/layouts"
 import { Button } from "@/components"
 import { SongRadioButton, VideoRadioButton } from "./RadioButton"
 
-import styles from "./ResultsView.module.css"
+import styles from "./Results.module.css"
+import { useLocation } from "@/hooks"
 
-export const ResultsView = (): JSX.Element => {
+export const ResultsView: React.FC = () => {
   const [response, setResponse] = useState<SearchResponse>()
-  const [, setLocation] = useLocation()
-  const [, params] = useRoute("/results/:id")
-  const { downloadSong, parseArtists } = window.song
+  const [params, changeView] = useLocation<{ id: string }>()
 
   useEffect(() => {
-    if (params === null || params.id === undefined) return
-    if (response !== undefined) return
-    console.log("fetch")
-    void window.song.searchSong(params.id)
-      .then(async (data) => {
-        if (data.video === null && data.songs.length === 1) {
-          const { title, thumbnailUrl, album, artists, id } = data.songs[0]
-          void downloadSong({
-            id,
-            title,
-            album,
-            artists: await parseArtists(artists),
-            thumbnailUrl
-          })
-          setLocation("/")
+    const { parseArtists, downloadSong, searchSong } = window.song
+    const { id } = params
+    console.log("Fetching data....")
+
+    void searchSong(id)
+      .then(async ({ video, songs }) => {
+        if (video !== null || songs.length < 1) {
+          setResponse({ video, songs })
+          return
         }
 
-        setResponse(data)
+        const { title, thumbnailUrl, album, artists, id } = songs[0]
+        void downloadSong({
+          id,
+          title,
+          album,
+          artists: await parseArtists(artists),
+          thumbnailUrl
+        })
+
+        changeView("/")
       })
-      .catch((e) => {
-        console.log(e)
-      })
-  }, [response, params, downloadSong, parseArtists, setLocation])
+      .catch((e) => { console.log(e) })
+  }, [params, changeView])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
@@ -48,7 +47,7 @@ export const ResultsView = (): JSX.Element => {
 
     if (video && response.video !== null) {
       const { id, title } = response.video
-      void downloadSong({
+      void window.song.downloadSong({
         id,
         title
       }).catch((e) => { console.log(e) })
@@ -58,28 +57,26 @@ export const ResultsView = (): JSX.Element => {
     if (song === undefined) return
     const { id, title, album, thumbnailUrl, artists } = song
 
-    void downloadSong({
+    void window.song.downloadSong({
       id,
       title,
       album,
-      artists: await parseArtists(artists),
+      artists: await window.song.parseArtists(artists),
       thumbnailUrl
     }).catch((e) => { console.log(e) })
 
-    setLocation("/")
+    changeView("/")
   }
 
   const handleBack = (): void => {
-    setLocation("/")
+    changeView("/")
   }
 
   if (response === undefined) {
     return <p>Cargando...</p>
   }
 
-  if (response.video === null) {
-    return <p>Error</p>
-  }
+  if (response.video === null) return null
 
   return (
     <ViewContainer className={styles.container}>
@@ -92,7 +89,7 @@ export const ResultsView = (): JSX.Element => {
         className={styles.form}
       >
         <div className={styles.videoContainer}>
-          <VideoRadioButton {...response.video}/>
+          <VideoRadioButton {...response?.video}/>
         </div>
         <div className={styles.songsContainer}>
           {response.songs.map((song) => (
