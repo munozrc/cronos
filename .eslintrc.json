@@ -31,5 +31,10 @@
       "double"
     ],
     "@typescript-eslint/quotes": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

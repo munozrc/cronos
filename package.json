@@ -11,7 +11,9 @@
     "build:renderer": "tsc && vite build",
     "build:main": "tsc -p tsconfig.main.json",
     "build": "npm run build:renderer && npm run build:main",
-    "release": "npm run build && electron-builder --publish never"
+    "release": "npm run build && electron-builder --publish never",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2",
