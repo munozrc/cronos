@@ -9,3 +9,9 @@ Init config eslint
 ```bash
 npm init @eslint/config
 ```
+
+## Resources
+
+### ReactDevTools
+
+https://polypane.app/docs/downgrading-react-devtools/
