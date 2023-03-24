@@ -1,19 +1,20 @@
 import { join } from "node:path"
 import { app, BrowserWindow, ipcMain } from "electron"
 import { onDownloadSong, onGetVideoID, onParseArtists, onSearchSong } from "./handlers"
-import { resolveHtmlPath } from "./helpers"
+import { loadReactDevTools, resolveHtmlPath } from "./helpers"
 
 async function createMainWindow (): Promise<void> {
   const window = new BrowserWindow({
     width: 900,
     height: 600,
+    resizable: false,
     autoHideMenuBar: false,
     titleBarStyle: "hidden",
     backgroundColor: "#1A1C20",
     icon: join(__dirname, "renderer/icon.png"),
     webPreferences: {
-      devTools: true,
-      preload: join(__dirname, "preload.js")
+      preload: join(__dirname, "preload.js"),
+      devTools: true
     }
   })
 
@@ -32,6 +33,7 @@ async function createMainWindow (): Promise<void> {
 }
 
 app.whenReady()
+  .then(loadReactDevTools)
   .then(createMainWindow)
   .catch(e => { console.error(e) })
 
