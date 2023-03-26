@@ -1,0 +1,53 @@
+.container {
+  width: 300px;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: #131517;
+  border-radius: 8px;
+  border: 1px solid #222526;
+  padding: 20px;
+  gap: 2px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.content {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #C3CAD6;
+}
+
+.success {
+  color: #47B5FF;
+}
+
+.pending {
+  color: #FFC022;
+}
+
+.error {
+  color: #FF4747;
+}
+
+.title.pending:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  animation: ellipsis steps(4, end) 1400ms infinite;
+  content: "\2026";
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1em;
+  }
+}
