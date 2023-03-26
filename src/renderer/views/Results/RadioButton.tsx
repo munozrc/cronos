@@ -49,7 +49,7 @@ export const SongRadioButton: FC<Song> = (props) => (
 
 export const VideoRadioButton: FC<Video> = (props) => (
   <RadioButton value={props.id} checked>
-    <header className={styles.header}>
+    <header className={styles.header} style={{ maxWidth: "1000px", width: "1000px" }}>
       <Button
         className={styles.editButton}
         onClick={() => { console.log("Click!") }}
@@ -57,7 +57,7 @@ export const VideoRadioButton: FC<Video> = (props) => (
         <EditIcon />
       </Button>
       <div className={styles.titleAndArtists}>
-        <h4>{props.title}</h4>
+        <h4 style={{ maxWidth: "520px" }}>{props.title}</h4>
         <span>{props.channelTitle}</span>
       </div>
     </header>
