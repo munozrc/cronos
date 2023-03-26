@@ -7,12 +7,14 @@ interface Params {
 }
 
 const fromApiResponseToMetadata = (response: any): any => {
-  const { primaryGenreName, releaseDate } = response
+  const { primaryGenreName, releaseDate, trackNumber } = response
   const date = new Date(releaseDate)
-  const year = date.getFullYear()
+  const year = date.getFullYear().toString()
 
   return {
     genre: primaryGenreName,
+    releaseTime: releaseDate,
+    trackNumber,
     year
   }
 }
