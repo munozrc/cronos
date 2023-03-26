@@ -12,7 +12,6 @@ async function getBufferImage (imageUrl: string): Promise<any> {
   return {
     mime,
     type: { id: 3, name: "front cover" },
-    description: "Album Cover of",
     imageBuffer: Buffer.from(imageBuffer)
   }
 }
