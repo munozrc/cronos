@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client"
-import { Route, ViewRouter } from "@/components/ViewRouter"
+import { Route, ViewRouter } from "./components"
 import { ResultsView, SearchView } from "@/views"
 import { ViewProvider } from "@/contexts"
 import { Frame } from "@/layouts"
