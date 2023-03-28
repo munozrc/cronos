@@ -6,13 +6,12 @@ import { Button } from "@/components"
 import { SongRadioButton, VideoRadioButton } from "./RadioButton"
 
 import styles from "./Results.module.css"
-import { useLocation } from "@/hooks"
-import { useSong } from "@/hooks/useSong"
+import { useLocation, useSingleSong } from "@/hooks"
 
 export const ResultsView: React.FC = () => {
   const [response, setResponse] = useState<SearchResponse>()
   const [params, changeView] = useLocation<{ id: string }>()
-  const { downloadSong, isDirectDownload } = useSong()
+  const { downloadSong, isDirectDownload } = useSingleSong()
 
   useEffect(() => {
     const { id } = params

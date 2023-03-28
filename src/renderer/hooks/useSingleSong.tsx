@@ -10,7 +10,7 @@ interface ReturnType {
   isDirectDownload: (response: SearchResponse) => boolean
 }
 
-export function useSong (): ReturnType {
+export function useSingleSong (): ReturnType {
   const downloadSong = useCallback(async (data: DataType) => {
     const { title, thumbnailUrl, album, artists, id } = data
     const { download: downloadService, parseArtists } = window.song
