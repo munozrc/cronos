@@ -8,16 +8,17 @@ import { useLocation } from "@/hooks"
 export const SearchView = (): JSX.Element => {
   const [, changeView] = useLocation()
 
+  const handleChangeView = async (link: string): Promise<void> => {
+    const id = await window.video.getID(link)
+    changeView("/results", { id })
+  }
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-
     const formData = new FormData(event.currentTarget)
-    const videoLink = formData.get("video-link") as string | null
-    if (videoLink === null || videoLink.length <= 0) return
-
-    window.video.getVideoID(videoLink)
-      .then(id => { changeView("/results", { id }) })
-      .catch((e) => { console.log({ e }) })
+    const link = formData.get("video-link") as string | null
+    if (link === null || link.length <= 0) return
+    void handleChangeView(link)
   }
 
   return (

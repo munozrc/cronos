@@ -19,7 +19,7 @@ export const song = {
 }
 
 export const video = {
-  getVideoID: async (link: string): Promise<string> => (
+  getID: async (link: string): Promise<string> => (
     await ipcRenderer.invoke("video/id", link)
   )
 }
