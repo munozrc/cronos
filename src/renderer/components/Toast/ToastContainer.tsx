@@ -1,28 +1,26 @@
-import { type Toast } from "@/global"
-import { useEffect, useState } from "react"
+import { type ToastContent, type Toast, TOAST_EVENTS } from "@/global"
+import { useCallback, useEffect, useState } from "react"
 import { ToastComponent } from "./ToastComponent"
 import styles from "./ToastContainer.module.css"
 
 export const ToastContainer: React.FC = () => {
   const [toastList, setToastList] = useState<Toast[]>([])
 
-  useEffect(() => {
-    const createToast = (e: CustomEvent<string>): void => {
-      setToastList(prev => ([
-        ...prev,
-        {
-          id: window.crypto.randomUUID(),
-          content: e.detail,
-          state: "pending"
-        }
-      ]))
+  const createToast = useCallback((e: CustomEvent<ToastContent>) => {
+    const toast: Toast = {
+      id: window.crypto.randomUUID(),
+      content: e.detail,
+      state: "pending"
     }
+    setToastList(prev => ([...prev, toast]))
+  }, []) as EventListener
 
-    window.addEventListener("createtoast", createToast as EventListener)
+  useEffect(() => {
+    window.addEventListener(TOAST_EVENTS.CREATE, createToast)
     return () => {
-      window.removeEventListener("createtoast", createToast as EventListener)
+      window.removeEventListener(TOAST_EVENTS.CREATE, createToast)
     }
-  })
+  }, [createToast])
 
   return (
     <div className={styles.container}>

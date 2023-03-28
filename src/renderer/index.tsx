@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client"
-import { Route, ViewRouter } from "./components"
+import { Route, ToastContainer, ViewRouter } from "./components"
 import { ResultsView, SearchView } from "@/views"
 import { ViewProvider } from "@/contexts"
 import { Frame } from "@/layouts"
@@ -16,5 +16,6 @@ root.render(
       <Route path="/results" component={ResultsView}/>
       <Route path="/" component={SearchView}/>
     </ViewRouter>
+    <ToastContainer />
   </ViewProvider>
 )
