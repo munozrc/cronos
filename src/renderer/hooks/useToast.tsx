@@ -1,4 +1,4 @@
-import { type ToastContent, TOAST_EVENTS } from "@/global"
+import { type ToastContent, TOAST_EVENTS } from "@/types"
 import { useCallback } from "react"
 
 interface ReturnType {

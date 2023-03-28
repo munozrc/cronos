@@ -1,5 +1,5 @@
-import { type ToastContent, type Toast, TOAST_EVENTS } from "@/global"
 import { useCallback, useEffect, useState } from "react"
+import { type ToastContent, type Toast, TOAST_EVENTS } from "@/types"
 import { ToastComponent } from "./ToastComponent"
 import styles from "./ToastContainer.module.css"
 

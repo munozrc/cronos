@@ -1,4 +1,4 @@
-import type { ToastContent, ToastState } from "@/global"
+import type { ToastContent, ToastState } from "@/types"
 import styles from "./Toast.module.css"
 
 interface ToastProps {
