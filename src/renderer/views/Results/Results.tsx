@@ -13,23 +13,23 @@ export const ResultsView: React.FC = () => {
   const [params, changeView] = useLocation<{ id: string }>()
 
   useEffect(() => {
-    const { parseArtists, downloadSong, searchSong } = window.song
+    const { parseArtists, download, search } = window.song
     const { id } = params
     console.log("Fetching data....")
 
-    void searchSong(id)
-      .then(async ({ video, songs }) => {
+    void search(id)
+      .then(({ video, songs }) => {
         if (video !== null || songs.length < 1) {
           setResponse({ video, songs })
           return
         }
 
         const { title, thumbnailUrl, album, artists, id } = songs[0]
-        void downloadSong({
+        void download({
           id,
           title,
           album,
-          artists: await parseArtists(artists),
+          artists: parseArtists(artists),
           thumbnailUrl
         })
 
@@ -38,7 +38,7 @@ export const ResultsView: React.FC = () => {
       .catch((e) => { console.log(e) })
   }, [params, changeView])
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
     const sourceId = form.get("song")
@@ -47,7 +47,7 @@ export const ResultsView: React.FC = () => {
 
     if (video && response.video !== null) {
       const { id, title } = response.video
-      void window.song.downloadSong({
+      void window.song.download({
         id,
         title
       }).catch((e) => { console.log(e) })
@@ -57,11 +57,11 @@ export const ResultsView: React.FC = () => {
     if (song === undefined) return
     const { id, title, album, thumbnailUrl, artists } = song
 
-    void window.song.downloadSong({
+    void window.song.download({
       id,
       title,
       album,
-      artists: await window.song.parseArtists(artists),
+      artists: window.song.parseArtists(artists),
       thumbnailUrl
     }).catch((e) => { console.log(e) })
 
@@ -85,7 +85,7 @@ export const ResultsView: React.FC = () => {
         <p className={styles.description}>Selecciona una de las opciones.</p>
       </header>
       <form
-        onSubmit={(e) => { void handleSubmit(e) }}
+        onSubmit={handleSubmit}
         className={styles.form}
       >
         <div className={styles.videoContainer}>

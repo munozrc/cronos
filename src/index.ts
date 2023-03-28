@@ -1,6 +1,6 @@
 import { join } from "node:path"
 import { app, BrowserWindow, ipcMain } from "electron"
-import { onDownloadSong, onGetVideoID, onParseArtists, onSearchSong } from "./handlers"
+import { onDownloadSong, onGetVideoID, onSearchSong } from "./handlers"
 import { loadReactDevTools, resolveHtmlPath } from "./helpers"
 
 async function createMainWindow (): Promise<void> {
@@ -41,5 +41,4 @@ app.on("window-all-closed", app.quit)
 
 ipcMain.handle("song/download", onDownloadSong)
 ipcMain.handle("song/search", onSearchSong)
-ipcMain.handle("song/parse-artists", onParseArtists)
 ipcMain.handle("video/id", onGetVideoID)

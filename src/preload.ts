@@ -7,13 +7,13 @@ export const windowFrame = {
 }
 
 export const song = {
-  parseArtists: async (artists: Artist[]): Promise<string> => (
-    await ipcRenderer.invoke("song/parse-artists", artists)
+  parseArtists: (artists: Artist[]): string => (
+    artists.map(i => i.name).join(" & ")
   ),
-  searchSong: async (id: string): Promise<SearchResponse> => (
+  search: async (id: string): Promise<SearchResponse> => (
     await ipcRenderer.invoke("song/search", id)
   ),
-  downloadSong: async (data: DataDownload): Promise<void> => (
+  download: async (data: DataDownload): Promise<void> => (
     await ipcRenderer.invoke("song/download", data)
   )
 }
