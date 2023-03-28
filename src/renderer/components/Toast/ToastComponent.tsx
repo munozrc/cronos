@@ -1,5 +1,10 @@
-import { type ReactNode } from "react"
+import type { ToastContent, ToastState } from "@/global"
 import styles from "./Toast.module.css"
+
+interface ToastProps {
+  state: ToastState
+  content: ToastContent
+}
 
 const stateTitle = {
   pending: "Pendiente",
@@ -7,14 +12,9 @@ const stateTitle = {
   error: "Error"
 }
 
-interface ToastProps {
-  state: "pending" | "success" | "error"
-  children: ReactNode
-}
-
-export const Toast: React.FC<ToastProps> = ({ state, children }) => (
+export const ToastComponent: React.FC<ToastProps> = ({ state, content }) => (
   <div className={styles.container}>
     <h4 className={`${styles.title} ${styles[state]}`}>{stateTitle[state]}</h4>
-    <p className={styles.content}>{children}</p>
+    <p className={styles.content}>{content}</p>
   </div>
 )
