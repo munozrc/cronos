@@ -7,64 +7,45 @@ import { SongRadioButton, VideoRadioButton } from "./RadioButton"
 
 import styles from "./Results.module.css"
 import { useLocation } from "@/hooks"
+import { useSong } from "@/hooks/useSong"
 
 export const ResultsView: React.FC = () => {
   const [response, setResponse] = useState<SearchResponse>()
   const [params, changeView] = useLocation<{ id: string }>()
+  const { downloadSong, isDirectDownload } = useSong()
 
   useEffect(() => {
-    const { parseArtists, download, search } = window.song
     const { id } = params
     console.log("Fetching data....")
 
-    void search(id)
-      .then(({ video, songs }) => {
-        if (video !== null || songs.length < 1) {
-          setResponse({ video, songs })
+    void window.song.search(id)
+      .then((res) => {
+        const { video, songs } = res
+        if (isDirectDownload(res)) {
+          void downloadSong(songs[0])
+          changeView("/")
           return
         }
-
-        const { title, thumbnailUrl, album, artists, id } = songs[0]
-        void download({
-          id,
-          title,
-          album,
-          artists: parseArtists(artists),
-          thumbnailUrl
-        })
-
-        changeView("/")
+        setResponse({ video, songs })
       })
       .catch((e) => { console.log(e) })
-  }, [params, changeView])
+  }, [params, changeView, downloadSong, isDirectDownload])
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
     const sourceId = form.get("song")
-
     const video = response?.video?.id === sourceId
 
     if (video && response.video !== null) {
-      const { id, title } = response.video
-      void window.song.download({
-        id,
-        title
-      }).catch((e) => { console.log(e) })
+      void downloadSong(response.video)
+      changeView("/")
+      return
     }
 
     const song = response?.songs.find(song => song.id === sourceId)
     if (song === undefined) return
-    const { id, title, album, thumbnailUrl, artists } = song
-
-    void window.song.download({
-      id,
-      title,
-      album,
-      artists: window.song.parseArtists(artists),
-      thumbnailUrl
-    }).catch((e) => { console.log(e) })
-
+    void downloadSong(song)
     changeView("/")
   }
 
@@ -89,7 +70,7 @@ export const ResultsView: React.FC = () => {
         className={styles.form}
       >
         <div className={styles.videoContainer}>
-          <VideoRadioButton {...response?.video}/>
+          <VideoRadioButton {...response.video} />
         </div>
         <div className={styles.songsContainer}>
           {response.songs.map((song) => (
