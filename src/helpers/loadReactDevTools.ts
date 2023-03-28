@@ -4,7 +4,7 @@ import os from "node:os"
 
 export async function loadReactDevTools (): Promise<void> {
   const homedir = os.homedir()
-  const extension = "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.25"
+  const extension = "react-dev-tool"
   const extensionPath = join(homedir, extension)
 
   const options: LoadExtensionOptions = {
