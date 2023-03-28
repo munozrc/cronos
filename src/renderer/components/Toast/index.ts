@@ -1,2 +1,2 @@
-export * from "./Toast"
+export * from "./ToastComponent"
 export * from "./ToastContainer"
