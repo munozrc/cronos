@@ -3,6 +3,8 @@ import type { Toast } from "@/types"
 import { useToast } from "@/hooks"
 
 import styles from "./ToastComponent.module.css"
+import { Button } from "../Button"
+import { CloseIcon } from "../Icons"
 
 const stateTitle = {
   pending: "Pendiente",
@@ -21,6 +23,10 @@ export const ToastComponent: React.FC<Toast> = ({ id, state, content }) => {
     }, 5000)
   }, [id, removeToast])
 
+  const handleClose = (): void => {
+    removeToast(id)
+  }
+
   useEffect(() => {
     if (state === "success") {
       startTimer()
@@ -35,6 +41,10 @@ export const ToastComponent: React.FC<Toast> = ({ id, state, content }) => {
 
   return (
     <div className={styles.container}>
+      {state !== "pending" && (
+        <Button className={styles.close} onClick={handleClose}>
+          <CloseIcon />
+        </Button>)}
       <h4 className={`${styles.title} ${styles[state]}`}>{stateTitle[state]}</h4>
       <p className={styles.content}>{content}</p>
     </div>

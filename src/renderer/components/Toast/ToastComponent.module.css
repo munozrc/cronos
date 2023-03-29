@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -47,6 +48,22 @@
   animation: ellipsis steps(4, end) 1400ms infinite;
   content: "\2026";
   width: 0px;
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  width: 18px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #70747A;
+}
+
+.close:hover {
+  color: #A1A1A1;
 }
 
 @keyframes ellipsis {
