@@ -1,48 +1,31 @@
-import { useEffect, useState, type FormEvent } from "react"
-import { type SearchResponse } from "@cronos/types"
-
+import { type FormEvent } from "react"
+import { useLocation, useSingleSong, useSong } from "@/hooks"
+import { SongRadioButton, VideoRadioButton } from "./RadioButton"
 import { ViewContainer } from "@/layouts"
 import { Button } from "@/components"
-import { SongRadioButton, VideoRadioButton } from "./RadioButton"
 
 import styles from "./Results.module.css"
-import { useLocation, useSingleSong } from "@/hooks"
 
 export const ResultsView: React.FC = () => {
-  const [response, setResponse] = useState<SearchResponse>()
-  const [params, changeView] = useLocation<{ id: string }>()
-  const { downloadSong, isDirectDownload } = useSingleSong()
-
-  useEffect(() => {
-    const { id } = params
-    console.log("Fetching data....")
-
-    void window.song.search(id)
-      .then((res) => {
-        const { video, songs } = res
-        if (isDirectDownload(res)) {
-          void downloadSong(songs[0])
-          changeView("/")
-          return
-        }
-        setResponse({ video, songs })
-      })
-      .catch((e) => { console.log(e) })
-  }, [params, changeView, downloadSong, isDirectDownload])
+  const [, changeView] = useLocation()
+  const { downloadSong } = useSingleSong()
+  const { isLoading, video, songs } = useSong()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
     const sourceId = form.get("song")
-    const video = response?.video?.id === sourceId
 
-    if (video && response.video !== null) {
-      void downloadSong(response.video)
+    const id = video?.id === sourceId
+    const isVideoDownload = id && video !== null
+    const song = songs?.find(s => s.id === sourceId)
+
+    if (isVideoDownload) {
+      void downloadSong(video)
       changeView("/")
       return
     }
 
-    const song = response?.songs.find(song => song.id === sourceId)
     if (song === undefined) return
     void downloadSong(song)
     changeView("/")
@@ -52,11 +35,11 @@ export const ResultsView: React.FC = () => {
     changeView("/")
   }
 
-  if (response === undefined) {
+  if (isLoading) {
     return <p>Cargando...</p>
   }
 
-  if (response.video === null) return null
+  if (video === null || typeof video === "undefined") return null
 
   return (
     <ViewContainer className={styles.container}>
@@ -69,10 +52,10 @@ export const ResultsView: React.FC = () => {
         className={styles.form}
       >
         <div className={styles.videoContainer}>
-          <VideoRadioButton {...response.video} />
+          <VideoRadioButton {...video} />
         </div>
         <div className={styles.songsContainer}>
-          {response.songs.map((song) => (
+          {songs?.map((song) => (
             <SongRadioButton
               key={song.id}
               {...song}
