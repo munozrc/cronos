@@ -28,7 +28,7 @@ export const ToastComponent: React.FC<Toast> = ({ id, state, content }) => {
   }
 
   useEffect(() => {
-    if (state === "success") {
+    if (state !== "pending") {
       startTimer()
       console.log("Timer Start ---> ", content)
     }

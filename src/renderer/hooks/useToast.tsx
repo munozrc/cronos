@@ -3,7 +3,7 @@ import { useCallback } from "react"
 
 interface ReturnType {
   createToast: (content: ToastContent) => string
-  updateToast: (id: string) => void
+  updateToast: (id: string, state?: ToastState) => void
   removeToast: (id: string) => void
 }
 

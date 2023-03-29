@@ -34,12 +34,14 @@ export function useSingleSong (): ReturnType {
       thumbnailUrl
     }
 
+    const toast = createToast(nameFile)
+
     try {
-      const toast = createToast(nameFile)
       await downloadService(song)
       updateToast(toast)
     } catch (error) {
       console.log(error)
+      updateToast(toast, "error")
     }
   }, [createToast, updateToast])
 
