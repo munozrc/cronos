@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import { type Toast, TOAST_EVENTS, type ToastID, type CreateToastEvent } from "@/types"
+import { type Toast, TOAST_EVENTS, type ToastID, type CreateToastEvent, type UpdateToastEvent } from "@/types"
 import { ToastComponent } from "./ToastComponent"
 import styles from "./ToastContainer.module.css"
 
@@ -12,12 +12,12 @@ export const ToastContainer: React.FC = () => {
     setToastList(prev => ([...prev, toast]))
   }, []) as EventListener
 
-  const updateToast = useCallback((e: CustomEvent<ToastID>) => {
+  const updateToast = useCallback((e: CustomEvent<UpdateToastEvent>) => {
     setToastList(prev => {
-      const toast = prev.find(t => t.id === e.detail)
-      const list = prev.filter(t => t.id !== e.detail)
+      const toast = prev.find(t => t.id === e.detail.id)
+      const list = prev.filter(t => t.id !== e.detail.id)
       if (typeof toast === "undefined") return prev
-      return [...list, { ...toast, state: "success" }]
+      return [...list, { ...toast, state: e.detail.state }]
     })
   }, []) as EventListener
 

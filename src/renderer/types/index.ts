@@ -18,3 +18,8 @@ export interface CreateToastEvent {
   id: ToastID
   content: ToastContent
 }
+
+export interface UpdateToastEvent {
+  id: ToastID
+  state: ToastState
+}

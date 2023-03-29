@@ -1,4 +1,4 @@
-import { type ToastContent, TOAST_EVENTS } from "@/types"
+import { type ToastContent, TOAST_EVENTS, type ToastState } from "@/types"
 import { useCallback } from "react"
 
 interface ReturnType {
@@ -16,8 +16,9 @@ export function useToast (): ReturnType {
     return id
   }, [])
 
-  const updateToast = useCallback((id: string) => {
-    const toastEvent = new CustomEvent(TOAST_EVENTS.UPDATE, { detail: id })
+  const updateToast = useCallback((id: string, state?: ToastState) => {
+    const detail = { id, state: state ?? "success" }
+    const toastEvent = new CustomEvent(TOAST_EVENTS.UPDATE, { detail })
     window.dispatchEvent(toastEvent)
   }, [])
 
