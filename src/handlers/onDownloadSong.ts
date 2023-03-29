@@ -32,7 +32,7 @@ export async function onDownloadSong (_: IpcMainInvokeEvent, data: DataDownload)
   let metaTags = {
     title,
     album,
-    artist: artists.replace(" & ", "; "), // TODO: Remove all & for ;
+    artist: artists.replace(/\s&\s/g, "; "), // TODO: Remove all & for ;
     image: undefined
   }
 
