@@ -3,6 +3,8 @@ import { app, BrowserWindow, ipcMain } from "electron"
 import { onDownloadSong, onGetVideoID, onSearchSong } from "./handlers"
 import { loadReactDevTools, resolveHtmlPath } from "./helpers"
 
+const isDevelopment = !app.isPackaged
+
 async function createMainWindow (): Promise<void> {
   const window = new BrowserWindow({
     width: 900,
@@ -14,7 +16,7 @@ async function createMainWindow (): Promise<void> {
     icon: join(__dirname, "renderer/icon.png"),
     webPreferences: {
       preload: join(__dirname, "preload.js"),
-      devTools: true
+      devTools: isDevelopment
     }
   })
 
@@ -24,7 +26,7 @@ async function createMainWindow (): Promise<void> {
     window
   })
 
-  window.webContents.openDevTools({
+  isDevelopment && window.webContents.openDevTools({
     mode: "undocked"
   })
 
