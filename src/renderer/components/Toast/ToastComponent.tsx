@@ -11,7 +11,7 @@ const stateTitle = {
 }
 
 export const ToastComponent: React.FC<Toast> = ({ id, state, content }) => {
-  const refTimer = useRef<number>()
+  const refTimer = useRef<number | null>(null)
   const { removeToast } = useToast()
 
   const startTimer = useCallback((): void => {
