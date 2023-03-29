@@ -1,4 +1,5 @@
 import type { Artist, DataDownload, SearchResponse } from "@cronos/types"
+import { useToast } from "./useToast"
 import { useCallback } from "react"
 
 interface DataType extends Omit<DataDownload, "artists"> {
@@ -11,14 +12,18 @@ interface ReturnType {
 }
 
 export function useSingleSong (): ReturnType {
+  const { createToast, updateToast } = useToast()
+
   const downloadSong = useCallback(async (data: DataType) => {
     const { title, thumbnailUrl, album, artists, id } = data
     const { download: downloadService, parseArtists } = window.song
 
     let normalizeArtists
+    let nameFile = `${title}`
 
     if (typeof artists !== "undefined") {
       normalizeArtists = parseArtists(artists)
+      nameFile = `${title} - ${normalizeArtists}`
     }
 
     const song: DataDownload = {
@@ -30,11 +35,13 @@ export function useSingleSong (): ReturnType {
     }
 
     try {
+      const toast = createToast(nameFile)
       await downloadService(song)
+      updateToast(toast)
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [createToast, updateToast])
 
   const isDirectDownload = useCallback((response: SearchResponse): boolean => {
     const { video, songs } = response
