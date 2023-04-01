@@ -22,19 +22,24 @@ export function useSong (): ReturnType {
 
     try {
       const res = await searchService(id)
-      if (isDirectDownload(res)) {
-        void downloadSong(res.songs[0])
-      } else setResponse(res)
+
+      if (!isDirectDownload(res)) {
+        setResponse(res)
+        return
+      }
+
+      const songMatch = res.songs[0]
+      void downloadSong(songMatch)
+      changeView("/")
     } catch (error) {
       console.error(error)
     }
-
-    changeView("/")
   }, [params, changeView, downloadSong, isDirectDownload])
 
   useEffect(() => {
+    if (typeof response !== "undefined") return
     void searchSongs()
-  }, [searchSongs])
+  }, [searchSongs, response])
 
   return {
     isLoading: typeof response === "undefined",
