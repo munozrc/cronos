@@ -1,7 +1,7 @@
 {
   "name": "cronos",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "build/index.js",
   "description": "Music downloader in mp3 format using NodeJS and ReactJS",
   "author": "munozrc",
@@ -19,7 +19,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "node-id3": "^0.2.6",
     "node-youtube-music": "^0.8.3",
-    "ytdl-core": "^4.11.2"
+    "ytdl-core": "^4.11.3"
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.21",

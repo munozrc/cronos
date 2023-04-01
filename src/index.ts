@@ -4,6 +4,7 @@ import { onDownloadSong, onGetVideoID, onSearchSong } from "./handlers"
 import { loadReactDevTools, resolveHtmlPath } from "./helpers"
 
 const isDevelopment = !app.isPackaged
+app.disableHardwareAcceleration()
 
 async function createMainWindow (): Promise<void> {
   const window = new BrowserWindow({
