@@ -45,7 +45,7 @@
   "build": {
     "appId": "com.${author}.${name}",
     "productName": "Cronos",
-    "artifactName": "${name}-portable-v${version}.${ext}",
+    "artifactName": "${name}-portable-v${version}-alpha.${ext}",
     "files": [
       "build"
     ],
