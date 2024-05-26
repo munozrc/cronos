@@ -1,1 +1,1 @@
-# music-downloader
+# Cronos Music Downloader
