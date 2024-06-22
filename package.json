@@ -1,0 +1,13 @@
+{
+  "name": "cronos",
+  "version": "0.0.1",
+  "description": "Cronos Music Download",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev:backend": "pnpm --filter backend run dev",
+    "dev:frontend": "pnpm --filter frontend run dev"
+  },
+  "author": "munozrc",
+  "license": "ISC"
+}
