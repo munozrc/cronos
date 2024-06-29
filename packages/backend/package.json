@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ../../build && swc build ./src -d ../../build",
     "lint": "eslint ./src/**/*.ts",
-    "dev": "nodemon --watch \"src\" --ext \"*\" --exec \"node --env-file .env -r @swc-node/register src/index.ts\"",
+    "dev": "nodemon --watch \"src\" --ext \"*\" --exec \"node --env-file ../../.env -r @swc-node/register src/index.ts\"",
     "start": "node ../../build/index.js"
   },
   "author": "munozrc",
@@ -15,7 +15,7 @@
     "fastify": "4.27.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.5.0",
+    "@eslint/js": "9.5.0",
     "@swc-node/register": "1.9.2",
     "@swc/cli": "0.3.12",
     "@swc/core": "1.5.29",
