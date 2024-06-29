@@ -1,4 +1,4 @@
-import { downloadAudioController } from "controllers/AudioController";
+import { downloadAudioController } from "controllers/audioController";
 import { type FastifyInstance } from "fastify";
 
 async function audioRoutes(fastify: FastifyInstance) {
