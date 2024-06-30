@@ -1,4 +1,5 @@
 import { PORT } from "config";
+
 import app from "./app";
 
 const start = async () => {

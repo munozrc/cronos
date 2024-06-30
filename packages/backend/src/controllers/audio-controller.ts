@@ -1,23 +1,14 @@
-import { IncomingHttpHeaders } from "node:http";
 import { type FastifyReply, type FastifyRequest } from "fastify";
-import {
-  downloadVideoStream,
-  getVideoFormat,
-  getVideoInfo,
-} from "services/video-service";
+import { IncomingHttpHeaders } from "node:http";
 
-async function downloadAudioController(
-  request: FastifyRequest,
-  reply: FastifyReply
-) {
+import { downloadVideoStream, getVideoFormat, getVideoInfo } from "../services/video-service";
+
+async function downloadAudioController(request: FastifyRequest, reply: FastifyReply) {
   const { videoId } = request.params as { videoId: string };
   return reply.send({ videoId });
 }
 
-async function playbackController(
-  request: FastifyRequest,
-  reply: FastifyReply
-) {
+async function playbackController(request: FastifyRequest, reply: FastifyReply) {
   const { videoId } = request.params as { videoId: string };
   const range = request.headers.range;
 
