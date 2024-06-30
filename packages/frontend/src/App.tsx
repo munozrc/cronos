@@ -5,6 +5,7 @@ export const App: FC = () => {
     <main>
       <header>
         <h1>Cronos | Music Downloader</h1>
+        <audio src="/api/audio/Vq_Mh84z_2c" controls />
       </header>
     </main>
   );
