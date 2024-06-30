@@ -1,6 +1,11 @@
 {
+  "$schema": "https://swc.rs/schema.json",
+  "minify": true,
   "jsc": {
     "target": "esnext",
+    "minify": {
+      "compress": true
+    },
     "parser": {
       "syntax": "typescript",
       "tsx": false,
@@ -9,6 +14,6 @@
     }
   },
   "module": {
-    "type": "commonjs"
+    "type": "nodenext"
   }
 }

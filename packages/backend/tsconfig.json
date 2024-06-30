@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -12,6 +13,6 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "include": ["src/"],
   "exclude": ["node_modules"]
 }

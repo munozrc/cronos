@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "build": "pnpm --filter backend run build",
     "dev:backend": "pnpm --filter backend run dev",
     "dev:frontend": "pnpm --filter frontend run dev",
     "lint": "pnpm recursive run lint"
