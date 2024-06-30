@@ -15,10 +15,10 @@ export function getVideoFormat(
 export function downloadVideoStream(
   videoInfo: ytdl.videoInfo,
   quality: "lowestaudio" | "highestaudio" = "lowestaudio",
-  start: string | number,
-  end: string | number
+  start?: number,
+  end?: number
 ) {
-  const range = { start: Number(start), end: Number(end) };
+  const range = { start, end };
   const options = { quality, range };
   return ytdl.downloadFromInfo(videoInfo, options);
 }
