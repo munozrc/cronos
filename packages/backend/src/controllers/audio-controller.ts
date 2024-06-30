@@ -1,7 +1,9 @@
 import { type FastifyReply, type FastifyRequest } from "fastify";
+import { getAudioBuffer } from "helpers";
+import NodeID3 from "node-id3";
 import { type IncomingHttpHeaders } from "node:http";
 
-import { getSongInfo } from "../services/music-service";
+import { getAlbumCoverBuffer, getSongInfo } from "../services/music-service";
 import { downloadVideoStream, getVideoFormat, getVideoInfo } from "../services/video-service";
 
 async function downloadAudioController(request: FastifyRequest, reply: FastifyReply) {
@@ -14,10 +16,45 @@ async function downloadAudioController(request: FastifyRequest, reply: FastifyRe
 
   try {
     const info = await getSongInfo(videoId);
-    if (info !== null) return reply.send(info);
 
-    const message = "Song information not found.";
-    return reply.code(404).send({ message });
+    if (info === null) {
+      const message = "Song information not found.";
+      return reply.code(404).send({ message });
+    }
+
+    const videoInfo = await getVideoInfo(videoId);
+    const audioStream = downloadVideoStream(videoInfo, "highestaudio");
+    const audioFormat = getVideoFormat(videoInfo, "highestaudio");
+    const audioBuffer = await getAudioBuffer(audioStream);
+
+    const parseTitle = info.title.replace(/[/\\?%*:|"<>]/g, "");
+    const parseAuthor = info.author.replace(/[/\\?%*:|"<>]/g, "");
+    const filename = `${parseTitle} - ${parseAuthor}.mp3`;
+
+    const headers: IncomingHttpHeaders = {
+      "content-type": "audio/mpeg",
+      "content-disposition": `attachment; filename="${filename}"`,
+      "content-length": audioFormat.contentLength,
+    };
+
+    const albumCoverAPIC = await getAlbumCoverBuffer(info.thumbnail);
+
+    const tags = {
+      title: info.title,
+      artist: info.author,
+      album: "",
+      year: `${new Date(info.publishDate).getFullYear()}`,
+      APIC: albumCoverAPIC,
+    };
+
+    const audioWithMetadata = NodeID3.write(tags, audioBuffer);
+
+    if (!audioWithMetadata) {
+      const message = "Error writing metadata";
+      return reply.code(500).send({ message });
+    }
+
+    return reply.headers(headers).send(audioWithMetadata);
   } catch (error) {
     reply.code(500).send({ error: "Failed to stream the audio" });
   }

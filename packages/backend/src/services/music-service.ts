@@ -49,7 +49,36 @@ export async function getSongInfo(videoId: string) {
 
     return parseSongInfo(data);
   } catch (error) {
-    console.error("Error search song infomation: ", error);
+    console.error("Error search song information: ", error);
     throw error;
+  }
+}
+
+export async function getAlbumCoverBuffer(imageURL: string) {
+  try {
+    const url = imageURL.replace(/w\d+-h\d+/, "w600-h600");
+    const response = await globalThis.fetch(url);
+    const mimeType = response.headers.get("content-type");
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch the album cover: ${response.statusText}`);
+    }
+
+    if (!mimeType || !mimeType.startsWith("image/")) {
+      throw new Error("URL does not point to an image");
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+    const imageBuffer = Buffer.from(arrayBuffer);
+
+    return {
+      mime: mimeType,
+      type: { id: 3, name: "front cover" },
+      description: "Album cover",
+      imageBuffer,
+    };
+  } catch (error) {
+    if (error instanceof Error) throw error;
+    throw new Error("Failed to fetch album cover.");
   }
 }

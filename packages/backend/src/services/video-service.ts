@@ -1,7 +1,11 @@
 import ytdl from "ytdl-core";
 
 export async function getVideoInfo(videoId: string) {
-  return await ytdl.getInfo(videoId);
+  try {
+    return await ytdl.getInfo(videoId);
+  } catch (err) {
+    throw new Error("Access to the video is forbidden (403).");
+  }
 }
 
 export function getVideoFormat(
