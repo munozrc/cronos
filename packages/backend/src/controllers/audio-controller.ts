@@ -1,11 +1,26 @@
 import { type FastifyReply, type FastifyRequest } from "fastify";
-import { IncomingHttpHeaders } from "node:http";
+import { type IncomingHttpHeaders } from "node:http";
 
+import { getSongInfo } from "../services/music-service";
 import { downloadVideoStream, getVideoFormat, getVideoInfo } from "../services/video-service";
 
 async function downloadAudioController(request: FastifyRequest, reply: FastifyReply) {
   const { videoId } = request.params as { videoId: string };
-  return reply.send({ videoId });
+
+  if (typeof videoId !== "string") {
+    const message = "Video ID is required.";
+    return reply.code(400).send({ message });
+  }
+
+  try {
+    const info = await getSongInfo(videoId);
+    if (info !== null) return reply.send(info);
+
+    const message = "Song information not found.";
+    return reply.code(404).send({ message });
+  } catch (error) {
+    reply.code(500).send({ error: "Failed to stream the audio" });
+  }
 }
 
 async function playbackController(request: FastifyRequest, reply: FastifyReply) {
