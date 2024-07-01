@@ -9,11 +9,12 @@ function extractMusicData(content: any) {
     const title = firstColumnRender?.text;
     const videoId = firstColumnRender?.navigationEndpoint?.watchEndpoint?.videoId;
     const author = secondColumnRender[0]?.text;
+    const album = secondColumnRender[2]?.text;
     const thumbnail = renderer?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails.pop()?.url;
     const lengthSeconds = secondColumnRender.slice(-1)[0]?.text;
 
-    if (!videoId || !title || !author || !thumbnail || !lengthSeconds) return null;
-    return { author, lengthSeconds, thumbnail, title, videoId };
+    if (!videoId || !title || !author || !thumbnail || !lengthSeconds || !album) return null;
+    return { author, lengthSeconds, thumbnail, title, videoId, album };
   } catch (error) {
     console.error("Error parsing music item:", error);
     return null;
