@@ -1,9 +1,9 @@
 import { type FastifyReply, type FastifyRequest } from "fastify";
-import { getAudioBuffer } from "helpers";
 import NodeID3 from "node-id3";
 import { type IncomingHttpHeaders } from "node:http";
 
-import { getAlbumCoverBuffer, getSongInfo } from "../services/music-service";
+import { getAudioBuffer } from "../helpers/audio-buffer";
+import { getAlbumCoverBuffer, getSongInfo, getSongsByQuery } from "../services/music-service";
 import { downloadVideoStream, getVideoFormat, getVideoInfo } from "../services/video-service";
 
 async function downloadAudioController(request: FastifyRequest, reply: FastifyReply) {
@@ -102,4 +102,21 @@ async function playbackController(request: FastifyRequest, reply: FastifyReply) 
   }
 }
 
-export { downloadAudioController, playbackController };
+async function searchSongs(request: FastifyRequest, reply: FastifyReply) {
+  const { query } = request.params as { query: string };
+
+  if (!query || query.trim() === "") {
+    const message = "Query parameter is required.";
+    return reply.code(400).send({ message });
+  }
+
+  try {
+    const parseQuery = globalThis.decodeURIComponent(query);
+    const results = await getSongsByQuery(parseQuery);
+    reply.send({ results });
+  } catch (error) {
+    reply.code(500).send({ error: "Failed to stream the audio" });
+  }
+}
+
+export { downloadAudioController, playbackController, searchSongs };
