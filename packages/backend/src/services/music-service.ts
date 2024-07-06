@@ -8,11 +8,18 @@ export async function getSongInfo(videoId: string) {
   const init: RequestInit = { method: "POST", credentials: "omit", body, headers };
 
   try {
-    const response = await globalThis.fetch(url, init);
-    const data = await response.json();
+    const [infoResponse, extraInfoResponse] = await Promise.all([
+      globalThis.fetch(url, init),
+      globalThis.fetch(url.replace("player", "next"), init),
+    ]);
 
-    if (typeof data !== "object" || data === null) throw new Error("Bad response");
-    return parseSongInfo(data);
+    const [info, extraData] = await Promise.all([infoResponse.json(), extraInfoResponse.json()]);
+
+    if (!info || typeof info !== "object" || !extraData || typeof extraData !== "object") {
+      throw new Error("Bad response");
+    }
+
+    return parseSongInfo(info, extraData);
   } catch (error) {
     console.error("Error search song information: ", error);
     throw error;

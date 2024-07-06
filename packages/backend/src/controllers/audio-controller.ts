@@ -15,17 +15,20 @@ async function downloadAudioController(request: FastifyRequest, reply: FastifyRe
   }
 
   try {
-    const info = await getSongInfo(videoId);
+    const [info, videoInfo] = await Promise.all([getSongInfo(videoId), getVideoInfo(videoId)]);
 
     if (info === null) {
       const message = "Song information not found.";
       return reply.code(404).send({ message });
     }
 
-    const videoInfo = await getVideoInfo(videoId);
     const audioStream = downloadVideoStream(videoInfo, "highestaudio");
     const audioFormat = getVideoFormat(videoInfo, "highestaudio");
-    const audioBuffer = await getAudioBuffer(audioStream);
+
+    const [audioBuffer, albumCoverAPIC] = await Promise.all([
+      getAudioBuffer(audioStream),
+      getAlbumCoverBuffer(info.thumbnail),
+    ]);
 
     const parseTitle = info.title.replace(/[/\\?%*:|"<>]/g, "");
     const parseAuthor = info.author.replace(/[/\\?%*:|"<>]/g, "");
@@ -37,12 +40,10 @@ async function downloadAudioController(request: FastifyRequest, reply: FastifyRe
       "content-length": audioFormat.contentLength,
     };
 
-    const albumCoverAPIC = await getAlbumCoverBuffer(info.thumbnail);
-
     const tags = {
       title: info.title,
       artist: info.author,
-      album: "",
+      album: info.album ?? undefined,
       year: `${new Date(info.publishDate).getFullYear()}`,
       APIC: albumCoverAPIC,
     };
@@ -56,7 +57,7 @@ async function downloadAudioController(request: FastifyRequest, reply: FastifyRe
 
     return reply.headers(headers).send(audioWithMetadata);
   } catch (error) {
-    reply.code(500).send({ error: "Failed to stream the audio" });
+    reply.code(500).send({ error: "Failed to download the audio" });
   }
 }
 
@@ -115,7 +116,7 @@ async function searchSongs(request: FastifyRequest, reply: FastifyReply) {
     const results = await getSongsByQuery(parseQuery);
     reply.send({ results });
   } catch (error) {
-    reply.code(500).send({ error: "Failed to stream the audio" });
+    reply.code(500).send({ error: "Failed to search songs" });
   }
 }
 
