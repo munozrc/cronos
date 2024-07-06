@@ -25,7 +25,7 @@ export function downloadVideoStream(
 ) {
   const range = { start, end };
   const options: ytdl.downloadOptions = { quality, range, filter: "audioonly" };
-  return ytdl.downloadFromInfo(videoInfo, options).on("error", (err) => {
-    throw err;
+  return ytdl.downloadFromInfo(videoInfo, options).on("error", () => {
+    throw new Error("Access to the video is forbidden (403).");
   });
 }
