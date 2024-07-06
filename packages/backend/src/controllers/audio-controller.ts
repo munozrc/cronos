@@ -61,6 +61,7 @@ async function downloadAudioController(request: FastifyRequest, reply: FastifyRe
 
     return reply.headers(headers).send(audioWithMetadata);
   } catch (error) {
+    if (error instanceof Error) console.error("ERROR_DOWNLOAD_AUDIO: ", error.message);
     reply.code(500).send({ error: "Failed to download the audio" });
   }
 }
