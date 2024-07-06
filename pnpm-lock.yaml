@@ -29,6 +29,9 @@ importers:
       '@eslint/js':
         specifier: 9.5.0
         version: 9.5.0
+      '@repo/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@swc-node/register':
         specifier: 1.9.2
         version: 1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.11))(@swc/types@0.1.8)(typescript@5.4.5)
@@ -111,6 +114,8 @@ importers:
       vite:
         specifier: 5.3.1
         version: 5.3.1(@types/node@20.14.2)
+
+  packages/shared: {}
 
 packages:
 

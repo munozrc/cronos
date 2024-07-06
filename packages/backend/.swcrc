@@ -2,7 +2,7 @@
   "$schema": "https://swc.rs/schema.json",
   "minify": true,
   "jsc": {
-    "target": "esnext",
+    "target": "es6",
     "minify": {
       "compress": true
     },
@@ -11,9 +11,11 @@
       "tsx": false,
       "decorators": false,
       "dynamicImport": false
-    }
+    },
+    "baseUrl": "./src",
+    "paths": { "@/*": ["./*"] }
   },
   "module": {
-    "type": "nodenext"
+    "type": "commonjs"
   }
 }

@@ -1,13 +1,13 @@
 {
   "name": "backend",
   "version": "0.0.1",
-  "main": "../../build/index.js",
+  "main": "./build/index.js",
   "private": true,
   "scripts": {
-    "build": "rimraf ../../build && swc build ./src -d ../../build",
+    "build": "rimraf ./build && swc build ./src -d ./build",
     "lint": "eslint ./src/**/*.ts",
     "dev": "nodemon --watch \"src\" --ext \"*\" --exec \"node --env-file ../../.env -r @swc-node/register src/index.ts\"",
-    "start": "node ../../build/index.js"
+    "start": "node ./build/index.js"
   },
   "author": "munozrc",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "ytdl-core": "4.11.5"
   },
   "devDependencies": {
+    "@repo/shared": "workspace:*",
     "@eslint/js": "9.5.0",
     "@swc-node/register": "1.9.2",
     "@swc/cli": "0.3.12",

@@ -8,7 +8,8 @@
     "build": "pnpm --filter backend run build",
     "dev:backend": "pnpm --filter backend run dev",
     "dev:frontend": "pnpm --filter frontend run dev",
-    "lint": "pnpm recursive run lint"
+    "lint": "pnpm recursive run lint",
+    "start": "pnpm --filter backend run start"
   },
   "author": "munozrc",
   "license": "ISC"

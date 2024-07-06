@@ -1,5 +1,5 @@
-import { context } from "../constants/music-provider";
-import { extractMusicFromResponse, parseSongInfo } from "../helpers/music-api-utils";
+import { context } from "@/constants/music-provider";
+import { extractMusicFromResponse, parseSongInfo } from "@/helpers/music-api-utils";
 
 export async function getSongInfo(videoId: string) {
   const url = "https://music.youtube.com/youtubei/v1/player?prettyPrint=false";
@@ -55,7 +55,7 @@ export async function getAlbumCoverBuffer(imageURL: string) {
   }
 }
 
-export async function getSongsByQuery(query: string) {
+export async function searchSongs(query: string) {
   const url = "https://music.youtube.com/youtubei/v1/search?prettyPrint=false";
   const body = JSON.stringify({ query, context, params: "EgWKAQIIAWoKEAoQCRADEAQQBQ%3D%3D" });
   const headers = { "content-type": "application/json" };

@@ -11,7 +11,10 @@
     "outDir": "build",
     "baseUrl": "src",
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "@/*": ["*"]
+    }
   },
   "include": ["src/"],
   "exclude": ["node_modules"]
