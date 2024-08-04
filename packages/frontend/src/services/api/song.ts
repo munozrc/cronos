@@ -19,3 +19,7 @@ export async function searchSong(query: string) {
     throw error;
   }
 }
+
+export async function downloadSong(videoId: string) {
+  await fetch(`/api/download/${videoId}`);
+}

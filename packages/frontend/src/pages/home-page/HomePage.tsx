@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 import { SearchInput } from "../../components";
 import { useSearchSong } from "../../hooks/queries";
+import { downloadSong } from "../../services/api";
 
 export function HomePage() {
   const { results, handleSearchSong } = useSearchSong();
@@ -14,7 +15,7 @@ export function HomePage() {
   };
 
   const handleDownload = (videoId: string) => () => {
-    console.log(videoId);
+    downloadSong(videoId);
   };
 
   return (
