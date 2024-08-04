@@ -1,6 +1,7 @@
 import { type FC } from "react";
 import "./styles/global.css";
 import { MainContainer } from "./layouts";
+import { SearchInput } from "./components";
 
 export const App: FC = () => {
   return (
@@ -11,7 +12,7 @@ export const App: FC = () => {
           <p>Descarga música de forma gratuita en formato MP3</p>
         </header>
         <div>
-          <input placeholder="https://www.youtube.com/watch?v=T0T9GyM28tg" />
+          <SearchInput placeholder="https://www.youtube.com/watch?v=T0T9GyM28tg" />
         </div>
       </div>
     </MainContainer>
