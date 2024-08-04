@@ -1,13 +1,19 @@
 import { type FC } from "react";
 import "./styles/global.css";
+import { MainContainer } from "./layouts";
 
 export const App: FC = () => {
   return (
-    <main>
-      <header>
-        <h1>Cronos - Music Downloader</h1>
-        <audio src="/api/G-oRhCHID_4" controls />
-      </header>
-    </main>
+    <MainContainer>
+      <div>
+        <header>
+          <h2>Music Downloader</h2>
+          <p>Descarga música de forma gratuita en formato MP3</p>
+        </header>
+        <div>
+          <input placeholder="https://www.youtube.com/watch?v=T0T9GyM28tg" />
+        </div>
+      </div>
+    </MainContainer>
   );
 };
